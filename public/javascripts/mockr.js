@@ -90,7 +90,7 @@ var mockr = function(){
     
     function initalize(){
         mockView = document.getElementById("mock");
-        threadView = document.getElementById("threads");
+        threadView = document.getElementById("comments_list");
         
         highlight.initalize();
     }
