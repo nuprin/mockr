@@ -1,2 +1,49 @@
-<h1>Mock#show</h1>
-<p>Find me in app/views/mock/show.html.erb</p>
+<html>
+  <head>
+    <style type="text/css">
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        width: 1400px;
+      }
+      body, h1 {
+        margin: 0;
+        padding: 0;
+      }
+      #sidebar {
+        background: black;
+        color: white;
+        float: left;
+        height: 100%;
+        width: 400px;
+      }
+      .module {
+        border-bottom: 1px solid #888;
+        padding: 8px 10px;
+      }
+      #mock {
+        float: left;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="sidebar">
+      <div class="module">
+        <h1>MOCKR</h1>
+      </div>
+      <div class="module">
+        petitions-5.png
+      </div>
+      <div class="module">
+        ADD COMMENT
+      </div>
+      <div class="module">
+        COMMENTS
+      </div>
+    </div>
+    <div id="mock">
+      <%= image_tag @path %>
+    </div>
+  </body>
+</html>
