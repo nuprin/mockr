@@ -33,6 +33,19 @@
           <div class="text">
             <%= comment.text %>
           </div>
+          <% if comment.children.any? %>
+            <ul id="children_comments_list">
+              <% comment.children.each do |child| %>
+                <li>
+                  <%= child.text %>
+                  <div class="meta">
+                    <%= child.author.first_name %>,
+                    <%= distance_of_time_in_words_to_now child.created_at %>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
         </li>
       <% end %>
     </ul>

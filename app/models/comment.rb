@@ -3,6 +3,16 @@ class Comment < ActiveRecord::Base
     :class_name => "User"
   belongs_to :feeling
 
+  # TODO: Returns the set of comments.
+  def children
+    [
+      Comment.new(:text => "whatevs", :created_at => 3.minutes.ago, 
+                  :author => User.new),
+      Comment.new(:text => "whatevs", :created_at => 1.minute.ago, 
+                  :author => User.new),
+    ]
+  end
+
   def self.stubbed_comments
     @happy_feeling = Feeling.new(:name => "happy")
     @sad_feeling = Feeling.new(:name => "sad")

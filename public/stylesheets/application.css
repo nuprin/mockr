@@ -14,10 +14,23 @@
   margin-right: 3px;
   width: 272px;
 }
+#children_comments_list {
+  margin-top: 10px;
+}
+#children_comments_list li {
+  background: #555;
+  margin: 0 -10px 1px 0;
+  padding: 8px 10px;
+}
+#children_comments_list .meta {
+  font-size: 10px;
+  margin-top: 5px;
+  text-align: right;
+}
 #comments_list {
   font-size: 12px;
 }
-#comments_list li {
+#comments_list>li {
   background-position: 8px 8px;
   background-repeat: no-repeat;
   border-bottom: 1px solid #888;
