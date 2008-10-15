@@ -1,14 +1,12 @@
+body, form, h1 {
+  margin: 0;
+  padding: 0;
+}
 body, textarea {
   font-family: Helvetica, Arial, sans-serif;
 }
 body {
-  margin: 0;
-  padding: 0;
   width: 1400px;
-}
-body, h1 {
-  margin: 0;
-  padding: 0;
 }
 input {
   margin: 0;

@@ -2,10 +2,14 @@
   border-bottom: 1px solid #888;
   padding: 8px 10px;
 }
+#add_feedback_form input[type=image] {
+  vertical-align: bottom;
+}
 #add_feedback_form textarea {
   background: #ccc;
   height: 60px;
-  width: 300px;
+  margin-right: 3px;
+  width: 272px;
 }
 #feelings_input_fields li, #feelings_input_fields input {
   float: left;
