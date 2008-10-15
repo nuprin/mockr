@@ -1,3 +1,7 @@
-<div class="module" id="mock_header">
-  <%= @mock.name %>
+<div class="module clearfix" id="mock_header">
+  <ul id="nav_list">
+    <li><a href="<%= mock_url(@mock.prev) %>">prev</a></li>
+    <li><a href="<%= mock_url(@mock.next) %>">next</a></li>
+  </ul>
+  <%= @mock.title %>
 </div>

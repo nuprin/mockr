@@ -80,7 +80,20 @@
   background-image: url(../images/glass.gif);
   background-repeat: repeat-x;
   font-weight: bold;
-  padding: 13px 10px;
+  line-height: 43px;
+  padding: 0 0 0 10px;
+}
+#nav_list {
+  float: right;
+}
+#nav_list li {
+  border-left: 1px solid #aaa;
+  float: left;
+}
+#nav_list a {
+  display: block;
+  font-weight: normal;
+  padding: 0 10px;
 }
 #sidebar {
   background-color: #333;
