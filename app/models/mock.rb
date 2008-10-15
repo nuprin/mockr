@@ -16,7 +16,15 @@ class Mock < ActiveRecord::Base
     unless File.exist?(full_path)
       raise MockDoesNotExist.new(full_path)
     end
-    Mock.find_by_path(path) || Mock.create(:path => path)
+    mock = Mock.find_by_path(path)
+    if mock.nil?
+      clean_filename = path.split('/').last.
+                            split('.').first.
+                            gsub(/[^\w]/, ' ').
+                            titleize
+      mock = Mock.create(:path => path, :title => clean_filename)
+    end
+    mock
   end
 
   def image_path
@@ -61,4 +69,5 @@ class Mock < ActiveRecord::Base
       Mock.for(sibling_path)
     end.sort
   end
+
 end
