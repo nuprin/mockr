@@ -51,9 +51,14 @@ class Mock < ActiveRecord::Base
   end
 
   def family_filenames
-    @family_filenames ||= Dir.glob("#{MOCK_PATH}/#{dir}/*").map do |path|
-      path.split('/')[3..-1].join('/')
-    end
+    @family_filenames ||=
+      Dir.glob("#{MOCK_PATH}/#{dir}/*").select do |filename|
+        filename.ends_with?('jpg') ||
+        filename.ends_with?('png') ||
+        filename.ends_with?('gif')
+      end.map do |path|
+        path.split('/')[3..-1].join('/')
+      end
   end
 
   def <=>(other)
