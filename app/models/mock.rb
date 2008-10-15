@@ -12,4 +12,8 @@ class Mock < ActiveRecord::Base
     end
     Mock.find_by_path(path) || Mock.create(:path => path)
   end
+
+  def image_path
+    "mocks/#{path}"
+  end
 end
