@@ -1,16 +1,23 @@
-body {
-  font-family: Helvetica, Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  width: 1400px;
-}
-body, h1 {
-  margin: 0;
-  padding: 0;
-}
 .module {
   border-bottom: 1px solid #888;
   padding: 8px 10px;
+}
+#add_feedback_form textarea {
+  background: #ccc;
+  height: 60px;
+  width: 300px;
+}
+#feelings_input_fields li, #feelings_input_fields input {
+  float: left;
+}
+#feelings_input_fields input {
+  margin: 3px 4px 0 0;
+}
+#feelings_input_fields li {
+  padding-right: 8px;
+}
+#header {
+  background-color: black;
 }
 #header h1 {
   background-image: url(../images/mockr.gif);
@@ -21,8 +28,14 @@ body, h1 {
 #mock {
   float: left;
 }
+#mock_header {
+  background-image: url(../images/glass.gif);
+  background-repeat: repeat-x;
+  font-weight: bold;
+  padding: 13px 10px;
+}
 #sidebar {
-  background: black;
+  background-color: #444;
   color: white;
   float: left;
   height: 100%;

@@ -16,4 +16,10 @@ class Mock < ActiveRecord::Base
   def image_path
     "mocks/#{path}"
   end
+  
+  # TODO[chris]: The name of a mock is the capitalized filename without the 
+  # extension and dash.
+  def name
+    "Petitions 5"
+  end
 end
