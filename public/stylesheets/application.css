@@ -18,7 +18,7 @@
   margin-top: 10px;
 }
 #children_comments_list li {
-  background: #555;
+  background: #444;
   margin: 0 -10px 1px 0;
   padding: 8px 10px;
 }
@@ -83,9 +83,8 @@
   padding: 13px 10px;
 }
 #sidebar {
-  background-color: #444;
+  background-color: #333;
   color: white;
   float: left;
-  height: 100%;
   width: 400px;
 }

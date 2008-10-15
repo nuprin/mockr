@@ -1,0 +1,16 @@
+<div class="module">
+  <form id="add_feedback_form">
+    <ul class="clearfix" id="feelings_input_fields">
+      <li>
+        <input type="radio" id="feeling_happy" name="feeling" value="happy" />
+        <label for="feeling_happy"><%= image_tag "happy.gif" %></label>
+      </li>
+      <li>
+        <input type="radio" id="feeling_sad" name="feeling" value="sad" />
+        <label for="feeling_sad"><%= image_tag "sad.gif" %></label>
+      </li>
+    </ul>
+    <textarea></textarea>
+    <%= image_submit_tag "buttons/add_feedback.gif" %>
+  </form>
+</div>
