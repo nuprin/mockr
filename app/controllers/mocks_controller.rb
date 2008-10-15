@@ -1,6 +1,9 @@
 class MocksController < ApplicationController
 
   def show
-    @path = "mocks/Petitions/petitions-4.png"
+    @mock = Mock.for(params[:mock_path])
+  rescue Mock::MockDoesNotExist => boom
+    render :text => "Mock does not exist: #{boom.path}"
   end
+
 end
