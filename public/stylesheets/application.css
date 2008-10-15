@@ -95,6 +95,9 @@
   font-weight: normal;
   padding: 0 10px;
 }
+#nav_list a.none {
+  color: #999;
+}
 #sidebar {
   background-color: #333;
   color: white;
