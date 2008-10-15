@@ -1,8 +1,8 @@
 class CreateFeelings < ActiveRecord::Migration
   def self.up
     create_table :feelings do |t|
-      t.string :name
-      t.string :path
+      t.string :name, :null => false
+      t.string :path, :null => false
 
       t.timestamps
     end
