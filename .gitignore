@@ -1,2 +1,3 @@
+*.ai
 *.log
 db/schema.rb
