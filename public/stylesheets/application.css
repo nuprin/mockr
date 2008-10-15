@@ -1,6 +1,9 @@
 .module {
   border-bottom: 1px solid #888;
-  padding: 8px 10px;
+  padding: 8px 0;
+}
+#add_feedback_form {
+  margin: 0 10px;
 }
 #add_feedback_form input[type=image] {
   vertical-align: bottom;
@@ -10,6 +13,33 @@
   height: 60px;
   margin-right: 3px;
   width: 272px;
+}
+#comments_list {
+  font-size: 12px;
+}
+#comments_list li {
+  background-position: 8px 8px;
+  background-repeat: no-repeat;
+  border-bottom: 1px solid #888;
+  padding: 12px 10px 12px 32px;
+}
+#comments_list li.happy {
+  background-image: url("../images/happy.gif");
+}
+#comments_list li.sad {
+  background-image: url("../images/sad.gif");  
+}
+#comments_list .author {
+  color: #888;
+}
+#comments_list .text {
+  margin: 1em 0 0;
+}
+#comments_list .time {
+  color: #888;
+  float: right;
+  font-size: 10px;
+  margin-top: 1px;
 }
 #feelings_input_fields li, #feelings_input_fields input {
   float: left;
@@ -22,6 +52,7 @@
 }
 #header {
   background-color: black;
+  padding: 0 10px;
 }
 #header h1 {
   background-image: url(../images/mockr.gif);

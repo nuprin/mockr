@@ -17,15 +17,27 @@
           <label for="feeling_sad"><%= image_tag "sad.gif" %></label>
         </li>
       </ul>
-      <textarea>
-      </textarea>
+      <textarea></textarea>
       <%= image_submit_tag "buttons/add_feedback.gif" %>
     </form>
   </div>
-  <div class="module">
-    COMMENTS
-  </div>
+    <ul id="comments_list">
+      <% @comments.each do |comment| %>
+        <li class="<%= comment.feeling.name %>">
+          <span class="time">
+            <%= distance_of_time_in_words_to_now comment.created_at %>
+          </span>
+          <span class="author">
+            <%= comment.author.name %> says:
+          </span>
+          <div class="text">
+            <%= comment.text %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
 </div>
+
 <div id="mock">
   <%= image_tag @mock.image_path %>
 </div>
