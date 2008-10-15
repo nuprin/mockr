@@ -18,7 +18,7 @@
   margin-top: 10px;
 }
 #children_comments_list li {
-  background: #555;
+  background: #444;
   margin: 0 -10px 1px 0;
   padding: 8px 10px;
 }
@@ -80,12 +80,27 @@
   background-image: url(../images/glass.gif);
   background-repeat: repeat-x;
   font-weight: bold;
-  padding: 13px 10px;
+  line-height: 43px;
+  padding: 0 0 0 10px;
+}
+#nav_list {
+  float: right;
+}
+#nav_list li {
+  border-left: 1px solid #aaa;
+  float: left;
+}
+#nav_list a {
+  display: block;
+  font-weight: normal;
+  padding: 0 10px;
+}
+#nav_list a.none {
+  color: #999;
 }
 #sidebar {
-  background-color: #444;
+  background-color: #333;
   color: white;
   float: left;
-  height: 100%;
   width: 400px;
 }
