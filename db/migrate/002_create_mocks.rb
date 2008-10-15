@@ -1,7 +1,7 @@
 class CreateMocks < ActiveRecord::Migration
   def self.up
     create_table :mocks do |t|
-      t.string :path
+      t.string :path, :null => false
       t.string :title
       t.string :description
 
