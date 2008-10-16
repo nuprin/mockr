@@ -15,13 +15,25 @@ class Mock < ActiveRecord::Base
     end
   end
 
+  class MockPathIsDirectory < StandardError
+    attr_reader :mock
+    def initialize(mock)
+      @mock = mock
+    end
+    def to_s
+      @mock
+    end
+  end
+
   def self.for(path)
     full_path = "#{MOCK_PATH}/#{path}"
     unless File.exist?(full_path)
       raise MockDoesNotExist.new(full_path)
     end
 
-    return Mock.last_mock_for(path) if File.directory?(full_path)
+    if File.directory?(full_path)
+      raise MockPathIsDirectory.new(Mock.last_mock_for(path))
+    end
 
     mock = Mock.find_by_path(path)
     if mock.nil?
