@@ -1,3 +1,9 @@
+input[type=image] {
+  vertical-align: bottom;
+}
+textarea {
+  font-size: 11px;
+}
 .highlight {
   background: #999;
   border: 1px solid #555;
@@ -13,9 +19,6 @@
 #add_feedback_form {
   margin: 0 10px;
 }
-#add_feedback_form input[type=image] {
-  vertical-align: bottom;
-}
 #add_feedback_form textarea {
   background: #ccc;
   height: 60px;
@@ -27,6 +30,7 @@
 }
 #children_comments_list li {
   background: #444;
+  font-size: 11px;
   margin: 0 -10px 1px 0;
   padding: 8px 10px;
 }
@@ -48,7 +52,7 @@
   background-image: url("../images/happy.gif");
 }
 #comments_list li.sad {
-  background-image: url("../images/sad.gif");  
+  background-image: url("../images/sad.gif");
 }
 #comments_list .author {
   color: #888;
@@ -62,19 +66,35 @@
   font-size: 10px;
   margin-top: 1px;
 }
+#comments_list .reply {
+  display: none;
+  margin-top: 10px;
+}
+#comments_list .reply textarea {
+  background: #ccc;
+  height: 60px;
+  margin-right: 3px;
+  width: 250px;
+}
+#comments_list .replying .reply {
+  display: block;
+}
 #feature_list {
   float: right;
   font-size: 9px;
   margin-top: 8px;
 }
-#feelings_input_fields li, #feelings_input_fields input {
+#feelings_input_fields li {
   float: left;
 }
 #feelings_input_fields input {
-  margin: 3px 4px 0 0;
+  margin: 3px 0 0 4px;
+}
+#feelings_input_fields label {
+  float: left;
 }
 #feelings_input_fields li {
-  padding-right: 8px;
+  padding-right: 10px;
 }
 #header {
   background-color: black;
@@ -156,7 +176,7 @@
   background-image: url("../images/happy.gif");
 }
 #stats_list li#sad_count {
-  background-image: url("../images/sad.gif");  
+  background-image: url("../images/sad.gif");
 }
 #userlight {
   background: #99c;

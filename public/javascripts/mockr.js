@@ -93,6 +93,19 @@ var mockr = function(){
         };
     }();
 
+    var replyr = function() {
+
+      function initialize(first_argument) {
+        $("#comments_list .reply_link span").click(function () {
+          $(this).parents("li.comment_node").toggleClass("replying");
+        });
+      }
+
+      return {
+        initialize : initialize
+      };
+    }();
+
     function initalize(){
         mockView = document.getElementById("mock");
         threadView = document.getElementById("comments_list");
