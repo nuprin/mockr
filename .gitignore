@@ -1,3 +1,4 @@
 *.ai
 *.log
 db/schema.rb
+tmtags

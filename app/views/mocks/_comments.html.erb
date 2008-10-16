@@ -11,7 +11,7 @@
       <div class="text">
         <%= comment.text %>
       </div>
-      <ul id="children_comments_list">
+      <ul<%= ' class="no_comments"' if comment.children.empty? %> id="children_comments_list">
         <% if comment.children.any? %>
           <% comment.children.each do |child| %>
             <li>
@@ -23,8 +23,8 @@
                                             child.created_at) %> later</span>
               </div>
             </li>
-            <% end %>
           <% end %>
+        <% end %>
           <li class="reply_link">
             <span class="fakelink">Reply</span>
           </li>

@@ -16,6 +16,11 @@ textarea {
   border-bottom: 1px solid #888;
   padding: 8px 0;
 }
+.no_comments#children_comments_list .reply_link {
+  background: #333;
+  margin: 0;
+  padding: 0;
+}
 #add_feedback_form {
   margin: 0 10px;
 }
@@ -30,9 +35,9 @@ textarea {
 }
 #children_comments_list li {
   background: #444;
-  font-size: 11px;
+  font-size: 10px;
   margin: 0 -10px 1px 0;
-  padding: 8px 10px;
+  padding: 4px 10px;
 }
 #children_comments_list .meta {
   font-size: 10px;
@@ -43,7 +48,7 @@ textarea {
   font-size: 12px;
 }
 #comments_list>li {
-  background-position: 8px 8px;
+  background-position: 8px 9px;
   background-repeat: no-repeat;
   border-bottom: 1px solid #888;
   padding: 12px 10px 12px 32px;
