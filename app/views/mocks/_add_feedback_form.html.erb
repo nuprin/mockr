@@ -23,7 +23,7 @@
             <%= f.radio_button :feeling_id, feeling.id %>
           </li>
         <% end %>
-        <% if viewer %>
+        <% if viewer.real? %>
           <%= f.hidden_field :author_id, :value => session[:user_id] %>
         <% else %>
           <select id="comment_author_id" name="comment[author_id]">
