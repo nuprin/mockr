@@ -105,11 +105,19 @@ var mockr = function(){
         });
         
         $("#feature_list").change(function(event) {
-          location.href = "/" + event.target.value;
+          if (event.target.value != "") {
+            location.href = "/" + event.target.value;
+          }
         });
         $("#feedback_filter").change(function(event) {
           location.href = "?filter=" + event.target.value
         })
+        // All textareas should have a dynamic height.
+        $("textarea").keydown(function(event) {
+          if (user.keyboard.character() == "enter") {
+            $(this).height($(this).height() + 20);
+          }
+        });
         $("#comments_list .reply_link span").click(function () {
           $(this).parents("li.comment_node").toggleClass("replying");
         });
