@@ -16,9 +16,11 @@
     </li>
   </ul>
   <ul id="stats_list">
-    <li id="happy_count" title="<%= @mock.happy_count %> happy reactions"><%=
+    <li id="happy_count"
+      title="<%= pluralize(@mock.happy_count, "happy reaction") %>"><%=
       @mock.happy_count %></li>
-    <li id="sad_count" title="<%= @mock.sad_count %> sad reactions"><%=
+    <li id="sad_count"
+      title="<%= pluralize(@mock.sad_count, "sad reaction") %>"><%=
       @mock.sad_count %></li>
   </ul>
   <h2>
