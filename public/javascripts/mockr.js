@@ -104,7 +104,5 @@ var mockr = function(){
 $(document).ready(mockr.initalize);
 
 $("#feature_list").change(function(event) {
-  var value = $("#this").attr("selectedValue");
-  alert(value);
-  location.href = "/" + value;
+  location.href = "/" + event.target.value;
 });
