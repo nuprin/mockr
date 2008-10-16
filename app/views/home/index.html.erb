@@ -1,1 +1,8 @@
-<%= link_to image_tag('/images/mockr.gif'), '/Mockr'  %>
+<div id="content">
+  <%= link_to image_tag('logo.png'), '/Mockr'  %>
+  <div id="features">
+    <% Mock.features.each do |feature| %>
+      <a href="/<%= feature %>"><%= feature %></a>
+    <% end %>
+  </div>
+</div>
