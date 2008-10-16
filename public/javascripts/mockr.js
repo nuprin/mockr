@@ -70,10 +70,10 @@ var mockr = function(){
                 w : $(dom).width(),
                 h : $(dom).height()
             };
+            x = {};
+            y = {};
             if (o.w < 10 || o.h < 10) {
                 clear();
-                x = {};
-                y = {};
                 dom = null;
             }
             else {
@@ -101,7 +101,7 @@ var mockr = function(){
         $("#comments_list li[box]").mouseover(function(){
             var box = $(this).attr('box').split('_');
             var id  = $(this).attr('id');
-            highlight.create(box[0],box[0],box[0],box[0],box[0],); 
+            highlight.create(box[0],box[1],box[2],box[3],id);
         });
         
         $("#feature_list").change(function(event) {
