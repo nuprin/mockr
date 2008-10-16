@@ -77,6 +77,10 @@ var mockr = function(){
             }
             else {
                 area = o;
+                $('#add_feedback_form input[name=x]').val(o.x||0);
+                $('#add_feedback_form input[name=y]').val(o.y||0);
+                $('#add_feedback_form input[name=width]').val(o.w||0);
+                $('#add_feedback_form input[name=height]').val(o.h||0);
             }
         }
         
