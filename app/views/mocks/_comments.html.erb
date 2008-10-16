@@ -1,6 +1,7 @@
 <ul id="comments_list">
   <% @comments.each do |comment| %>
     <li class="<%= comment.feeling.name %> comment_node"
+        id="comment_<%= comment.id %>"
         <%= comment.box_attribute %>>
       <span class="time"
         title="<%= comment.created_at.strftime("%b %e, %l:%M%p")%>">
