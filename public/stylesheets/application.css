@@ -144,6 +144,7 @@ textarea {
 #mock {
   background-repeat: no-repeat;
   background-position: left top;
+  cursor: crosshair;
   float: left;
   position: relative;
   height: 1000px;
