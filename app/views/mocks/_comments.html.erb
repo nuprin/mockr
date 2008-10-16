@@ -1,6 +1,6 @@
 <ul id="comments_list">
   <% @comments.each do |comment| %>
-    <li class="<%= comment.feeling.name %> comment_node">
+    <li class="<%= comment.feeling.name %> comment_node" box="{x:<% comment.x %>,y:<% comment.y %>,width:<% comment.width %>,height:<% comment.height %>,id:<% comment.id %>}">
       <span class="time">
         <%= distance_of_time_in_words_to_now comment.created_at %>
       </span>
