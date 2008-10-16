@@ -1,6 +1,6 @@
 <ul id="comments_list">
   <% @comments.each do |comment| %>
-    <li class="<%= comment.feeling.name %>">
+    <li class="<%= comment.feeling.name %> comment_node">
       <span class="time">
         <%= distance_of_time_in_words_to_now comment.created_at %>
       </span>
@@ -23,6 +23,12 @@
           <% end %>
         </ul>
       <% end %>
+      <div class="reply_link">
+        <%= link_to "Reply", '#' %>
+      </div>
+      <div class="reply">
+        <% form_for @comment %>
+      </div>
     </li>
   <% end %>
 </ul>
