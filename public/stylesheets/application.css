@@ -132,8 +132,14 @@ textarea {
   font-size: 9px;
 }
 #header a {
+  border-bottom: none;
+  color: white;
   display: block;
   padding: 8px 0 10px;
+}
+#header a:hover {
+  background-color: black;
+  border-bottom: none;
 }
 #mock {
   background-repeat: no-repeat;
@@ -149,6 +155,10 @@ textarea {
   font-weight: bold;
   line-height: 45px;
   padding: 0 0 0 10px;
+}
+#mock_header a {
+  border-bottom: none;
+  color: white;
 }
 #mock_header h2 {
   font-size: 16px;

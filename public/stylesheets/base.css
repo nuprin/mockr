@@ -1,12 +1,15 @@
 a,
 .fakelink {
-  color: #fff;
+  border-bottom: 1px dotted #666;
+  color: #999;
   cursor: pointer;
   text-decoration: none;
 }
 a:hover,
 .fakelink:hover {
-  text-decoration: underline;
+  background-color: #444;
+  border-bottom: 1px dotted #999;
+  text-decoration: none;
 }
 a img {
   border: none;

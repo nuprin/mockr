@@ -16,8 +16,6 @@ body {
   text-align: justify;
 }
 #features a {
-  border-bottom: 1px dotted #666;
-  color: #999;
 }
 #features a:hover {
   background-color: #444;
