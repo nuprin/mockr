@@ -90,6 +90,7 @@
   background-repeat: no-repeat;
   background-position: left top;
   float: left;
+  position: relative;
   height: 1000px;
   width: 1000px;
 }

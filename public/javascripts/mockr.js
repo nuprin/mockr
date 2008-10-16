@@ -29,10 +29,9 @@ var mockr = function(){
             dom = null;
         }
         function create(o){
-            if (dom) $(dom).remove();
-            dom = $('<div class="highlight"></div>').css({
-                left     : o.x,
-                top      : o.y,
+            $('<div class="highlight"></div>').css({
+                left     : o.x || 0,
+                top      : o.y || 0,
                 opacity  : 0.4,
                 width    : o.w,
                 height   : o.h
