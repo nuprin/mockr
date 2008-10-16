@@ -1,7 +1,7 @@
 <div class="module" id="header">
   <select id="feature_list">
     <option value="">Go to feature...</option>
-    <% Mock.features.each do |feature| %>
+    <% Mock.features.sort.each do |feature| %>
       <option value="<%= feature %>"<%= ' selected="selected"' if @mock.dir == feature %>><%= feature %></option>
     <% end %>
   </select>
