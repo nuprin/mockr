@@ -10,8 +10,8 @@ class Comment < ActiveRecord::Base
     :class_name => 'Comment',
     :foreign_key => 'parent_id'
 
-  validates_presence_of :feeling
   validates_presence_of :text
+  validates_presence_of :author
 
   def author
     User.new(:name => "Fako")
