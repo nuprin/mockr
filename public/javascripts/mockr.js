@@ -115,7 +115,7 @@ var mockr = function(){
         // All textareas should have a dynamic height.
         $("textarea").keydown(function(event) {
           if (user.keyboard.character() == "enter") {
-            $(this).height($(this).height() + 20);
+            $(this).height($(this).height() + 24);
           }
         });
         $("#comments_list .reply_link span").click(function () {
