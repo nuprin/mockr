@@ -11,21 +11,22 @@
     <%= f.hidden_field :y %>
     <%= f.hidden_field :width %>
     <%= f.hidden_field :height %>
-    <ul class="clearfix" id="feelings_input_fields">
-      <% Feeling.find(:all).each do |feeling| %>
-        <li>
-          <label for="comment_feeling_id_<%= feeling.id %>">
-            <%= image_tag feeling.path %>
-          </label>
-          <%= f.radio_button :feeling_id, feeling.id %>
-        </li>
-      <% end %>
-    </ul>
     <input type="hidden" name="x" value="" />
     <input type="hidden" name="y" value="" />
     <input type="hidden" name="width" value="" />
     <input type="hidden" name="height" value="" />
     <%= f.text_area :text %>
     <%= image_submit_tag "buttons/add_feedback.gif" %>
+    <ul class="clearfix" id="feelings_input_fields">
+      <% Feeling.find(:all).each do |feeling| %>
+        <li>
+          <label for="comment_feeling_id_<%= feeling.id %>"
+            title="I am <%= feeling.name %>">
+            <%= image_tag feeling.path %>
+          </label>
+          <%= f.radio_button :feeling_id, feeling.id %>
+        </li>
+      <% end %>
+    </ul>
   <% end %>
 </div>
