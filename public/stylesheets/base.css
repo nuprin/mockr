@@ -2,7 +2,7 @@ a {
   text-decoration: none;
   color: white;
 }
-body, form, h1 {
+body, form, h1, h2 {
   margin: 0;
   padding: 0;
 }

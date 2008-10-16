@@ -85,15 +85,14 @@ class Mock < ActiveRecord::Base
     Mock.ordered_feature(dir)
   end
 
-  # TODO: Implement.
   def happy_count
-    10
+    Comment.count(:conditions => {:mock_id => self.id,
+                                  :feeling_id => Feeling.happy.id})
   end
 
-  # TODO: Implement.
   def sad_count
-    5
-  end
+    Comment.count(:conditions => {:mock_id => self.id,
+                                  :feeling_id => Feeling.sad.id})  end
 
   def self.features
     Dir.glob("#{MOCK_PATH}/*").map {|path| path.split('/').last }
