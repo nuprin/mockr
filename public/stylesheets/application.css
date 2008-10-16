@@ -77,9 +77,14 @@ textarea {
 }
 #comments_list .reply textarea {
   background: #ccc;
+  display: block;
   height: 60px;
+  margin-bottom: 8px;
   margin-right: 3px;
-  width: 250px;
+  width: 357px;
+}
+#comments_list .reply input[type=image] {
+  float: right;
 }
 #comments_list .replying .reply {
   display: block;

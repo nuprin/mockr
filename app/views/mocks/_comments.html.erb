@@ -29,7 +29,7 @@
             <span class="fakelink">Reply</span>
           </li>
         </ul>
-      <div class="reply">
+      <div class="reply clearfix">
         <% form_for :comment, Comment.new(:parent_id => comment.id),
                     :url => {:controller => 'comments', :action => 'create'},
                     :html => {:id => "reply_form_#{comment.id}"} do |f| %>
