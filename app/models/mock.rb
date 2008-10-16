@@ -93,18 +93,17 @@ class Mock < ActiveRecord::Base
   end
 
   def self.feature_filenames(feature)
-    @feature_filenames ||=
-      Dir.glob("#{MOCK_PATH}/#{feature}/*").select do |filename|
-        filename.ends_with?('jpg') ||
-        filename.ends_with?('png') ||
-        filename.ends_with?('gif')
-      end.map do |path|
-        path.split('/')[3..-1].join('/')
-      end
+    Dir.glob("#{MOCK_PATH}/#{feature}/*").select do |filename|
+      filename.ends_with?('jpg') ||
+      filename.ends_with?('png') ||
+      filename.ends_with?('gif')
+    end.map do |path|
+      path.split('/')[3..-1].join('/')
+    end
   end
 
   def self.ordered_feature(feature)
-    @ordered_feature ||= feature_filenames(feature).map do |sibling_path|
+    feature_filenames(feature).map do |sibling_path|
       Mock.for(sibling_path)
     end.sort
   end
