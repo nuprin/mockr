@@ -94,7 +94,7 @@ var mockr = function(){
     var replyr = function() {
 
       function initialize(first_argument) {
-        $("#comments_list div.reply_link a").click(function () {
+        $("#comments_list .reply_link span").click(function () {
           $(this).parents("li.comment_node").toggleClass("replying");
         });
       }
