@@ -1,7 +1,7 @@
 var mockr = function(){
-  var mockView;	     //mock display panel
-	var threadView;      //threads panel
-    
+    var mockView;        //mock display panel
+    var threadView;      //threads panel
+
     // highlight    : creates a highlighted section by clicking and draging
     // .initalize() : binds user highlight to the page (start,size,stop)
     // .create()    : create a new highlighted section
@@ -12,7 +12,7 @@ var mockr = function(){
         var dom;   //userlight dom element
         var x ;    //vertical mouse data
         var y;     //horizontal mouse data
-        
+
         function initalize(){
             x = {};
             y = {};
@@ -38,7 +38,7 @@ var mockr = function(){
                 height   : o.h
             }).appendTo(mockView)[0];
         }
-        
+
         function start(){
             x.start = user.mouse.left();
             y.start = user.mouse.top();
@@ -70,7 +70,7 @@ var mockr = function(){
                 y : y.start < y.drag ? y.start : y.drag,
                 w : $(dom).width(),
                 h : $(dom).height()
-            }
+            };
             if (o.w < 10 || o.h < 10) {
                 clear();
                 dom = null;
@@ -79,7 +79,7 @@ var mockr = function(){
                 area = o;
             }
         }
-        
+
         return {
             initalize : initalize,
             create    : create,
@@ -87,18 +87,32 @@ var mockr = function(){
             area      : getArea
         };
     }();
-    
+
+    var replyr = function() {
+
+      function initialize(first_argument) {
+        $("#comments_list div.reply_link a").click(function () {
+          $(this).parents("li.comment_node").toggleClass("replying");
+        });
+      }
+
+      return {
+        initialize : initialize
+      };
+    }();
+
     function initalize(){
         mockView = document.getElementById("mock");
         threadView = document.getElementById("comments_list");
-        
+
         highlight.initalize();
+        replyr.initialize();
     }
 
     return {
         initalize: initalize,
         highlight: highlight
-    }
+    };
 }();
 
 $(document).ready(mockr.initalize);
