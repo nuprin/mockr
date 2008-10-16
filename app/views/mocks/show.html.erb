@@ -7,6 +7,5 @@
   <%= render :partial => "comments" %>
 </div>
 
-<div id="mock">
-  <%= image_tag @mock.image_path %>
+<div id="mock" style="background-image: url('<%= image_path(@mock.image_path) %>');">
 </div>

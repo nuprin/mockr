@@ -1,3 +1,11 @@
+.highlight {
+  background: #999;
+  border: 1px solid #555;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  position: absolute;
+  z-index: 10;
+}
 .module {
   border-bottom: 1px solid #888;
   padding: 8px 0;
@@ -74,13 +82,17 @@
   text-indent: -9999px;
 }
 #mock {
+  background-repeat: no-repeat;
+  background-position: left top;
   float: left;
+  height: 1000px;
+  width: 1000px;
 }
 #mock_header {
   background-image: url(../images/glass.gif);
   background-repeat: repeat-x;
   font-weight: bold;
-  line-height: 43px;
+  line-height: 45px;
   padding: 0 0 0 10px;
 }
 #nav_list {
@@ -103,4 +115,26 @@
   color: white;
   float: left;
   width: 400px;
+}
+#stats_list {
+  float: right;
+  font-size: 12px;
+  font-weight: normal;
+  margin-right: 10px;
+}
+#stats_list li {
+  background-position: right 50%;
+  background-repeat: no-repeat;
+  float: left;
+  padding: 0 23px 0 12px;
+}
+#stats_list li#happy_count {
+  background-image: url("../images/happy.gif");
+}
+#stats_list li#sad_count {
+  background-image: url("../images/sad.gif");  
+}
+#userlight {
+  background: #99c;
+  border: 1px #55c solid;
 }

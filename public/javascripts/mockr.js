@@ -24,32 +24,32 @@ var mockr = function(){
             return area;
         }
         function clear(){
-            $('#mockView div.highlight').remove();
+            $(mockView).html('');
             area = null;
             dom = null;
         }
         function create(o){
             if (dom) $(dom).remove();
-            dom = $('<div></div>').css({
+            dom = $('<div class="highlight"></div>').css({
                 left     : o.x,
                 top      : o.y,
                 opacity  : 0.4,
                 width    : o.w,
                 height   : o.h
-            }).attr({className:'highlight'}).appendTo(mockView)[0];
+            }).appendTo(mockView)[0];
         }
         
         function start(){
             x.start = user.mouse.left();
             y.start = user.mouse.top();
             clear();
-            dom = $('<div></div>').css({
+            dom = $('<div id="area" class="highlight"></div>').css({
                 left     : x.start,
                 top      : y.start,
                 opacity  : 0.4,
                 width    : 2,
                 height   : 2
-            }).attr({className:'highlight',id:'area'}).appendTo(mockView)[0];
+            }).appendTo(mockView)[0];
         }
         function size(){
             if (!y.start && !x.start) return false;

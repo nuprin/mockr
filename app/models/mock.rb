@@ -75,4 +75,13 @@ class Mock < ActiveRecord::Base
     end.sort
   end
 
+  # TODO: Implement.
+  def happy_count
+    10
+  end
+  
+  # TODO: Implement.
+  def sad_count
+    5
+  end
 end

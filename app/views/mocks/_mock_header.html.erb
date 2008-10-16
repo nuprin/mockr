@@ -1,19 +1,23 @@
 <div class="module clearfix" id="mock_header">
   <ul id="nav_list">
-      <li>
-        <% if @mock.prev %>
-          <%= link_to "prev", mock_url(@mock.prev) %>
-        <% else %>
-          <%= link_to_function "prev", :class => "none" %>
-        <% end %>
-      </li>
-      <li>
-        <% if @mock.next %>
-          <%= link_to "next", mock_url(@mock.next) %>
-        <% else %>
-          <%= link_to_function "next", "", :class => "none" %>
-        <% end %>
-      </li>
+    <li>
+      <% if @mock.prev %>
+        <%= link_to "prev", mock_url(@mock.prev) %>
+      <% else %>
+        <%= link_to_function "prev", :class => "none" %>
+      <% end %>
+    </li>
+    <li>
+      <% if @mock.next %>
+        <%= link_to "next", mock_url(@mock.next) %>
+      <% else %>
+        <%= link_to_function "next", "", :class => "none" %>
+      <% end %>
+    </li>
+  </ul>
+  <ul id="stats_list">
+    <li id="happy_count"><%= @mock.happy_count %></li>
+    <li id="sad_count"><%= @mock.sad_count %></li>
   </ul>
   <%= @mock.title %>
 </div>
