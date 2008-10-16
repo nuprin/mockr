@@ -81,12 +81,14 @@ textarea {
   margin-top: 10px;
 }
 #comments_list .reply textarea {
-  background: #ccc;
+  background: #444;
+  border: 1px solid #555;
+  color: white;
   display: block;
   height: 60px;
   margin-bottom: 8px;
   margin-right: 3px;
-  width: 357px;
+  width: 100%;
 }
 #comments_list .reply input[type=image] {
   float: right;
