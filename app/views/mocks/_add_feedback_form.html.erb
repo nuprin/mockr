@@ -1,4 +1,7 @@
 <div class="module">
+  <% if flash[:notice] %>
+    <div id="notice"><%= flash[:notice] %></div>
+  <% end %>
   <% form_for :comment, @comment,
               :url => {:controller => 'comments', :action => 'create'},
               :html => {:id => 'add_feedback_form'} do |f| %>
@@ -14,6 +17,10 @@
         </li>
       <% end %>
     </ul>
+    <input type="hidden" name="x" value="" />
+    <input type="hidden" name="y" value="" />
+    <input type="hidden" name="width" value="" />
+    <input type="hidden" name="height" value="" />
     <%= f.text_area :text %>
     <%= image_submit_tag "buttons/add_feedback.gif" %>
   <% end %>
