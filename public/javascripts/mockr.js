@@ -93,31 +93,16 @@ var mockr = function(){
         };
     }();
 
-    var replyr = function() {
-
-      function initialize(first_argument) {
-        $("#comments_list .reply_link span").click(function () {
-          $(this).parents("li.comment_node").toggleClass("replying");
-        });
-      }
-
-      return {
-        initialize : initialize
-      };
-    }();
-
     function initialize(){
         mockView = document.getElementById("mock");
         threadView = document.getElementById("comments_list");
-
         highlight.initialize();
-        replyr.initialize();
-
-        $("#comments_list div.reply_link a").click(function () {
-          $(this).parents("li.comment_node").toggleClass("replying");
-        });
+        
         $("#feature_list").change(function(event) {
           location.href = "/" + event.target.value;
+        });
+        $("#comments_list .reply_link span").click(function () {
+          $(this).parents("li.comment_node").toggleClass("replying");
         });
     }
 
