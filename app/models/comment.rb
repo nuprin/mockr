@@ -8,6 +8,8 @@ class Comment < ActiveRecord::Base
     :class_name => 'Comment',
     :foreign_key => 'parent_id'
 
+  validates_presence_of :feeling
+
   def author
     User.new(:name => "Fako")
   end

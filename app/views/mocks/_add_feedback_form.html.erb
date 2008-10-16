@@ -1,4 +1,7 @@
 <div class="module">
+  <% if flash[:notice] %>
+    <div id="notice"><%= flash[:notice] %></div>
+  <% end %>
   <% form_for :comment, @comment,
               :url => {:controller => 'comments', :action => 'create'},
               :html => {:id => 'add_feedback_form'} do |f| %>

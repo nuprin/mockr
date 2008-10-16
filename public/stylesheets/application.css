@@ -116,6 +116,13 @@
 #nav_list a.none {
   color: #999;
 }
+#notice {
+  background: white;
+  color: black;
+  font-size: 11px;
+  margin: 0 10px 10px;
+  padding: 10px 10px;
+}
 #sidebar {
   background-color: #333;
   color: white;
