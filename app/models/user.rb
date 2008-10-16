@@ -1,9 +1,5 @@
 class User < ActiveRecord::Base
-  def name
-    "Chris Chan"
-  end
-  
   def first_name
-    "Chris"
+    name.split.first
   end
 end
