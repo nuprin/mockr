@@ -1,4 +1,5 @@
 body {
+  background: #333;
   width: 1400px;
 }
 textarea {
@@ -15,14 +16,6 @@ textarea {
 .module {
   border-bottom: 1px solid #555;
   padding: 8px 0;
-}
-.no_comments#children_comments_list .reply_link {
-  background: transparent;
-  margin: 0;
-  padding: 0;
-}
-.no_comments#children_comments_list .reply_link .fakelink {
-  color: #888;
 }
 #add_feedback_form {
   margin: 0 10px;
@@ -76,7 +69,7 @@ textarea {
 #comments_list .text {
   margin: 1em 0 0;
 }
-#comments_list .time {
+#comments_list .parent_meta {
   color: #888;
   float: right;
   font-size: 10px;

@@ -3,22 +3,26 @@
     <li class="<%= comment.feeling.name %> comment_node"
         id="comment_<%= comment.id %>"
         <%= comment.box_attribute %>>
-      <span class="time"
-        title="<%= comment.created_at.strftime("%b %e, %l:%M%p")%>">
-        <%= distance_of_time_in_words_to_now comment.created_at %> ago
-      </span>
+      <div class="parent_meta">
+        <% if comment.children.empty? %>
+          <span class="fakelink replylink">Reply</span> - 
+        <% end %>
+        <span class="time"
+          title="<%= comment.created_at.strftime("%b %e, %l:%M%p")%>">
+          <%= distance_of_time_in_words_to_now comment.created_at %> ago
+        </span>
+      </div>
       <span class="author">
         <%= comment.author.name %>
         <% unless comment.text.blank? %>
           says:
         <% end %>
       </span>
-      <div class="text">
-        <%= comment.text %>
-      </div>
-      <ul<%= ' class="no_comments"' if comment.children.empty? %>
-        id="children_comments_list">
-        <% if comment.children.any? %>
+      <% unless comment.text.blank? %>
+        <div class="text"><%= comment.text %></div>
+      <% end %>
+      <% if comment.children.any? %>
+        <ul id="children_comments_list">
           <% comment.children.each do |child| %>
             <li>
               <%= child.text %>
@@ -31,11 +35,11 @@
               </div>
             </li>
           <% end %>
-        <% end %>
-          <li class="reply_link">
-            <span class="fakelink">Reply</span>
+          <li>
+            <span class="fakelink replylink">Reply</span>
           </li>
         </ul>
+      <% end %>
       <div class="reply clearfix">
         <% form_for :comment, Comment.new(:parent_id => comment.id),
                     :url => {:controller => 'comments', :action => 'create'},

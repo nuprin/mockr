@@ -132,7 +132,7 @@ var mockr = function(){
             $(this).height($(this).height() + 24);
           }
         });
-        $("#comments_list .reply_link span").click(function () {
+        $("#comments_list .replylink").click(function () {
           $(this).parents("li.comment_node").toggleClass("replying");
         });
     }
