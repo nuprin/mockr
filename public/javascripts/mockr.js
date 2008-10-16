@@ -93,9 +93,6 @@ var mockr = function(){
         };
     }();
 
-    var ui = function() {
-    };
-
     function initalize(){
         mockView = document.getElementById("mock");
         threadView = document.getElementById("comments_list");
