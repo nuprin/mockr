@@ -2,6 +2,9 @@ a {
   text-decoration: none;
   color: white;
 }
+a:active, a:focus {
+  outline: none;
+}
 body, form, h1, h2 {
   margin: 0;
   padding: 0;
