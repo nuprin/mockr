@@ -10,8 +10,8 @@
       <div class="text">
         <%= comment.text %>
       </div>
-      <% if comment.children.any? %>
-        <ul id="children_comments_list">
+      <ul id="children_comments_list">
+        <% if comment.children.any? %>
           <% comment.children.each do |child| %>
             <li>
               <%= child.text %>
@@ -20,18 +20,18 @@
                 <%= distance_of_time_in_words_to_now child.created_at %>
               </div>
             </li>
+            <% end %>
           <% end %>
+          <li class="reply_link">
+            <span class="fakelink">Reply</span>
+          </li>
         </ul>
-      <% end %>
-      <div class="reply_link">
-        <%= link_to "Reply", '#' %>
-      </div>
       <div class="reply">
         <% form_tag url_for(:controller => "comments", :action => "create"),
                     :method => 'post' do %>
           <%= hidden_field_tag :parent_id, comment.id %>
           <%= text_area_tag :text %>
-          <%= submit_tag "Add" %>
+          <%= image_submit_tag "buttons/add_feedback.gif" %>
         <% end %>
       </div>
     </li>

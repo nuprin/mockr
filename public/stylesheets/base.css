@@ -1,6 +1,12 @@
-a {
+a,
+.fakelink {
+  color: #fff;
+  cursor: pointer;
   text-decoration: none;
-  color: white;
+}
+a:hover,
+.fakelink:hover {
+  text-decoration: underline;
 }
 a:active, a:focus {
   outline: none;

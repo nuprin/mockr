@@ -1,3 +1,9 @@
+input[type=image] {
+  vertical-align: bottom;
+}
+textarea {
+  font-size: 11px;
+}
 .highlight {
   background: #999;
   border: 1px solid #555;
@@ -13,9 +19,6 @@
 #add_feedback_form {
   margin: 0 10px;
 }
-#add_feedback_form input[type=image] {
-  vertical-align: bottom;
-}
 #add_feedback_form textarea {
   background: #ccc;
   height: 60px;
@@ -27,6 +30,7 @@
 }
 #children_comments_list li {
   background: #444;
+  font-size: 11px;
   margin: 0 -10px 1px 0;
   padding: 8px 10px;
 }
@@ -48,7 +52,7 @@
   background-image: url("../images/happy.gif");
 }
 #comments_list li.sad {
-  background-image: url("../images/sad.gif");  
+  background-image: url("../images/sad.gif");
 }
 #comments_list .author {
   color: #888;
@@ -61,6 +65,19 @@
   float: right;
   font-size: 10px;
   margin-top: 1px;
+}
+#comments_list .reply {
+  display: none;
+  margin-top: 10px;
+}
+#comments_list .reply textarea {
+  background: #ccc;
+  height: 60px;
+  margin-right: 3px;
+  width: 250px;
+}
+#comments_list .replying .reply {
+  display: block;
 }
 #feature_list {
   float: right;
@@ -159,7 +176,7 @@
   background-image: url("../images/happy.gif");
 }
 #stats_list li#sad_count {
-  background-image: url("../images/sad.gif");  
+  background-image: url("../images/sad.gif");
 }
 #userlight {
   background: #99c;
