@@ -78,10 +78,10 @@ var mockr = function(){
             }
             else {
                 area = o;
-                $('#add_feedback_form input[name=comment[x]]').val(o.x||0);
-                $('#add_feedback_form input[name=comment[y]]').val(o.y||0);
-                $('#add_feedback_form input[name=comment[width]]').val(o.w||0);
-                $('#add_feedback_form input[name=comment[height]]').val(o.h||0);
+                $('#comment_x').val(o.x||0);
+                $('#comment_y').val(o.y||0);
+                $('#comment_width').val(o.w||0);
+                $('#comment_height').val(o.h||0);
             }
         }
 
