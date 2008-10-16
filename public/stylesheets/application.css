@@ -18,6 +18,9 @@ textarea {
   margin: 0;
   padding: 0;
 }
+.no_comments#children_comments_list .reply_link .fakelink {
+  color: #888;
+}
 #add_feedback_form {
   margin: 0 10px;
 }
@@ -25,7 +28,9 @@ textarea {
   float: right;
 }
 #add_feedback_form textarea {
-  background: #ccc;
+  background: #444;
+  border: 1px solid #555;
+  color: white;
   height: 60px;
   margin: 0 3px 8px 0;
   width: 100%;
@@ -89,11 +94,6 @@ textarea {
 #comments_list .replying .reply {
   display: block;
 }
-#feature_list {
-  float: right;
-  font-size: 9px;
-  margin-top: 8px;
-}
 #feedback_header {
   border-bottom: 1px solid #555;
   padding: 10px 10px 5px 10px;
@@ -121,6 +121,14 @@ textarea {
 #header {
   background-color: black;
   padding: 0 10px;
+}
+#header div {
+  float: right;
+  font-size: 9px;
+  margin-top: 8px;
+}
+#header select {
+  font-size: 9px;
 }
 #header h1 {
   background-image: url(../images/mockr.gif);

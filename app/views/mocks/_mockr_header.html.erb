@@ -1,9 +1,12 @@
 <div class="module" id="header">
-  <select id="feature_list">
-    <option value="">Go to feature...</option>
-    <% Mock.features.sort.each do |feature| %>
-      <option value="<%= feature %>"<%= ' selected="selected"' if @mock.dir == feature %>><%= feature %></option>
-    <% end %>
-  </select>
+  <div>
+    <label for="feature_list">Feature:</label>&nbsp;
+    <select id="feature_list">
+      <option value="">Go to feature...</option>
+      <% Mock.features.sort.each do |feature| %>
+        <option value="<%= feature %>"<%= ' selected="selected"' if @mock.dir == feature %>><%= feature %></option>
+      <% end %>
+    </select>
+  </div>
   <h1>MOCKR</h1>
 </div>
