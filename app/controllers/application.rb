@@ -12,4 +12,9 @@ class ApplicationController < ActionController::Base
     "/#{mock.path}"
   end
   helper_method :mock_url
+
+  def viewer
+    (@viewer = [User.find_by_id(session[:user_id])]).first
+  end
+  helper_method :viewer
 end

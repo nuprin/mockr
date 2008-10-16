@@ -23,15 +23,15 @@
             <%= f.radio_button :feeling_id, feeling.id %>
           </li>
         <% end %>
-        <% if session[:user_id].blank? %>
+        <% if viewer %>
+          <%= f.hidden_field :author_id, :value => session[:user_id] %>
+        <% else %>
           <select id="comment_author_id" name="comment[author_id]">
             <option>I am...</option>
             <% User.find(:all).sort_by(&:name).each do |user| %>
               <option value="<%= user.id %>"><%= user.name %></option>
             <% end %>
           </select>
-        <% else %>
-          <%= f.hidden_field :author_id, :value => session[:user_id] %>
         <% end %>
       </ul>
     </div>

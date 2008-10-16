@@ -13,4 +13,8 @@ class Comment < ActiveRecord::Base
   validates_presence_of :text
   validates_presence_of :author
 
+  def box_attribute
+      return "box=\"#{x}_#{y}_#{width}_#{height}\"" if x && y && width && height
+  end
+
 end
