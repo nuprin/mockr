@@ -8,7 +8,10 @@
         <%= distance_of_time_in_words_to_now comment.created_at %> ago
       </span>
       <span class="author">
-        <%= comment.author.name %> says:
+        <%= comment.author.name %>
+        <% unless comment.text.blank? %>
+          says:
+        <% end %>
       </span>
       <div class="text">
         <%= comment.text %>
