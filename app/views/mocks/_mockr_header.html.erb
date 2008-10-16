@@ -2,7 +2,7 @@
   <select id="feature_list">
     <option>Go to feature...</option>
     <% Mock.features.each do |feature| %>
-      <option><%= feature %></option>
+      <option value="<%= feature %>"><%= feature %></option>
     <% end %>
   </select>
   <h1>MOCKR</h1>
