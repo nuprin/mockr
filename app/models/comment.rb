@@ -2,7 +2,6 @@ class Comment < ActiveRecord::Base
   belongs_to :author,
     :class_name => "User"
   belongs_to :feeling
-  belongs_to :mock
 
   belongs_to :parent,
     :class_name => 'Comment'
@@ -17,6 +16,11 @@ class Comment < ActiveRecord::Base
   validates_presence_of :feeling, :unless => Proc.new { |comment|
       !comment.parent.nil?
     }
+
+  def mock
+    mock_id = self.parent_id ? self.parent.mock_id : self.mock_id
+    Mock.find_by_id(mock_id)
+  end
 
   def box_attribute
       return "box=\"#{x}_#{y}_#{width}_#{height}\"" if x && y && width && height
