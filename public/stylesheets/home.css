@@ -15,10 +15,15 @@ body {
   line-height: 30px;
   text-align: justify;
 }
-#features a {
-}
 #features a:hover {
   background-color: #444;
   border-bottom: 1px dotted #999;
   text-decoration: none;
+}
+#logo {
+  border-bottom: none;
+  text-decoration: none;
+}
+#logo:hover {
+  background: none;
 }

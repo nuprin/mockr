@@ -1,5 +1,5 @@
 <div id="content">
-  <%= link_to image_tag('logo.png'), '/Mockr'  %>
+  <%= link_to image_tag('logo.png'), '/Mockr', :id => "logo"  %>
   <div id="features">
     <% Mock.features.each do |feature| %>
       <a href="/<%= feature %>"><%= feature %></a>
