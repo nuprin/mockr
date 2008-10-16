@@ -8,6 +8,9 @@ a:hover,
 .fakelink:hover {
   text-decoration: underline;
 }
+a img {
+  border: none;
+}
 a:active, a:focus {
   outline: none;
 }

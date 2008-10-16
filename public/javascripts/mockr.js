@@ -124,7 +124,7 @@ var mockr = function(){
           }
         });
         $("#feedback_filter").change(function(event) {
-          location.href = "?filter=" + event.target.value
+          location.href = "?feedback_filter=" + event.target.value
         })
         // All textareas should have a dynamic height.
         $("textarea").keydown(function(event) {

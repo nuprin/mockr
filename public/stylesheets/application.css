@@ -62,7 +62,7 @@ textarea {
   padding: 12px 10px 12px 32px;
 }
 #comments_list>li.highlighted {
-    background-color: #444;
+    background-color: #1a1a33;
 }
 #comments_list li.happy {
   background-image: url("../images/happy.gif");
@@ -133,16 +133,14 @@ textarea {
 #header div {
   float: right;
   font-size: 9px;
-  margin-top: 8px;
+  margin-top: 12px;
 }
 #header select {
   font-size: 9px;
 }
-#header h1 {
-  background-image: url(../images/mockr.gif);
-  background-position: left 5px;
-  background-repeat: no-repeat;
-  text-indent: -9999px;
+#header a {
+  display: block;
+  padding: 8px 0 10px;
 }
 #mock {
   background-repeat: no-repeat;
