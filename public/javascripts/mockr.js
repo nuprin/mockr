@@ -70,10 +70,10 @@ var mockr = function(){
                 w : $(dom).width(),
                 h : $(dom).height()
             };
+            x = {};
+            y = {};
             if (o.w < 10 || o.h < 10) {
                 clear();
-                x = {};
-                y = {};
                 dom = null;
             }
             else {
