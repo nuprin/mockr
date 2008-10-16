@@ -64,8 +64,6 @@ var mockr = function(){
             });
         }
         function stop(){
-            x = {};
-            y = {};
             var o = {
                 x : x.start < x.drag ? x.start : x.drag,
                 y : y.start < y.drag ? y.start : y.drag,
@@ -74,6 +72,8 @@ var mockr = function(){
             };
             if (o.w < 10 || o.h < 10) {
                 clear();
+                x = {};
+                y = {};
                 dom = null;
             }
             else {
@@ -97,6 +97,12 @@ var mockr = function(){
         mockView = document.getElementById("mock");
         threadView = document.getElementById("comments_list");
         highlight.initialize();
+        
+        $("#comments_list li[box]").mouseover(function(){
+            var box = $(this).attr('box').split('_');
+            var id  = $(this).attr('id');
+            highlight.create(box[0],box[0],box[0],box[0],box[0],); 
+        });
         
         $("#feature_list").change(function(event) {
           location.href = "/" + event.target.value;
