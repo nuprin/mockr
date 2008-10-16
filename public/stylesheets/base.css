@@ -10,6 +10,7 @@ body, textarea {
   font-family: Helvetica, Arial, sans-serif;
 }
 body {
+  background: #222;
   width: 1400px;
 }
 input {
