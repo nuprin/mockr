@@ -46,6 +46,21 @@ class Mock < ActiveRecord::Base
     mock
   end
 
+  def filtered_comments(filter)
+    return comments if filter.blank?
+    author_id = filter.to_i
+    if author_id > 0
+      return Comment.find(:all, :conditions => {:mock_id => self.id,
+                                                :author_id => author_id})
+    else
+      feeling_id = Feeling.send(filter)
+      return Comment.find(:all, :conditions => {:mock_id => self.id,
+                                                :feeling_id => feeling_id})
+    end
+  rescue
+    comments
+  end
+
   def image_path
     "mocks/#{path}"
   end
