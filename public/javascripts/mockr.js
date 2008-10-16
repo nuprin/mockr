@@ -1,5 +1,5 @@
 var mockr = function(){
-    var mockView;	     //mock display panel
+  var mockView;	     //mock display panel
 	var threadView;      //threads panel
     
     // highlight    : creates a highlighted section by clicking and draging
@@ -106,3 +106,7 @@ var mockr = function(){
 }();
 
 $(document).ready(mockr.initalize);
+
+$("#feature_list").change(function(event) {
+  location.href = "/" + event.target.value;
+});

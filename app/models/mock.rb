@@ -1,5 +1,8 @@
 class Mock < ActiveRecord::Base
+
   MOCK_PATH = "public/images/mocks"
+
+  has_many :comments
 
   class MockDoesNotExist < StandardError
     attr_reader :path
@@ -75,4 +78,29 @@ class Mock < ActiveRecord::Base
     end.sort
   end
 
+  # TODO: Implement.
+  def happy_count
+    10
+  end
+  
+  # TODO: Implement.
+  def sad_count
+    5
+  end
+  
+  def self.features
+    [
+      "Action Center",
+      "Cause",
+      "Cause 2",
+      "Navigation",
+      "Scrapbook",
+      "Sears",
+      "Sphig",
+    ]
+  end
+
+  def self.last_mock_for(feature)
+    Mock.find(:first)
+  end  
 end
