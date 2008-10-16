@@ -14,7 +14,7 @@ textarea {
   padding: 8px 0;
 }
 .no_comments#children_comments_list .reply_link {
-  background: #333;
+  background: transparent;
   margin: 0;
   padding: 0;
 }
@@ -57,6 +57,9 @@ textarea {
   background-repeat: no-repeat;
   border-bottom: 1px solid #555;
   padding: 12px 10px 12px 32px;
+}
+#comments_list>li.highlighted {
+    background-color: #444;
 }
 #comments_list li.happy {
   background-image: url("../images/happy.gif");

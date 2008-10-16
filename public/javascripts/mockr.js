@@ -101,6 +101,8 @@ var mockr = function(){
         highlight.initialize();
         
         $("#comments_list >li").click(function(){
+            $("#comments_list >li").removeClass('highlighted');
+            $(this).addClass('highlighted');
             highlight.clear();
             if ($(this).attr('box')) {
                 var box = $(this).attr('box').split('_');
