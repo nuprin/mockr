@@ -94,11 +94,6 @@ textarea {
 #comments_list .replying .reply {
   display: block;
 }
-#feature_list {
-  float: right;
-  font-size: 9px;
-  margin-top: 8px;
-}
 #feedback_header {
   border-bottom: 1px solid #555;
   padding: 10px 10px 5px 10px;
@@ -126,6 +121,14 @@ textarea {
 #header {
   background-color: black;
   padding: 0 10px;
+}
+#header div {
+  float: right;
+  font-size: 9px;
+  margin-top: 8px;
+}
+#header select {
+  font-size: 9px;
 }
 #header h1 {
   background-image: url(../images/mockr.gif);
