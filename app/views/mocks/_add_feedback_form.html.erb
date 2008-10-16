@@ -5,14 +5,14 @@
     <%= f.hidden_field :mock_id, :value => @mock.id %>
     <%= f.hidden_field :author_id, :value => 0 %>
     <ul class="clearfix" id="feelings_input_fields">
-      <li>
-        <%= f.radio_button :feeling, :happy %>
-        <label for="comment_feeling_happy"><%= image_tag "happy.gif" %></label>
-      </li>
-      <li>
-        <%= f.radio_button :feeling, :sad %>
-        <label for="comment_feeling_sad"><%= image_tag "sad.gif" %></label>
-      </li>
+      <% Feeling.find(:all).each do |feeling| %>
+        <li>
+          <%= f.radio_button :feeling_id, feeling.id %>
+          <label for="comment_feeling_<%= feeling.name %>">
+            <%= image_tag feeling.path %>
+          </label>
+        </li>
+      <% end %>
     </ul>
     <%= f.text_area :text %>
     <%= image_submit_tag "buttons/add_feedback.gif" %>
