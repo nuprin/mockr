@@ -1,3 +1,11 @@
+.highlight {
+  background: #999;
+  border: 1px solid #555;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  position: absolute;
+  z-index: 10px;
+}
 .module {
   border-bottom: 1px solid #888;
   padding: 8px 0;
@@ -74,7 +82,11 @@
   text-indent: -9999px;
 }
 #mock {
+  background-repeat: no-repeat;
+  background-position: left top;
   float: left;
+  height: 1000px;
+  width: 1000px;
 }
 #mock_header {
   background-image: url(../images/glass.gif);
@@ -103,4 +115,8 @@
   color: white;
   float: left;
   width: 400px;
+}
+#userlight {
+  background: #99c;
+  border: 1px #55c solid;
 }
