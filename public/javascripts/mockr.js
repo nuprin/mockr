@@ -100,18 +100,20 @@ var mockr = function(){
         threadView = document.getElementById("comments_list");
         highlight.initialize();
         
-        $("#comments_list li[box]").click(function(){
-            var box = $(this).attr('box').split('_');
-            var id  = $(this).attr('id');
+        $("#comments_list >li").click(function(){
             highlight.clear();
-            var high = highlight.create({
-                x: box[0],
-                y: box[1],
-                width: box[2],
-                height: box[3],
-                id: id
-            });
-            $(high).css({opacity:0}).animate({opacity:0.7},200).animate({opacity:0.4},200);
+            if ($(this).attr('box')) {
+                var box = $(this).attr('box').split('_');
+                var id = $(this).attr('id');
+                var high = highlight.create({
+                    x: box[0],
+                    y: box[1],
+                    width: box[2],
+                    height: box[3],
+                    id: id
+                });
+                $(high).css({opacity:0}).animate({opacity:0.7},200).animate({opacity:0.4},200);
+            }
         });
         
         $("#feature_list").change(function(event) {
