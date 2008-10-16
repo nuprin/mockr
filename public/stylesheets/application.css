@@ -25,6 +25,10 @@ textarea {
   margin-right: 3px;
   width: 272px;
 }
+#add_feedback_form select {
+	float: right;
+	margin-right: 110px;
+}
 #children_comments_list {
   margin-top: 10px;
 }

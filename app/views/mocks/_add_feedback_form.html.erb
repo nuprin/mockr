@@ -6,11 +6,20 @@
               :url => {:controller => 'comments', :action => 'create'},
               :html => {:id => 'add_feedback_form'} do |f| %>
     <%= f.hidden_field :mock_id, :value => @mock.id %>
-    <%= f.hidden_field :author_id, :value => 0 %>
     <%= f.hidden_field :x %>
     <%= f.hidden_field :y %>
     <%= f.hidden_field :width %>
     <%= f.hidden_field :height %>
+    <% if session[:user_id].blank? %>
+      <select id="comment_author_id" name="comment[author_id]">
+        <option>I am...</option>
+        <% User.find(:all).sort_by(&:name).each do |user| %>
+          <option value="<%= user.id %>"><%= user.name %></option>
+        <% end %>
+      </select>
+    <% else %>
+      <%= f.hidden_field :author_id, :value => session[:user_id] %>
+    <% end %>
     <ul class="clearfix" id="feelings_input_fields">
       <% Feeling.find(:all).each do |feeling| %>
         <li>
