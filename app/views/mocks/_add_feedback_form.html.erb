@@ -7,6 +7,10 @@
               :html => {:id => 'add_feedback_form'} do |f| %>
     <%= f.hidden_field :mock_id, :value => @mock.id %>
     <%= f.hidden_field :author_id, :value => 0 %>
+    <%= f.hidden_field :x %>
+    <%= f.hidden_field :y %>
+    <%= f.hidden_field :width %>
+    <%= f.hidden_field :height %>
     <ul class="clearfix" id="feelings_input_fields">
       <% Feeling.find(:all).each do |feeling| %>
         <li>
