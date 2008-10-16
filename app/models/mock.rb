@@ -75,13 +75,13 @@ class Mock < ActiveRecord::Base
 
   def next
     my_index = ordered_feature.index(self)
-    ordered_feature[my_index+1]
+    ordered_feature[my_index + 1]
   end
 
   def prev
     my_index = ordered_feature.index(self)
     return nil if my_index == 0
-    ordered_feature[my_index-1]
+    ordered_feature[my_index - 1]
   end
 
   def <=>(other)
