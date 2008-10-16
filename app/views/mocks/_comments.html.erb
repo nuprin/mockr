@@ -1,8 +1,9 @@
 <ul id="comments_list">
   <% @comments.each do |comment| %>
     <li class="<%= comment.feeling.name %> comment_node">
-      <span class="time">
-        <%= distance_of_time_in_words_to_now comment.created_at %>
+      <span class="time"
+        title="<%= comment.created_at.strftime("%b %e, %l:%M%p")%>">
+        <%= distance_of_time_in_words_to_now comment.created_at %> ago
       </span>
       <span class="author">
         <%= comment.author.name %> says:
@@ -17,7 +18,9 @@
               <%= child.text %>
               <div class="meta">
                 <%= child.author.first_name %>,
-                <%= distance_of_time_in_words_to_now child.created_at %>
+                <span title="<%= child.created_at.strftime("%b %e, %l:%M%p")%>"><%=
+                  distance_of_time_in_words(comment.created_at,
+                                            child.created_at) %> later</span>
               </div>
             </li>
             <% end %>
@@ -27,10 +30,12 @@
           </li>
         </ul>
       <div class="reply">
-        <% form_tag url_for(:controller => "comments", :action => "create"),
-                    :method => 'post' do %>
-          <%= hidden_field_tag :parent_id, comment.id %>
-          <%= text_area_tag :text %>
+        <% form_for :comment, Comment.new(:parent_id => comment.id),
+                    :url => {:controller => 'comments', :action => 'create'},
+                    :html => {:id => "reply_form_#{comment.id}"} do |f| %>
+          <%= f.hidden_field :author_id, :value => 1 %>
+          <%= f.hidden_field :parent_id %>
+          <%= f.text_area :text %>
           <%= image_submit_tag "buttons/add_feedback.gif" %>
         <% end %>
       </div>
