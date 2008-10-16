@@ -96,15 +96,7 @@ class Mock < ActiveRecord::Base
   end
 
   def self.features
-    [
-      "Action Center",
-      "Cause",
-      "Cause 2",
-      "Navigation",
-      "Scrapbook",
-      "Sears",
-      "Sphig",
-    ]
+    Dir.glob("#{MOCK_PATH}/*").map {|path| path.split('/').last }
   end
 
   def self.last_mock_for(feature)
