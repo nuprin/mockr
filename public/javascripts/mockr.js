@@ -29,12 +29,14 @@ var mockr = function(){
             dom = null;
         }
         function create(o){
-            $('<div class="highlight"></div>').css({
+            return $('<div class="highlight"></div>').css({
                 left     : o.x || 0,
                 top      : o.y || 0,
                 opacity  : 0.4,
                 width    : o.w,
                 height   : o.h
+            }).attr({
+                id:o.id
             }).appendTo(mockView)[0];
         }
 
@@ -91,25 +93,21 @@ var mockr = function(){
         };
     }();
 
-    var replyr = function() {
-
-      function initialize(first_argument) {
-        $("#comments_list div.reply_link a").click(function () {
-          $(this).parents("li.comment_node").toggleClass("replying");
-        });
-      }
-
-      return {
-        initialize : initialize
-      };
-    }();
+    var ui = function() {
+    };
 
     function initalize(){
         mockView = document.getElementById("mock");
         threadView = document.getElementById("comments_list");
-
+        
         highlight.initalize();
-        replyr.initialize();
+        
+        $("#comments_list div.reply_link a").click(function () {
+          $(this).parents("li.comment_node").toggleClass("replying");
+        });
+        $("#feature_list").change(function(event) {
+          location.href = "/" + event.target.value;
+        });
     }
 
     return {
@@ -119,7 +117,3 @@ var mockr = function(){
 }();
 
 $(document).ready(mockr.initalize);
-
-$("#feature_list").change(function(event) {
-  location.href = "/" + event.target.value;
-});
