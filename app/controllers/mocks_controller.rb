@@ -1,7 +1,5 @@
 class MocksController < ApplicationController
 
-  # TODO: accept params[:filter], which can be "happy," "sad," or the id of 
-  # an author.
   def show
     path = params[:mock_path]
     @mock = Mock.for(path)
