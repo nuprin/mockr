@@ -1,5 +1,5 @@
 <ul id="comments_list">
-  <% @comments.each do |comment| %>
+  <% @mock.filtered_comments(params[:feedback_filter]).each do |comment| %>
     <li class="<%= comment.feeling.name %> comment_node"
         id="comment_<%= comment.id %>"
         <%= comment.box_attribute %>>

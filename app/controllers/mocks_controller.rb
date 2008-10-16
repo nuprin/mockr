@@ -4,7 +4,6 @@ class MocksController < ApplicationController
     path = params[:mock_path]
     @mock = Mock.for(path)
     @title = path.split('/').last(2).join(' / ')
-    @comments = @mock.filtered_comments(params[:feedback_filter])
   rescue Mock::MockPathIsDirectory => ex
     logger.info ex.mock.inspect
     redirect_to ex.mock ? mock_url(ex.mock) : '/'
