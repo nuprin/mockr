@@ -18,6 +18,9 @@ textarea {
   margin: 0;
   padding: 0;
 }
+.no_comments#children_comments_list .reply_link .fakelink {
+  color: #888;
+}
 #add_feedback_form {
   margin: 0 10px;
 }
@@ -25,7 +28,9 @@ textarea {
   float: right;
 }
 #add_feedback_form textarea {
-  background: #ccc;
+  background: #444;
+  border: 1px solid #555;
+  color: white;
   height: 60px;
   margin: 0 3px 8px 0;
   width: 100%;
