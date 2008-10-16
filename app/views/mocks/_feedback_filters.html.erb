@@ -6,13 +6,16 @@
         <option>All (<%= @mock.comments.size %>)</option>
         <% if @mock.happy_count > 0 && @mock.sad_count > 0 %>
           <option disabled="disabled">----</option>
-          <option value="happy">Happy (<%= @mock.happy_count %>)</option>
-          <option value="sad">Sad (<%= @mock.sad_count %>)</option>
+          <% ["happy", "sad"].each do |feeling| %>
+            <option value="<%= feeling %>"<%= ' selected="selected"' if feeling == params[:feedback_filter] %>>
+              <%= feeling.capitalize %> (<%= @mock.send(feeling + "_count") %>)
+            </option>
+          <% end %>
         <% end %>
         <% if @mock.author_feedback.size > 1 %>
           <option disabled="disabled">----</option>
           <% @mock.author_feedback.each do |author, count| %>
-            <option value="<%= author.id %>">
+            <option value="<%= author.id %>"<%= ' selected="selected"' if author.id == params[:feedback_filter].to_i %>>
               <%= author.name %> (<%= count %>)
             </option>
           <% end %>

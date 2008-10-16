@@ -132,6 +132,8 @@ class Mock < ActiveRecord::Base
   def author_feedback
     comments.group_by(&:author).to_a.map do |author, coms|
       [author, coms.size]
-    end.sort
+    end.sort_by do |author, count|
+      author.name
+    end
   end
 end
