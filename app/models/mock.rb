@@ -19,6 +19,9 @@ class Mock < ActiveRecord::Base
     unless File.exist?(full_path)
       raise MockDoesNotExist.new(full_path)
     end
+
+    return Mock.last_mock_for(path) if File.directory?(full_path)
+
     mock = Mock.find_by_path(path)
     if mock.nil?
       clean_filename = path.split('/').last.
@@ -43,25 +46,14 @@ class Mock < ActiveRecord::Base
   end
 
   def next
-    my_index = ordered_family.index(self)
-    ordered_family[my_index+1]
+    my_index = ordered_feature.index(self)
+    ordered_feature[my_index+1]
   end
 
   def prev
-    my_index = ordered_family.index(self)
+    my_index = ordered_feature.index(self)
     return nil if my_index == 0
-    ordered_family[my_index-1]
-  end
-
-  def family_filenames
-    @family_filenames ||=
-      Dir.glob("#{MOCK_PATH}/#{dir}/*").select do |filename|
-        filename.ends_with?('jpg') ||
-        filename.ends_with?('png') ||
-        filename.ends_with?('gif')
-      end.map do |path|
-        path.split('/')[3..-1].join('/')
-      end
+    ordered_feature[my_index-1]
   end
 
   def <=>(other)
@@ -72,22 +64,36 @@ class Mock < ActiveRecord::Base
     /\w+-(\d+)\.(jpg|gif|png)/ =~ filename ? $1.to_i : -1
   end
 
-  def ordered_family
-    @ordered_family ||= family_filenames.map do |sibling_path|
+  def self.feature_filenames(feature)
+    @feature_filenames ||=
+      Dir.glob("#{MOCK_PATH}/#{feature}/*").select do |filename|
+        filename.ends_with?('jpg') ||
+        filename.ends_with?('png') ||
+        filename.ends_with?('gif')
+      end.map do |path|
+        path.split('/')[3..-1].join('/')
+      end
+  end
+
+  def self.ordered_feature(feature)
+    @ordered_feature ||= feature_filenames(feature).map do |sibling_path|
       Mock.for(sibling_path)
     end.sort
+  end
+  def ordered_feature
+    Mock.ordered_feature(dir)
   end
 
   # TODO: Implement.
   def happy_count
     10
   end
-  
+
   # TODO: Implement.
   def sad_count
     5
   end
-  
+
   def self.features
     [
       "Action Center",
@@ -101,6 +107,6 @@ class Mock < ActiveRecord::Base
   end
 
   def self.last_mock_for(feature)
-    Mock.find(:first)
-  end  
+    self.ordered_feature(feature).last
+  end
 end
