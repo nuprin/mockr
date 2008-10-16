@@ -1,6 +1,3 @@
-input[type=image] {
-  vertical-align: bottom;
-}
 textarea {
   font-size: 11px;
 }
@@ -13,30 +10,34 @@ textarea {
   z-index: 10;
 }
 .module {
-  border-bottom: 1px solid #888;
+  border-bottom: 1px solid #555;
   padding: 8px 0;
+}
+.no_comments#children_comments_list .reply_link {
+  background: #333;
+  margin: 0;
+  padding: 0;
 }
 #add_feedback_form {
   margin: 0 10px;
 }
+#add_feedback_form input[type=image] {
+  float: right;
+}
 #add_feedback_form textarea {
   background: #ccc;
   height: 60px;
-  margin-right: 3px;
-  width: 272px;
-}
-#add_feedback_form select {
-	float: right;
-	margin-right: 110px;
+  margin: 0 3px 8px 0;
+  width: 100%;
 }
 #children_comments_list {
   margin-top: 10px;
 }
 #children_comments_list li {
   background: #444;
-  font-size: 11px;
+  font-size: 10px;
   margin: 0 -10px 1px 0;
-  padding: 8px 10px;
+  padding: 4px 10px;
 }
 #children_comments_list .meta {
   font-size: 10px;
@@ -47,9 +48,9 @@ textarea {
   font-size: 12px;
 }
 #comments_list>li {
-  background-position: 8px 8px;
+  background-position: 8px 9px;
   background-repeat: no-repeat;
-  border-bottom: 1px solid #888;
+  border-bottom: 1px solid #555;
   padding: 12px 10px 12px 32px;
 }
 #comments_list li.happy {
@@ -76,9 +77,14 @@ textarea {
 }
 #comments_list .reply textarea {
   background: #ccc;
+  display: block;
   height: 60px;
+  margin-bottom: 8px;
   margin-right: 3px;
-  width: 250px;
+  width: 357px;
+}
+#comments_list .reply input[type=image] {
+  float: right;
 }
 #comments_list .replying .reply {
   display: block;
@@ -87,6 +93,17 @@ textarea {
   float: right;
   font-size: 9px;
   margin-top: 8px;
+}
+#feedback_header {
+  border-bottom: 1px solid #555;
+  padding: 10px 10px 5px 10px;
+}
+#feedback_header h3 {
+  font-size: 12px;
+  margin: 0;
+}
+#feedback_header select {
+  font-size: 9px;
 }
 #feelings_input_fields li {
   float: left;
@@ -149,6 +166,11 @@ textarea {
 }
 #nav_list a.none {
   color: #999;
+}
+#nav_list a.none:hover {
+  cursor: default;
+  background: none;
+  text-decoration: none;
 }
 #notice {
   background: white;

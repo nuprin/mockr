@@ -78,10 +78,10 @@ var mockr = function(){
             }
             else {
                 area = o;
-                $('#add_feedback_form input[name=x]').val(o.x||0);
-                $('#add_feedback_form input[name=y]').val(o.y||0);
-                $('#add_feedback_form input[name=width]').val(o.w||0);
-                $('#add_feedback_form input[name=height]').val(o.h||0);
+                $('#comment_x').val(o.x||0);
+                $('#comment_y').val(o.y||0);
+                $('#comment_width').val(o.w||0);
+                $('#comment_height').val(o.h||0);
             }
         }
 
@@ -93,31 +93,16 @@ var mockr = function(){
         };
     }();
 
-    var replyr = function() {
-
-      function initialize(first_argument) {
-        $("#comments_list .reply_link span").click(function () {
-          $(this).parents("li.comment_node").toggleClass("replying");
-        });
-      }
-
-      return {
-        initialize : initialize
-      };
-    }();
-
     function initialize(){
         mockView = document.getElementById("mock");
         threadView = document.getElementById("comments_list");
-
         highlight.initialize();
-        replyr.initialize();
-
-        $("#comments_list div.reply_link a").click(function () {
-          $(this).parents("li.comment_node").toggleClass("replying");
-        });
+        
         $("#feature_list").change(function(event) {
           location.href = "/" + event.target.value;
+        });
+        $("#comments_list .reply_link span").click(function () {
+          $(this).parents("li.comment_node").toggleClass("replying");
         });
     }
 
