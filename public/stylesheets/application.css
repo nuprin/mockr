@@ -119,6 +119,10 @@
   font-weight: normal;
   padding: 0 10px;
 }
+#nav_list a:hover {
+  background-image: url(../images/glass_hover.gif);
+  background-repeat: repeat-x;
+}
 #nav_list a.none {
   color: #999;
 }
