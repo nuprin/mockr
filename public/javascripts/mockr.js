@@ -110,7 +110,7 @@ var mockr = function(){
         mockView = document.getElementById("mock");
         threadView = document.getElementById("comments_list");
         
-        highlight.initalize();
+        highlight.initialize();
         
         $("#comments_list div.reply_link a").click(function () {
           $(this).parents("li.comment_node").toggleClass("replying");
@@ -121,9 +121,9 @@ var mockr = function(){
     }
 
     return {
-        initalize: initalize,
+        initialize: initialize,
         highlight: highlight
     };
 }();
 
-$(document).ready(mockr.initalize);
+$(document).ready(mockr.initialize);
