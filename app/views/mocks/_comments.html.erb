@@ -12,14 +12,16 @@
       <div class="text">
         <%= comment.text %>
       </div>
-      <ul<%= ' class="no_comments"' if comment.children.empty? %> id="children_comments_list">
+      <ul<%= ' class="no_comments"' if comment.children.empty? %>
+        id="children_comments_list">
         <% if comment.children.any? %>
           <% comment.children.each do |child| %>
             <li>
               <%= child.text %>
               <div class="meta">
                 <%= child.author.first_name %>,
-                <span title="<%= child.created_at.strftime("%b %e, %l:%M%p")%>"><%=
+                <span
+                  title="<%= child.created_at.strftime("%b %e, %l:%M%p")%>"><%=
                   distance_of_time_in_words(comment.created_at,
                                             child.created_at) %> later</span>
               </div>
@@ -34,7 +36,7 @@
         <% form_for :comment, Comment.new(:parent_id => comment.id),
                     :url => {:controller => 'comments', :action => 'create'},
                     :html => {:id => "reply_form_#{comment.id}"} do |f| %>
-          <%= f.hidden_field :author_id, :value => 1 %>
+          <%= f.hidden_field :author_id, :value => viewer.id %>
           <%= f.hidden_field :parent_id %>
           <%= f.text_area :text %>
           <%= image_submit_tag "buttons/add_feedback.gif" %>
