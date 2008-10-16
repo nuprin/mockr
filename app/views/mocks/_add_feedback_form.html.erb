@@ -1,4 +1,7 @@
 <div class="module">
+  <% if flash[:notice] %>
+    <div id="notice"><%= flash[:notice] %></div>
+  <% end %>
   <% form_for :comment, @comment,
               :url => {:controller => 'comments', :action => 'create'},
               :html => {:id => 'add_feedback_form'} do |f| %>
@@ -8,7 +11,7 @@
       <% Feeling.find(:all).each do |feeling| %>
         <li>
           <%= f.radio_button :feeling_id, feeling.id %>
-          <label for="comment_feeling_<%= feeling.name %>">
+          <label for="comment_feeling_id_<%= feeling.id %>">
             <%= image_tag feeling.path %>
           </label>
         </li>

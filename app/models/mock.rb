@@ -2,7 +2,8 @@ class Mock < ActiveRecord::Base
 
   MOCK_PATH = "public/images/mocks"
 
-  has_many :comments
+  has_many :comments,
+    :order => "created_at DESC"
 
   class MockDoesNotExist < StandardError
     attr_reader :path
