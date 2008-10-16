@@ -10,10 +10,10 @@
     <ul class="clearfix" id="feelings_input_fields">
       <% Feeling.find(:all).each do |feeling| %>
         <li>
-          <%= f.radio_button :feeling_id, feeling.id %>
           <label for="comment_feeling_id_<%= feeling.id %>">
             <%= image_tag feeling.path %>
           </label>
+          <%= f.radio_button :feeling_id, feeling.id %>
         </li>
       <% end %>
     </ul>
