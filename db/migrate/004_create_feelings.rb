@@ -6,6 +6,9 @@ class CreateFeelings < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    Feeling.create(:name => 'happy', :path => 'happy.gif')
+    Feeling.create(:name => 'sad', :path => 'sad.gif')
   end
 
   def self.down
