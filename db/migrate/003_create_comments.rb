@@ -1,7 +1,7 @@
 class CreateComments < ActiveRecord::Migration
   def self.up
     create_table :comments do |t|
-      t.integer :mock_id, :null => false
+      t.integer :mock_id
       t.integer :author_id, :null => false
       t.integer :parent_id
       t.integer :feeling_id
