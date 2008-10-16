@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   helper_method :mock_url
 
   def viewer
-    (@viewer = [User.find_by_id(session[:user_id])]).first
+    @viewer = User.find_by_id(session[:user_id]) || User.new
   end
   helper_method :viewer
 end
