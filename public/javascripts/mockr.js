@@ -39,8 +39,8 @@ var mockr = function(){
         }
 
         function start(){
-            x.start = user.mouse.left();
-            y.start = user.mouse.top();
+            x.start = user.mouse.left() - $(mockView).offset().left;
+            y.start = user.mouse.top() - $(mockView).offset().top;
             clear();
             dom = $('<div id="area" class="highlight"></div>').css({
                 left     : x.start,
@@ -52,8 +52,8 @@ var mockr = function(){
         }
         function size(){
             if (!y.start && !x.start) return false;
-            x.drag = user.mouse.left();
-            y.drag = user.mouse.top();
+            x.drag = user.mouse.left() - $(mockView).offset().left;
+            y.drag = user.mouse.top() - $(mockView).offset().top;
             $(dom).css({
                 left   : x.start < x.drag ? x.start : x.drag,
                 top    : y.start < y.drag ? y.start : y.drag,
