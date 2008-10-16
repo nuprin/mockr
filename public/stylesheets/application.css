@@ -151,6 +151,11 @@ textarea {
 #nav_list a.none {
   color: #999;
 }
+#nav_list a.none:hover {
+  cursor: default;
+  background: none;
+  text-decoration: none;
+}
 #notice {
   background: white;
   color: black;
