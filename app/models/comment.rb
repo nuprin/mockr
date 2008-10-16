@@ -12,6 +12,7 @@ class Comment < ActiveRecord::Base
 
   validates_presence_of :text
   validates_presence_of :author
+  validates_presence_of :feeling, :unless => Proc.new {|comment| !comment.parent.nil?}
 
   def box_attribute
       return "box=\"#{x}_#{y}_#{width}_#{height}\"" if x && y && width && height
