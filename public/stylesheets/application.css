@@ -4,7 +4,7 @@
   -moz-border-radius: 3px;
   border-radius: 3px;
   position: absolute;
-  z-index: 10px;
+  z-index: 10;
 }
 .module {
   border-bottom: 1px solid #888;
