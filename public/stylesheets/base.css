@@ -8,6 +8,9 @@ a:hover,
 .fakelink:hover {
   text-decoration: underline;
 }
+a:active, a:focus {
+  outline: none;
+}
 body, form, h1, h2 {
   margin: 0;
   padding: 0;
@@ -16,6 +19,7 @@ body, textarea {
   font-family: Helvetica, Arial, sans-serif;
 }
 body {
+  background: #222;
   width: 1400px;
 }
 input {
