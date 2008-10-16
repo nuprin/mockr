@@ -1,6 +1,7 @@
 body {
   background-repeat: repeat-x;
   background-image: url(../images/home_background.png);
+  width: 100%;
 }
 #content {
   margin: 200px auto 0;
