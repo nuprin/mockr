@@ -27,7 +27,12 @@
         <%= link_to "Reply", '#' %>
       </div>
       <div class="reply">
-        <% form_for @comment %>
+        <% form_tag url_for(:controller => "comments", :action => "create"),
+                    :method => 'post' do %>
+          <%= hidden_field_tag :parent_id, comment.id %>
+          <%= text_area_tag :text %>
+          <%= submit_tag "Add" %>
+        <% end %>
       </div>
     </li>
   <% end %>
