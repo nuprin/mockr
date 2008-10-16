@@ -128,11 +128,10 @@ class Mock < ActiveRecord::Base
   def self.last_mock_for(feature)
     self.ordered_feature(feature).last
   end
-  
+
   def author_feedback
-    [
-      [User.new(:name => "Kristján"), 3],
-      [User.new(:name => "Brad"), 5],
-    ]
+    comments.group_by(&:author).to_a.map do |author, coms|
+      [author, coms.size]
+    end.sort
   end
 end
