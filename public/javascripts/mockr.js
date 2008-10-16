@@ -3,7 +3,7 @@ var mockr = function(){
     var threadView;      //threads panel
 
     // highlight    : creates a highlighted section by clicking and draging
-    // .initalize() : binds user highlight to the page (start,size,stop)
+    // .initialize() : binds user highlight to the page (start,size,stop)
     // .create()    : create a new highlighted section
     // .clear()     : removes all highlighted sections
     // .selected()  : returns the area highlighted by the user
@@ -13,7 +13,7 @@ var mockr = function(){
         var x ;    //vertical mouse data
         var y;     //horizontal mouse data
 
-        function initalize(){
+        function initialize(){
             x = {};
             y = {};
             mockView.onmousedown = start;
@@ -86,7 +86,7 @@ var mockr = function(){
         }
 
         return {
-            initalize : initalize,
+            initialize : initialize,
             create    : create,
             clear     : clear,
             area      : getArea
@@ -106,12 +106,13 @@ var mockr = function(){
       };
     }();
 
-    function initalize(){
+    function initialize(){
         mockView = document.getElementById("mock");
         threadView = document.getElementById("comments_list");
-        
-        highlight.initalize();
-        
+
+        highlight.initialize();
+        replyr.initialize();
+
         $("#comments_list div.reply_link a").click(function () {
           $(this).parents("li.comment_node").toggleClass("replying");
         });
@@ -121,9 +122,9 @@ var mockr = function(){
     }
 
     return {
-        initalize: initalize,
+        initialize: initialize,
         highlight: highlight
     };
 }();
 
-$(document).ready(mockr.initalize);
+$(document).ready(mockr.initialize);
