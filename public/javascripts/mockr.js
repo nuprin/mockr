@@ -101,7 +101,7 @@ var mockr = function(){
         $("#comments_list li[box]").mouseover(function(){
             var box = $(this).attr('box').split('_');
             var id  = $(this).attr('id');
-            highlight.create(box[0],box[0],box[0],box[0],box[0],); 
+            highlight.create(box[0],box[0],box[0],box[0],box[0],id); 
         });
         
         $("#feature_list").change(function(event) {
