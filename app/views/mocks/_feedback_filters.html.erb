@@ -1,13 +1,23 @@
 <div id="feedback_header">
-  <h3>Feedback from
-    <select id="feedback_filter" name="feedback_filter">
-      <option>All (9)</option>
-      <option disabled="disabled">----</option>
-      <option>Good (4)</option>
-      <option>Bad (5)</option>
-      <option disabled="disabled">----</option>
-      <option>Brad (4)</option>
-      <option>Kristján (2)</option>
-    </select>
+  <h3>Feedback
+    <% if @mock.comments.any? %>
+      from
+      <select id="feedback_filter" name="feedback_filter">
+        <option>All (<%= @mock.comments.size %>)</option>
+        <% if @mock.happy_count > 0 && @mock.sad_count > 0 %>
+          <option disabled="disabled">----</option>
+          <option value="happy">Happy (<%= @mock.happy_count %>)</option>
+          <option value="sad">Sad (<%= @mock.sad_count %>)</option>
+        <% end %>
+        <% if @mock.author_feedback.size > 1 %>
+          <option disabled="disabled">----</option>
+          <% @mock.author_feedback.each do |author, count| %>
+            <option value="<%= author.id %>">
+              <%= author.name %> (<%= count %>)
+            </option>
+          <% end %>
+        <% end %>
+      </select>
+    <% end %>
   </h3>
 </div>
