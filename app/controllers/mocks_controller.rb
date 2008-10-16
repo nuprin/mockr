@@ -8,7 +8,7 @@ class MocksController < ApplicationController
     @title = path.split('/').last(2).join(' / ')
     @comments = @mock.comments
   rescue Mock::MockPathIsDirectory => ex
-    redirect_to url_for(ex.mock)
+    redirect_to ex.mock ? url_for(ex.mock) : '/'
   rescue Mock::MockDoesNotExist => boom
     render :text => "Mock does not exist: #{boom.path}"
   end
