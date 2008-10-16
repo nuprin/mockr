@@ -87,4 +87,20 @@ class Mock < ActiveRecord::Base
   def sad_count
     5
   end
+  
+  def self.features
+    [
+      "Action Center",
+      "Cause",
+      "Cause 2",
+      "Navigation",
+      "Scrapbook",
+      "Sears",
+      "Sphig",
+    ]
+  end
+
+  def self.last_mock_for(feature)
+    Mock.find(:first)
+  end  
 end

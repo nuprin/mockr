@@ -62,6 +62,11 @@
   font-size: 10px;
   margin-top: 1px;
 }
+#feature_list {
+  float: right;
+  font-size: 9px;
+  margin-top: 8px;
+}
 #feelings_input_fields li, #feelings_input_fields input {
   float: left;
 }
