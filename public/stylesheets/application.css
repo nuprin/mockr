@@ -5,6 +5,12 @@ body {
 textarea {
   font-size: 11px;
 }
+.commenting .instructions {
+  display: none;
+}
+.commenting #add_feedback_form {
+  display: block;
+}
 .highlight {
   background: #4e4e99;
   border: 1px solid #1a1a33;
@@ -13,15 +19,19 @@ textarea {
   position: absolute;
   z-index: 10;
 }
+.instructions {
+  font-size: 12px;
+  margin: 0;
+  padding: 0 8px;
+}
 .module {
   border-bottom: 1px solid #555;
   padding: 8px 0;
 }
 #add_feedback_form {
+  display: none;
   margin: 0 10px;
-}
-#add_feedback_form input[type=image] {
-  float: right;
+  text-align: right;
 }
 #add_feedback_form textarea {
   background: #444;
@@ -106,6 +116,9 @@ textarea {
 }
 #feedback_header select {
   font-size: 9px;
+}
+#feelings_input_fields {
+  float: left;
 }
 #feelings_input_fields li {
   float: left;

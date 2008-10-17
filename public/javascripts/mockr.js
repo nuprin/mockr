@@ -66,6 +66,7 @@ var mockr = function(){
             });
         }
         function stop(){
+            startCommenting();
             var o = {
                 x : x.start < x.drag ? x.start : x.drag,
                 y : y.start < y.drag ? y.start : y.drag,
@@ -86,7 +87,7 @@ var mockr = function(){
                 $('#comment_height').val(o.height||0);
             }
         }
-
+        
         return {
             initialize : initialize,
             create    : create,
@@ -94,6 +95,39 @@ var mockr = function(){
             area      : getArea
         };
     }();
+
+    this.startCommenting = function(){
+      $('#add_feedback_form').parents("div.module").addClass("commenting");
+      $('#comment_text').focus();
+    }
+
+    function initializeFeatureList(){
+      $("#feature_list").change(function(event) {
+        if (event.target.value != "") {
+          location.href = "/" + event.target.value;
+        }
+      });     
+    }
+
+    function initializeFeedbackFilter() {
+      $("#feedback_filter").change(function(event) {
+        location.href = "?feedback_filter=" + event.target.value
+      })
+    }
+
+    function initializeTextareas() {
+      $("textarea").keydown(function(event) {
+        if (user.keyboard.character() == "enter") {
+          $(this).height($(this).height() + 24);
+        }
+      });   
+    }
+    
+    function initializeChildComments() {
+      $("#comments_list .replylink").click(function () {
+        $(this).parents("li.comment_node").toggleClass("replying");
+      });
+    }
 
     function initialize(){
         mockView = document.getElementById("mock");
@@ -117,29 +151,16 @@ var mockr = function(){
                 $(high).css({opacity:0}).animate({opacity:0.7},200).animate({opacity:0.4},200);
             }
         });
-        
-        $("#feature_list").change(function(event) {
-          if (event.target.value != "") {
-            location.href = "/" + event.target.value;
-          }
-        });
-        $("#feedback_filter").change(function(event) {
-          location.href = "?feedback_filter=" + event.target.value
-        })
-        // All textareas should have a dynamic height.
-        $("textarea").keydown(function(event) {
-          if (user.keyboard.character() == "enter") {
-            $(this).height($(this).height() + 24);
-          }
-        });
-        $("#comments_list .replylink").click(function () {
-          $(this).parents("li.comment_node").toggleClass("replying");
-        });
+        initializeFeatureList();
+        initializeFeedbackFilter();
+        initializeTextareas();
+        initializeChildComments();
     }
 
     return {
         initialize: initialize,
-        highlight: highlight
+        highlight: highlight,
+        startCommenting: startCommenting,
     };
 }();
 
