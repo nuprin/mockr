@@ -132,12 +132,15 @@ class Mock < ActiveRecord::Base
     Comment.most_recent_comment_for(self)
   end
 
+  # TODO [chris]: So messy.
   def self.recently_commented_mocks
-    mocks =
-      self.find(:all, :conditions => "comments.mock_id = mocks.id", :limit => 5, 
-                :order => "comments.created_at DESC", :group => :mock_id,
-                :joins => ", comments")
-    mocks.map do |mock|
+    sql = <<-sql
+      select distinct mock_id from comments where mock_id IS NOT NULL
+      order by created_at DESC limit 5
+    sql
+    mock_ids = Comment.find_by_sql(sql).map(&:mock_id)
+    mock_ids.map do |mock_id|
+      mock = Mock.find(mock_id)
       [mock, mock.most_recent_comment]
     end
   end
