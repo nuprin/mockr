@@ -128,6 +128,14 @@ class Mock < ActiveRecord::Base
     self.ordered_feature(feature).last
   end
 
+  def self.recently_commented_mocks
+    Comment.find(:all, :conditions => "mock_id IS NOT NULL", 
+                 :order => "created_at DESC", :limit => 5, 
+                 :group => :mock_id).map do |c|
+      [c.mock, c]
+    end
+  end
+
   def author_feedback
     comments.group_by(&:author).to_a.map do |author, coms|
       [author, coms.size]

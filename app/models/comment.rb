@@ -18,8 +18,7 @@ class Comment < ActiveRecord::Base
     }
 
   def mock
-    mock_id = self.parent_id ? self.parent.mock_id : self.mock_id
-    Mock.find_by_id(mock_id)
+    Mock.find_by_id(self.mock_id || self.parent.mock_id)
   end
 
   def box_attribute

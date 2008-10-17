@@ -1,5 +1,22 @@
 <div id="content">
   <%= link_to image_tag('logo.png'), '/Mockr', :id => "logo"  %>
+
+  <div id="active_mocks">
+    <h2>ACTIVE MOCKS</h2>
+    <ul class="clearfix">
+      <% Mock.recently_commented_mocks.each do |mock, comment| %>
+        <li>
+          <%= link_to mock.title, mock_url(mock) %>
+          <div class="meta">
+            by <%= comment.author.name %> -
+            <%= distance_of_time_in_words_to_now comment.created_at %> ago
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <h2>ALL FEATURES</h2>
   <div id="features">
     <% Mock.features.each do |feature| %>
       <a href="/<%= feature %>"><%= feature %></a>
