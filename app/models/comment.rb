@@ -27,7 +27,7 @@ class Comment < ActiveRecord::Base
   end
 
   def box_attribute
-      return "box=\"#{x}_#{y}_#{width}_#{height}\"" if x && y && width && height
+    "box=\"#{x}_#{y}_#{width}_#{height}\"" if x && y && width && height
   end
 
 end
