@@ -124,8 +124,9 @@ var mockr = function(){
     }
     
     function initializeChildComments() {
-      $("#comments_list .replylink").click(function () {
-        $(this).parents("li.comment_node").toggleClass("replying");
+      $("#comments_list .replylink").click(function (){
+        $(this).parents("li.comment_node").
+          toggleClass("replying").find('textarea').focus();
       });
     }
 
