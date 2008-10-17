@@ -128,11 +128,17 @@ class Mock < ActiveRecord::Base
     self.ordered_feature(feature).last
   end
 
+  def most_recent_comment
+    Comment.most_recent_comment_for(self)
+  end
+
   def self.recently_commented_mocks
-    Comment.find(:all, :conditions => "mock_id IS NOT NULL", 
-                 :order => "created_at DESC", :limit => 5, 
-                 :group => :mock_id).map do |c|
-      [c.mock, c]
+    mocks =
+      self.find(:all, :conditions => "comments.mock_id = mocks.id", :limit => 5, 
+                :order => "comments.created_at DESC", :group => :mock_id,
+                :joins => ", comments")
+    mocks.map do |mock|
+      [mock, mock.most_recent_comment]
     end
   end
 
