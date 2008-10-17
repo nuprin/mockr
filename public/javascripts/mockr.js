@@ -27,6 +27,8 @@ var mockr = function(){
             $('#mock div.highlight').animate({opacity:0},500,null,function(){
                 $(this).remove();
             });
+            $('#add_feedback_form').parents("div.module").
+              removeClass("commenting");
             area = null;
             dom = null;
         }
