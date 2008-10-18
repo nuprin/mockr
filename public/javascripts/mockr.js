@@ -168,7 +168,7 @@ var mockr = function(){
     return {
         initialize: initialize,
         highlight: highlight,
-        startCommenting: startCommenting,
+        startCommenting: startCommenting
     };
 }();
 
