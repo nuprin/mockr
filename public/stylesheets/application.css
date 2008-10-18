@@ -14,8 +14,6 @@ textarea {
 .highlight {
   background: #4e4e99;
   border: 1px solid #1a1a33;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
   position: absolute;
   z-index: 10;
 }

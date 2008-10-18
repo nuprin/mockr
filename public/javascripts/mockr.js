@@ -16,7 +16,9 @@ var mockr = function(){
         function initialize(){
             x = {};
             y = {};
-            mockView.onmousedown = start;
+            mockView.onmousedown = function(){
+                start();
+            };
             mockView.onmousemove = size;
             mockView.onmouseup = stop;
         }
@@ -27,6 +29,7 @@ var mockr = function(){
             $('#mock div.highlight').animate({opacity:0},500,null,function(){
                 $(this).remove();
             });
+            mockView.innerHTML = "";
             $('#add_feedback_form').parents("div.module").
               removeClass("commenting");
             area = null;
@@ -48,13 +51,15 @@ var mockr = function(){
             x.start = user.mouse.left() - $(mockView).offset().left;
             y.start = user.mouse.top() - $(mockView).offset().top;
             clear();
-            dom = $('<div id="area" class="highlight"></div>').css({
+            dom = $('<div id="area" class="highlight"></div>')[0];
+            $(mockView).append(dom);
+            $(dom).css({
                 left     : x.start,
                 top      : y.start,
                 opacity  : 0.4,
                 width    : 2,
                 height   : 2
-            }).appendTo(mockView)[0];
+            });
         }
         function size(){
             if (!y.start && !x.start) return false;
