@@ -3,6 +3,7 @@
     <li class="<%= comment.feeling.name %> comment_node"
         id="comment_<%= comment.id %>"
         <%= comment.box_attribute %>>
+      <div class="arrow"></div>
       <div class="parent_meta">
         <% if comment.children.empty? %>
           <span class="fakelink replylink">Reply</span> - 
