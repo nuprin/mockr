@@ -14,6 +14,12 @@ h2 {
   margin-bottom: 50px;
   text-align: left;
 }
+#active_mocks img {
+  background: #444;
+  padding: 4px;
+  display: block;
+  width: 132px;
+}
 #active_mocks li {
   float: left;
   width: 144px;
@@ -27,13 +33,15 @@ h2 {
   font-size: 10px;
   margin-top: .5em;
 }
+#active_mocks .preview_container {
+  height: 100px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
 #content {
   margin: 200px auto 0;
   text-align: center;
   width: 800px;
-}
-#content img {
-  margin-bottom: 40px;
 }
 #features  {
   line-height: 30px;
@@ -44,10 +52,13 @@ h2 {
   border-bottom: 1px dotted #999;
   text-decoration: none;
 }
-#logo {
+#logo a {
   border-bottom: none;
   text-decoration: none;
 }
-#logo:hover {
+#logo a:hover {
   background: none;
+}
+#logo img {
+  margin-bottom: 40px;
 }
