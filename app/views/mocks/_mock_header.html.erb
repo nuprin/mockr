@@ -1,4 +1,4 @@
-<div class="module clearfix" id="mock_header">
+<div class="clearfix" id="mock_header">
   <ul id="nav_list">
     <li>
       <% if @mock.prev %>
@@ -15,15 +15,9 @@
       <% end %>
     </li>
   </ul>
-  <ul id="stats_list">
-    <li id="happy_count"
-      title="<%= pluralize(@mock.happy_count, "happy reaction") %>"><%=
-      @mock.happy_count %></li>
-    <li id="sad_count"
-      title="<%= pluralize(@mock.sad_count, "sad reaction") %>"><%=
-      @mock.sad_count %></li>
-  </ul>
+
   <h2>
+    <span class="date"><%= @mock.created_at.strftime("%b %e") %></span>
     <%= @mock.title %>
   </h2>
 </div>

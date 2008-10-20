@@ -13,10 +13,8 @@
         </span>
       </div>
       <span class="author">
-        <%= comment.author.name %>
-        <% unless comment.text.blank? %>
-          says:
-        <% end %>
+        <%= comment.author.first_name %>
+        <% unless comment.text.blank? %>says:<% end %>
       </span>
       <% unless comment.text.blank? %>
         <div class="text"><%= comment.text %></div>

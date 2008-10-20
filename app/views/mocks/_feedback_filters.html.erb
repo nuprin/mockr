@@ -1,4 +1,12 @@
 <div id="feedback_header">
+  <ul id="stats_list">
+    <li id="happy_count"
+      title="<%= pluralize(@mock.happy_count, "happy reaction") %>"><%=
+      @mock.happy_count %></li>
+    <li id="sad_count"
+      title="<%= pluralize(@mock.sad_count, "sad reaction") %>"><%=
+      @mock.sad_count %></li>
+  </ul>
   <h3>Feedback
     <% if @mock.comments.any? %>
       from
