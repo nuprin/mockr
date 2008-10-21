@@ -1,6 +1,6 @@
 <div id="content">
   <div id="logo">
-    <%= link_to image_tag('logo.png'), '/Mockr'  %>
+    <%= link_to image_tag('logo.gif'), '/Mockr'  %>
   </div>
 
   <div id="active_mocks">
@@ -23,7 +23,7 @@
 
   <h2>ALL FEATURES</h2>
   <div id="features">
-    <% Mock.features.each do |feature| %>
+    <% Mock.sorted_features.each do |feature| %>
       <a href="/<%= feature %>"><%= feature %></a>
     <% end %>
   </div>

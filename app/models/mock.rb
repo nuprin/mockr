@@ -145,6 +145,10 @@ class Mock < ActiveRecord::Base
     end
   end
 
+  def self.sorted_features
+    @sorted_features ||= self.features.sort
+  end
+  
   def author_feedback
     comments.group_by(&:author).to_a.map do |author, coms|
       [author, coms.size]
