@@ -54,7 +54,7 @@ class Mock < ActiveRecord::Base
       feeling_id = Feeling.send(filter)
       conditions.merge!(:feeling_id => feeling_id)
     end
-    Comment.find(:all, :conditions => conditions)
+    Comment.find(:all, :conditions => conditions, :order => "created_at DESC")
   end
 
   def image_path
@@ -114,7 +114,19 @@ class Mock < ActiveRecord::Base
 
   def sad_count
     Comment.count(:conditions => {:mock_id => self.id,
-                                  :feeling_id => Feeling.sad.id})  end
+                                  :feeling_id => Feeling.sad.id})
+  end
+
+  # A mock is "fresh" if there are new comments since the user last viewed.
+  def fresh?(user)
+    if user.real?
+      last_viewed_at = MockView.last_viewed_at(self, user)
+      if comment = most_recent_comment
+        return last_viewed_at.nil? || comment.created_at > last_viewed_at
+      end
+    end
+    false
+  end
 
   def self.features
     Dir.glob("#{MOCK_PATH}/*").map {|path| path.split('/').last }

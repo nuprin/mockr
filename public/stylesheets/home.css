@@ -20,6 +20,9 @@ h2 {
   display: block;
   width: 132px;
 }
+#active_mocks .fresh img {
+  background: #ff9900;
+}
 #active_mocks li {
   float: left;
   width: 144px;

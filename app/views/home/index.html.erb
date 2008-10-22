@@ -8,7 +8,7 @@
     <ul class="clearfix">
       <% Mock.recently_commented_mocks.each do |mock, comment| %>
         <li>
-          <div class="preview_container">
+          <div class="preview_container<%= ' fresh' if mock.fresh?(viewer) %>">
             <%= link_to image_tag(mock.image_path), mock_url(mock) %>
           </div>
           <%= link_to mock.title, mock_url(mock) %>

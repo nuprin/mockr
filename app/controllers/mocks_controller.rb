@@ -3,6 +3,9 @@ class MocksController < ApplicationController
   def show
     path = params[:mock_path]
     @mock = Mock.for(path)
+    if viewer.real?
+      MockView.log_view(@mock, viewer)
+    end
     @title = "#{@mock.dir} | #{@mock.title}"
   rescue Mock::MockPathIsDirectory => ex
     logger.info ex.mock.inspect
