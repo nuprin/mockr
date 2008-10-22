@@ -1,11 +1,34 @@
 class MockView < ActiveRecord::Base
+
+  belongs_to :mock
+
   def self.log_view(mock, user)
-    mock_view = self.find_or_create_by_mock_id_and_user_id(mock.id, user.id)
-    mock_view.update_attribute(:updated_at, Time.now)
+    mock_view = self.find_by_mock_id_and_user_id(mock.id, user.id)
+    if mock_view
+      mock_view.update_attributes(:reply_count => 0, :viewed_at => Time.now)
+    else
+      self.create! :mock_id => mock.id, 
+                   :user_id => user.id, 
+                   :viewed_at => Time.now
+    end
   end
   
   def self.last_viewed_at(mock, user)
     mock_view = self.find_by_mock_id_and_user_id(mock.id, user.id)
-    mock_view ? mock_view.updated_at : nil
+    mock_view ? mock_view.viewed_at : nil
+  end
+  
+  def self.discussions_relevant_to(comment)
+    return [] unless comment.parent_id
+    related_comments = [comment.parent] + comment.siblings
+    author_ids = related_comments.map(&:author_id).uniq
+    conditions = {:user_id => author_ids, :mock_id => comment.mock_id}
+    self.find(:all, :conditions => conditions)
+  end
+  
+  def self.discussions_for(user)
+    conditions = ["user_id = ? AND reply_count > 0", user.id]
+    find_options = {:conditions => conditions, :order => "last_replied_at DESC"}
+    self.find :all, find_options
   end
 end

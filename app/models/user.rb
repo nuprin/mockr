@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
   def real?
     !self.id.nil?
   end
+  
+  def discussions
+    MockView.discussions_for(self)
+  end
 end

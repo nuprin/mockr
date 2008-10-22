@@ -122,7 +122,7 @@ class Mock < ActiveRecord::Base
     if user.real?
       last_viewed_at = MockView.last_viewed_at(self, user)
       if comment = most_recent_comment
-        return last_viewed_at.nil? || comment.created_at > last_viewed_at
+        return last_viewed_at.nil? || (comment.created_at > last_viewed_at)
       end
     end
     false

@@ -46,6 +46,29 @@ h2 {
   text-align: center;
   width: 800px;
 }
+#discussions {
+  color: #999;
+  text-align: left;
+}
+#discussions .time {
+  float: right;
+}
+#discussions a {
+  background: #444;
+  border-bottom: 1px dotted #999;
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+}
+#discussions a:hover {
+  background: #333;
+}
+#discussions ul {
+  margin-bottom: 50px;
+  width: 100%;
+}
+#discussions li {
+}
 #features  {
   line-height: 30px;
   text-align: justify;
