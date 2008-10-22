@@ -6,6 +6,7 @@ class CreateMockViews < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :mock_views, [:mock_id, :user_id], :unique => true
   end
 
   def self.down
