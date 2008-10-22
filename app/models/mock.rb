@@ -47,18 +47,14 @@ class Mock < ActiveRecord::Base
   end
 
   def filtered_comments(filter)
-    return comments if filter.blank?
-    author_id = filter.to_i
-    if author_id > 0
-      return Comment.find(:all, :conditions => {:mock_id => self.id,
-                                                :author_id => author_id})
-    else
+    conditions = {:mock_id => self.id, :parent_id => nil}
+    if filter.to_i > 0
+      conditions.merge!(:author_id => filter.to_i)
+    elsif filter && Feeling.respond_to?(filter)
       feeling_id = Feeling.send(filter)
-      return Comment.find(:all, :conditions => {:mock_id => self.id,
-                                                :feeling_id => feeling_id})
+      conditions.merge!(:feeling_id => feeling_id)
     end
-  rescue
-    comments
+    Comment.find(:all, :conditions => conditions)
   end
 
   def image_path

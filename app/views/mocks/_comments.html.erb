@@ -40,10 +40,12 @@
         </ul>
       <% end %>
       <div class="reply clearfix">
-        <% form_for :comment, Comment.new(:parent_id => comment.id),
+        <% form_for :comment, Comment.new(:parent_id => comment.id,
+                                          :mock_id => @mock.id),
                     :url => {:controller => 'comments', :action => 'create'},
                     :html => {:id => "reply_form_#{comment.id}"} do |f| %>
           <%= f.hidden_field :author_id, :value => viewer.id %>
+          <%= f.hidden_field :mock_id %>
           <%= f.hidden_field :parent_id %>
           <%= f.text_area :text %>
           <%= image_submit_tag "buttons/add_feedback.gif" %>
