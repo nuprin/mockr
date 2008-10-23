@@ -31,14 +31,16 @@
     <h2>ACTIVE MOCKS</h2>
     <ul class="clearfix">
       <% Mock.recently_commented_mocks.each do |mock, comment| %>
-        <li>
-          <div class="preview_container<%= ' fresh' if mock.fresh?(viewer) %>">
+        <li<%= ' class="fresh"' if mock.fresh?(viewer) %>>
+          <div class="preview_container">
             <%= link_to image_tag(mock.image_path), mock_url(mock) %>
           </div>
-          <%= link_to mock.title, mock_url(mock) %>
-          <div class="meta">
-            by <%= comment.author.name %> -
-            <%= distance_of_time_in_words_to_now comment.created_at %> ago
+          <div class="text">
+            <%= link_to mock.title, mock_url(mock) %>
+            <div class="meta">
+              by <%= comment.author.first_name %> -
+              <%= distance_of_time_in_words_to_now comment.created_at %> ago
+            </div>
           </div>
         </li>
       <% end %>

@@ -20,8 +20,11 @@ h2 {
   display: block;
   width: 132px;
 }
-#active_mocks .fresh img {
-  background: #ff9900;
+#active_mocks .fresh .text {
+  background-image: url(../images/dot.gif);
+  background-position: 0 3px;
+  background-repeat: no-repeat;
+  padding-left: 18px;
 }
 #active_mocks li {
   float: left;
