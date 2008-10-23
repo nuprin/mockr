@@ -31,8 +31,11 @@ h2 {
 }
 #active_mocks li {
   float: left;
-  width: 144px;
   margin-right: 20px;
+  width: 144px;
+}
+#active_mocks a {
+  line-height: 20px;
 }
 #active_mocks ul {
   margin-right: -20px;
@@ -76,7 +79,7 @@ h2 {
 #discussions li {
 }
 #features  {
-  line-height: 30px;
+  line-height: 34px;
   text-align: justify;
 }
 #features a:hover {
