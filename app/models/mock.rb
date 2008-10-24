@@ -138,17 +138,16 @@ class Mock < ActiveRecord::Base
     Comment.about(self).recent.first
   end
 
-  # TODO [chris]: So messy.
   def self.recently_commented_mocks
-    sql = <<-sql
-      select distinct mock_id from comments where mock_id IS NOT NULL
-      order by created_at DESC limit 5
-    sql
-    mock_ids = Comment.find_by_sql(sql).map(&:mock_id)
+    mock_ids =
+      Comment.recent.all(:select => "distinct mock_id", :limit => 5).
+      map(&:mock_id)
     mock_ids.map do |mock_id|
       mock = Mock.find(mock_id)
       [mock, mock.most_recent_comment]
-    end
+    end.sort do |(m1, c1), (m2, c2)|
+      c1.created_at <=> c2.created_at
+    end.reverse
   end
 
   def self.sorted_features
