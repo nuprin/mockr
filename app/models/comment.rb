@@ -9,6 +9,19 @@ class Comment < ActiveRecord::Base
     :class_name => 'Comment',
     :foreign_key => 'parent_id'
 
+
+  named_scope :about, lambda {|mock| {:conditions => {:mock_id => mock.id}}}
+  named_scope :by, lambda {|author| {:conditions => {:author_id => author.id}}}
+  named_scope :happy, :conditions => {:feeling_id => Feeling.happy.id}
+  named_scope :in_reply_to, lambda {|parent_id|
+    {:conditions => {:parent_id => parent_id}}
+  }
+  named_scope :recent, :order => "created_at DESC"
+  named_scope :sad, :conditions => {:feeling_id => Feeling.sad.id}
+  named_scope :since, lambda {|time| 
+    {:conditions => ["created_at >= ?", time.getutc]}
+  }
+
   validates_presence_of :text, :if => Proc.new { |comment| 
       comment.parent
     }
@@ -25,11 +38,6 @@ class Comment < ActiveRecord::Base
     self.parent_id ? self.parent.children : []
   end
   
-  def self.most_recent_comment_for(mock)
-    Comment.find :first, :conditions => {:mock_id => mock.id},
-                 :order => "created_at DESC"
-  end
-
   after_create do |comment|
     discussions = MockView.discussions_relevant_to(comment)
     discussions.each do |discussion|
