@@ -15,9 +15,11 @@ class User < ActiveRecord::Base
     last_viewed_at = MockView.last_viewed_at(mock, self)
     if last_viewed_at
       comment_ids = self.subscribed_comment_ids(mock)
-      Comment.about(mock).in_reply_to(comment_ids).since(last_viewed_at).all
+      comments = 
+        Comment.about(mock).in_reply_to(comment_ids).since(last_viewed_at)
+      Comment.find(comments.map(&:parent_id))
     else
-      Comment.about(mock).all
+      Comment.about(mock)
     end
   end
 

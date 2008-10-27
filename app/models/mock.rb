@@ -46,7 +46,10 @@ class Mock < ActiveRecord::Base
     mock
   end
 
-  def filtered_comments(filter)
+  def filtered_comments(filter, user)
+    if filter == "new"
+      return user.unread_comments_for(self)
+    end
     conditions = {:mock_id => self.id, :parent_id => nil}
     if filter.to_i > 0
       conditions.merge!(:author_id => filter.to_i)
@@ -103,6 +106,7 @@ class Mock < ActiveRecord::Base
       Mock.for(sibling_path)
     end.sort
   end
+
   def ordered_feature
     Mock.ordered_feature(dir)
   end

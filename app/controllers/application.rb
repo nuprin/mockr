@@ -8,8 +8,8 @@ class ApplicationController < ActionController::Base
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => 'c0343548cd9ee7aee309727618e8b6ca'
 
-  def mock_url(mock)
-    "/#{mock.path}"
+  def mock_url(mock, query_string = "")
+    "/#{mock.path}#{query_string}"
   end
   helper_method :mock_url
 

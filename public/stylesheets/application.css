@@ -2,7 +2,7 @@ body {
   background: #282828;
   width: 1400px;
 }
-textarea {
+body, textarea {
   font-size: 11px;
 }
 .commenting .instructions {
@@ -10,6 +10,21 @@ textarea {
 }
 .commenting #add_feedback_form {
   display: block;
+}
+p.unread_notice {
+  background: #f8f671;
+  border-bottom: 1px solid #ab8234;
+  color: black;
+  margin: 0;
+  padding: 10px 0;
+  text-align: center;
+}
+p.unread_notice a {
+  color: black;
+  font-weight: bold;
+}
+p.unread_notice a:hover {
+  background: none;
 }
 .highlight {
   background: #4e4e99;

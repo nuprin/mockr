@@ -1,5 +1,13 @@
+<% if params[:feedback_filter] %>
+  <p class="unread_notice">
+    Displaying only unread comments.
+    <%= link_to "See All Comments", mock_url(@mock) %>
+  </p>
+<% end %>
 <ul id="comments_list">
-  <% @mock.filtered_comments(params[:feedback_filter]).each do |comment| %>
+  <%
+    @mock.filtered_comments(params[:feedback_filter], viewer).each do |comment| 
+  %>
     <li class="<%= comment.feeling.name %> comment_node"
         id="comment_<%= comment.id %>"
         <%= comment.box_attribute %>>

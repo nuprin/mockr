@@ -1,10 +1,14 @@
 class Comment < ActiveRecord::Base
   belongs_to :author,
     :class_name => "User"
+
   belongs_to :feeling
+
+  belongs_to :mock
 
   belongs_to :parent,
     :class_name => 'Comment'
+
   has_many :children,
     :class_name => 'Comment',
     :foreign_key => 'parent_id'
@@ -19,7 +23,7 @@ class Comment < ActiveRecord::Base
   named_scope :recent, :order => "created_at DESC"
   named_scope :sad, :conditions => {:feeling_id => Feeling.sad.id}
   named_scope :since, lambda {|time| 
-    {:conditions => ["created_at >= ?", time.getutc]}
+    {:conditions => ["created_at >= ?", time]}
   }
 
   validates_presence_of :text, :if => Proc.new { |comment| 
@@ -29,10 +33,6 @@ class Comment < ActiveRecord::Base
   validates_presence_of :feeling, :unless => Proc.new { |comment|
       !comment.parent.nil?
     }
-
-  def mock
-    Mock.find_by_id(self.mock_id || self.parent.mock_id)
-  end
 
   def siblings
     self.parent_id ? self.parent.children : []
