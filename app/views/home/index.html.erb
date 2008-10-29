@@ -3,29 +3,26 @@
     <%= link_to image_tag('logo.gif'), '/Mockr'  %>
   </div>
 
-  <% if viewer.real? %>
-    <% discussions = MockView.discussions_for(viewer) %>
-    <% if discussions.any? %>
-      <div id="discussions">
-        <h2>DISCUSSIONS</h2>
-        <ul>
-          <% discussions.each do |discussion| %>
-            <li>
-              <a href='<%= mock_url(discussion.mock, "?feedback_filter=new") 
-              %>'>
-                <span class="time">
-                <%= 
-                  distance_of_time_in_words_to_now(discussion.last_replied_at)
-                %> ago
-                </span>
-                <%= discussion.mock.title %>
-                (<%= discussion.reply_count %>)
-              </a>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+  <% if viewer.real? && viewer.discussions.any? %>
+    <div id="discussions">
+      <h2>DISCUSSIONS</h2>
+      <ul>
+        <% viewer.discussions.each do |discussion| %>
+          <li>
+            <a href='<%= mock_url(discussion.mock, "?feedback_filter=new") 
+            %>'>
+              <span class="time">
+              <%= 
+                distance_of_time_in_words_to_now(discussion.last_replied_at)
+              %> ago
+              </span>
+              <%= discussion.mock.title %>
+              (<%= discussion.reply_count %>)
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
 
   <div id="active_mocks">

@@ -1,14 +1,15 @@
 class User < ActiveRecord::Base
+  has_many :discussions,
+    :conditions => "reply_count > 0",
+    :order      => "last_replied_at DESC",
+    :class_name => "MockView"
+
   def first_name
     name.split.first
   end
 
   def real?
     !self.id.nil?
-  end
-  
-  def discussions
-    MockView.discussions_for(self)
   end
   
   def unread_comments_for(mock)

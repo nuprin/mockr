@@ -25,10 +25,5 @@ class MockView < ActiveRecord::Base
     conditions = {:user_id => author_ids, :mock_id => comment.mock_id}
     self.find(:all, :conditions => conditions)
   end
-  
-  def self.discussions_for(user)
-    conditions = ["user_id = ? AND reply_count > 0", user.id]
-    find_options = {:conditions => conditions, :order => "last_replied_at DESC"}
-    self.find :all, find_options
-  end
+
 end
