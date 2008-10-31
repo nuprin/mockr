@@ -1,6 +1,5 @@
 body {
   background: #282828;
-  width: 1400px;
 }
 body, textarea {
   font-size: 11px;
@@ -70,6 +69,8 @@ p.unread_notice a:hover {
 }
 #comments_list {
   font-size: 12px;
+  height: 400px;
+  overflow: auto;
 }
 #comments_list>li {
   background-position: 8px 9px;
@@ -184,10 +185,10 @@ p.unread_notice a:hover {
   background-position: left top;
   background-repeat: no-repeat;
   cursor: crosshair;
-  float: left;
   position: relative;
-  height: 2000px;
-  width: 1000px;
+  overflow: auto;
+  height: 500px;
+  margin-left: 400px;
 }
 #mock_header {
   background-image: url(../images/glass-2.gif);

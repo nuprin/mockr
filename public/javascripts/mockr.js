@@ -137,6 +137,12 @@ var mockr = function(){
       });
     }
 
+    function adjustHeights() {
+      height = user.browser.height() - $('#comments_list').offset().top
+      $("#comments_list").height(height)
+      $("#mock").height(user.browser.height())
+    }
+
     function initialize(){
         mockView = document.getElementById("mock");
         threadView = document.getElementById("comments_list");
@@ -163,13 +169,17 @@ var mockr = function(){
         initializeFeedbackFilter();
         initializeTextareas();
         initializeChildComments();
+        adjustHeights();
     }
 
     return {
         initialize: initialize,
         highlight: highlight,
-        startCommenting: startCommenting
+        startCommenting: startCommenting,
+        adjustHeights: adjustHeights
     };
 }();
 
 $(document).ready(mockr.initialize);
+// TODO: Figure out window size change handler.
+$(document).resize(mockr.adjustHeights);
