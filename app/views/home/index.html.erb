@@ -11,13 +11,15 @@
           <li>
             <a href='<%= mock_url(discussion.mock, "?feedback_filter=new") 
             %>'>
+              <span class="reply_count">
+                <%= discussion.reply_count %> 
+              </span>
               <span class="time">
               <%= 
                 distance_of_time_in_words_to_now(discussion.last_replied_at)
               %> ago
               </span>
               <%= discussion.mock.title %>
-              (<%= discussion.reply_count %>)
             </a>
           </li>
         <% end %>
@@ -27,22 +29,24 @@
 
   <div id="active_mocks">
     <h2>ACTIVE MOCKS</h2>
-    <ul class="clearfix">
-      <% Mock.recently_commented_mocks.each do |mock, comment| %>
-        <li<%= ' class="fresh"' if mock.fresh?(viewer) %>>
-          <div class="preview_container">
-            <%= link_to image_tag(mock.image_path), mock_url(mock) %>
-          </div>
-          <div class="text">
-            <%= link_to mock.title, mock_url(mock) %>
-            <div class="meta">
-              by <%= comment.author.first_name %> -
-              <%= distance_of_time_in_words_to_now comment.created_at %> ago
+    <% Mock.recently_commented_mocks.in_groups_of(3) do |row| %>
+      <ul class="clearfix">
+        <% row.each do |mock, comment| %>
+          <li<%= ' class="fresh"' if mock.fresh?(viewer) %>>
+            <div class="preview_container">
+              <%= link_to image_tag(mock.image_path), mock_url(mock) %>
             </div>
-          </div>
-        </li>
-      <% end %>
-    </ul>
+            <div class="text">
+              <%= link_to mock.title, mock_url(mock) %>
+              <div class="meta">
+                by <%= comment.author.first_name %> -
+                <%= distance_of_time_in_words_to_now comment.created_at %> ago
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
   </div>
 
   <h2>ALL FEATURES</h2>

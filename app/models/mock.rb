@@ -144,7 +144,7 @@ class Mock < ActiveRecord::Base
 
   def self.recently_commented_mocks
     mock_ids =
-      Comment.recent.all(:select => "distinct mock_id", :limit => 5).
+      Comment.recent.all(:select => "distinct mock_id", :limit => 6).
       map(&:mock_id)
     mock_ids.map do |mock_id|
       mock = Mock.find(mock_id)
