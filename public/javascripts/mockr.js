@@ -16,7 +16,8 @@ var mockr = function(){
         function initialize(){
             x = {};
             y = {};
-            mockView.onmousedown = function(){
+            mockView.onmousedown = function(event){
+                event.preventDefault();
                 start();
             };
             mockView.onmousemove = size;
@@ -29,7 +30,8 @@ var mockr = function(){
             $('#mock div.highlight').animate({opacity:0},500,null,function(){
                 $(this).remove();
             });
-            mockView.innerHTML = "";
+            // mockView.innerHTML = "";
+            $('#area').remove();
             $('#add_feedback_form').parents("div.module").
               removeClass("commenting");
             area = null;
@@ -49,7 +51,7 @@ var mockr = function(){
 
         function start(){
             x.start = user.mouse.left() - $(mockView).offset().left;
-            y.start = user.mouse.top() - $(mockView).offset().top;
+            y.start = getY();
             clear();
             dom = $('<div id="area" class="highlight"></div>')[0];
             $(mockView).append(dom);
@@ -61,10 +63,14 @@ var mockr = function(){
                 height   : 2
             });
         }
+        function getY() {
+          return user.mouse.top() - $(mockView).offset().top + 
+                  $('#mock').scrollTop();
+        }
         function size(){
             if (!y.start && !x.start) return false;
             x.drag = user.mouse.left() - $(mockView).offset().left;
-            y.drag = user.mouse.top() - $(mockView).offset().top;
+            y.drag = getY();
             $(dom).css({
                 left   : x.start < x.drag ? x.start : x.drag,
                 top    : y.start < y.drag ? y.start : y.drag,
@@ -99,7 +105,8 @@ var mockr = function(){
             initialize : initialize,
             create    : create,
             clear     : clear,
-            area      : getArea
+            area      : getArea,
+            getY      : getY,
         };
     }();
 
@@ -162,7 +169,12 @@ var mockr = function(){
                     height: box[3],
                     id: id
                 });
-                $(high).css({opacity:0}).animate({opacity:0.7},200).animate({opacity:0.4},200);
+              boxTop = parseInt(high.style.top)
+              mockTop = parseInt($('#mock').height() / 2)
+              $('#mock').scrollTo(Math.max(boxTop - mockTop, 0), 200);
+              $(high).css({opacity:0}, 2500).
+                animate({opacity:0.7}, 200).
+                animate({opacity:0.4}, 200);
             }
         });
         initializeFeatureList();
