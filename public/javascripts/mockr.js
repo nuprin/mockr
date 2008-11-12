@@ -8,10 +8,10 @@ var mockr = function(){
     // .clear()     : removes all highlighted sections
     // .selected()  : returns the area highlighted by the user
     var highlight = function(){
-        var area;  //area highlighted by user
-        var dom;   //userlight dom element
-        var x ;    //vertical mouse data
-        var y;     //horizontal mouse data
+        var area;  // area highlighted by user
+        var dom;   // userlight dom element
+        var x ;    // vertical mouse data
+        var y;     // horizontal mouse data
 
         function initialize(){
             x = {};
@@ -30,7 +30,6 @@ var mockr = function(){
             $('#mock div.highlight').animate({opacity:0},500,null,function(){
                 $(this).remove();
             });
-            // mockView.innerHTML = "";
             $('#area').remove();
             $('#add_feedback_form').parents("div.module").
               removeClass("commenting");
@@ -50,7 +49,7 @@ var mockr = function(){
         }
 
         function start(){
-            x.start = user.mouse.left() - $(mockView).offset().left;
+            x.start = getX();
             y.start = getY();
             clear();
             dom = $('<div id="area" class="highlight"></div>')[0];
@@ -63,13 +62,17 @@ var mockr = function(){
                 height   : 2
             });
         }
+        function getX() {
+          return user.mouse.left() - $(mockView).offset().left +
+                  $('#mock').scrollLeft();
+        }
         function getY() {
           return user.mouse.top() - $(mockView).offset().top + 
                   $('#mock').scrollTop();
         }
         function size(){
             if (!y.start && !x.start) return false;
-            x.drag = user.mouse.left() - $(mockView).offset().left;
+            x.drag = getX();
             y.drag = getY();
             $(dom).css({
                 left   : x.start < x.drag ? x.start : x.drag,
@@ -106,7 +109,6 @@ var mockr = function(){
             create    : create,
             clear     : clear,
             area      : getArea,
-            getY      : getY,
         };
     }();
 
@@ -149,7 +151,21 @@ var mockr = function(){
       $("#comments_list").height(height)
       $("#mock").height(user.browser.height())
     }
-
+    
+    function scrollToElem(elem) {
+      boxTop = parseInt(elem.style.top);
+      mockTop = parseInt($('#mock').height() / 2);
+      boxLeft = parseInt(elem.style.left);
+      mockLeft = parseInt($('#mock').width() / 2);
+      position = {
+        top:  Math.max(boxTop - mockTop, 0), 
+        left: Math.max(boxLeft - mockLeft, 0)        
+      }
+      $(elem).css({opacity: 0});
+      $('#mock').scrollTo(position, 400, {axis: 'xy', onAfter: function() {
+        $(elem).animate({opacity: 0.7}, 200).animate({opacity: 0.4}, 200);
+      }});
+    }
     function initialize(){
         mockView = document.getElementById("mock");
         threadView = document.getElementById("comments_list");
@@ -169,12 +185,7 @@ var mockr = function(){
                     height: box[3],
                     id: id
                 });
-              boxTop = parseInt(high.style.top)
-              mockTop = parseInt($('#mock').height() / 2)
-              $('#mock').scrollTo(Math.max(boxTop - mockTop, 0), 200);
-              $(high).css({opacity:0}, 2500).
-                animate({opacity:0.7}, 200).
-                animate({opacity:0.4}, 200);
+                scrollToElem(high);
             }
         });
         initializeFeatureList();
