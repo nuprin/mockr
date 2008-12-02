@@ -1,4 +1,5 @@
 *.ai
 *.log
+*.DS_Store
 db/schema.rb
 tmtags
