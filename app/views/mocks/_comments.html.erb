@@ -17,7 +17,7 @@
           <span class="fakelink replylink">Reply</span> - 
         <% end %>
         <span class="time"
-          title="<%= comment.created_at.strftime("%b %e, %l:%M%p")%>">
+          title="<%= comment.created_at.strftime("%b %e, %l:%M%p").squish %>">
           <%= distance_of_time_in_words_to_now comment.created_at %> ago
         </span>
       </div>
@@ -36,7 +36,8 @@
               <div class="meta">
                 <%= child.author.first_name %>,
                 <span
-                  title="<%= child.created_at.strftime("%b %e, %l:%M%p")%>"><%=
+                  title="<%=
+                  child.created_at.strftime("%b %e, %l:%M%p").squish %>"><%=
                   distance_of_time_in_words(comment.created_at,
                                             child.created_at) %> later</span>
               </div>
