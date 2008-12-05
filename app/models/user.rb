@@ -4,6 +4,10 @@ class User < ActiveRecord::Base
     :order      => "last_replied_at DESC",
     :class_name => "MockView"
 
+  named_scope :with_first_name, lambda {|first_name| 
+    {:conditions => ["name LIKE '%s%%'", first_name]}
+  }
+
   def first_name
     name.split.first
   end
