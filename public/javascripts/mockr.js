@@ -162,10 +162,18 @@ var mockr = function(){
         left: Math.max(boxLeft - mockLeft, 0)        
       }
       $(elem).css({opacity: 0});
-      $('#mock').scrollTo(position, 400, {axis: 'xy', onAfter: function() {
+      // TODO: Find a built in bounds function.
+      if (position.top < $('#mock').scrollTop() ||
+          position.top > $('#mock').scrollTop() + $('#mock').height()) {
+        pause = 400;
+      } else {
+        pause = 0;
+      }
+      $('#mock').scrollTo(position, pause, {axis: 'xy', onAfter: function() {
         $(elem).animate({opacity: 0.7}, 200).animate({opacity: 0.4}, 200);
       }});
     }
+
     function initialize(){
         mockView = document.getElementById("mock");
         threadView = document.getElementById("comments_list");
@@ -204,5 +212,4 @@ var mockr = function(){
 }();
 
 $(document).ready(mockr.initialize);
-// TODO: Figure out window size change handler.
-$(document).resize(mockr.adjustHeights);
+$(window).resize(mockr.adjustHeights);
