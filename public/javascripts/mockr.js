@@ -1,3 +1,15 @@
+/* TODO: Make these object-oriented. */
+function showSidebar() {
+  $('#sidebar').animate({left: '0'}, 'fast');
+  $('#mock').animate({left: '0', width: '-=400px'}, 'fast');
+  $(document.body).toggleClass('fullscreen');
+}
+function hideSidebar() {
+  $('#sidebar').animate({left: '-400px'}, 'fast');
+  $('#mock').animate({left: '-400px', width: '+=400px'}, 'fast');
+  $(document.body).toggleClass('fullscreen');
+}
+
 var mockr = function(){
     var mockView;        //mock display panel
     var threadView;      //threads panel

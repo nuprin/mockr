@@ -52,7 +52,7 @@
   <h2>ALL FEATURES</h2>
   <div id="features">
     <% Mock.sorted_features.each do |feature| %>
-      <a href="/<%= feature %>"><%= feature %></a>
+      <%= link_to feature, "/#{URI.escape(feature)}" %>
     <% end %>
   </div>
 </div>

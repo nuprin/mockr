@@ -1,5 +1,6 @@
 body {
   background: #282828;
+  position: relative;
 }
 body, textarea {
   font-size: 11px;
@@ -24,6 +25,16 @@ p.unread_notice a {
 }
 p.unread_notice a:hover {
   background: none;
+}
+#show_sidebar {
+  display: none;
+}
+.fullscreen #show_sidebar {
+  display: block;
+  left: 0;
+  position: absolute;
+  top: 10px;
+  z-index: 1000;
 }
 .highlight {
   background: #4e4e99;
@@ -160,7 +171,8 @@ p.unread_notice a:hover {
 }
 #header {
   background-color: black;
-  padding: 0 10px;
+  padding: 0 28px 0 10px;
+  position: relative;
 }
 #header div {
   float: right;
@@ -170,7 +182,7 @@ p.unread_notice a:hover {
 #header select {
   font-size: 9px;
 }
-#header a {
+#header h1 a {
   border-bottom: none;
   color: white;
   display: block;
@@ -179,6 +191,11 @@ p.unread_notice a:hover {
 #header a:hover {
   background-color: black;
   border-bottom: none;
+}
+#header .hide_link {
+  position: absolute;
+  top: 11px;
+  right: 0;
 }
 #mock {
   background-color: white;
@@ -249,7 +266,9 @@ p.unread_notice a:hover {
 }
 #sidebar {
   color: white;
-  float: left;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 400px;
 }
 #stats_list {
