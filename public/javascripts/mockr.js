@@ -1,19 +1,8 @@
-/* TODO: Make these object-oriented. */
-function showSidebar() {
-  $('#sidebar').animate({left: '0'}, 'fast');
-  $('#mock').animate({left: '0', width: '-=400px'}, 'fast');
-  $(document.body).toggleClass('fullscreen');
-}
-function hideSidebar() {
-  $('#sidebar').animate({left: '-400px'}, 'fast');
-  $('#mock').animate({left: '-400px', width: '+=400px'}, 'fast');
-  $(document.body).toggleClass('fullscreen');
-}
-
-var mockr = function(){
-    var mockView;        //mock display panel
-    var threadView;      //threads panel
-
+var mockr = function() {
+    var mockView;
+    var threadView;
+    var sidebar;
+    
     // highlight    : creates a highlighted section by clicking and draging
     // .initialize() : binds user highlight to the page (start,size,stop)
     // .create()    : create a new highlighted section
@@ -28,12 +17,12 @@ var mockr = function(){
         function initialize(){
             x = {};
             y = {};
-            mockView.onmousedown = function(event){
+            mockView.mousedown(function(event){
                 event.preventDefault();
                 start();
-            };
-            mockView.onmousemove = size;
-            mockView.onmouseup = stop;
+            });
+            mockView.mousemove(size);
+            mockView.mouseup(stop);
         }
         function getArea(){
             return area;
@@ -65,7 +54,7 @@ var mockr = function(){
             y.start = getY();
             clear();
             dom = $('<div id="area" class="highlight"></div>')[0];
-            $(mockView).append(dom);
+            mockView.append(dom);
             $(dom).css({
                 left     : x.start,
                 top      : y.start,
@@ -75,11 +64,11 @@ var mockr = function(){
             });
         }
         function getX() {
-          return user.mouse.left() - $(mockView).offset().left +
+          return user.mouse.left() - mockView.offset().left +
                   $('#mock').scrollLeft();
         }
         function getY() {
-          return user.mouse.top() - $(mockView).offset().top + 
+          return user.mouse.top() - mockView.offset().top + 
                   $('#mock').scrollTop();
         }
         function size(){
@@ -94,6 +83,7 @@ var mockr = function(){
             });
         }
         function stop(){
+            showSidebar();
             startCommenting();
             var o = {
                 x : x.start < x.drag ? x.start : x.drag,
@@ -129,6 +119,30 @@ var mockr = function(){
       $('#comment_text').focus();
     }
 
+    function toggleSidebar() {
+      if ($(document.body).hasClass('fullscreen')) {
+        showSidebar();
+      } else {
+        hideSidebar();
+      }
+    }
+
+    function showSidebar() {
+      if ($(document.body).hasClass('fullscreen')) {
+        sidebar.animate({left: '0'}, 'fast');
+        mockView.animate({left: '0', width: '-=400px'}, 'fast');
+        $(document.body).toggleClass('fullscreen');
+      }
+    }
+
+    function hideSidebar() {
+      if (!$(document.body).hasClass('fullscreen')) {
+        sidebar.animate({left: '-400px'}, 'fast');
+        mockView.animate({left: '-400px', width: '+=400px'}, 'fast');
+        $(document.body).toggleClass('fullscreen');
+      }
+    }
+
     function initializeFeatureList(){
       $("#feature_list").change(function(event) {
         if (event.target.value != "") {
@@ -155,6 +169,26 @@ var mockr = function(){
       $("#comments_list .replylink").click(function (){
         $(this).parents("li.comment_node").
           toggleClass("replying").find('textarea').focus();
+      });
+    }
+
+    function initializeComments() {
+      $("#comments_list >li").click(function(){
+          $("#comments_list >li").removeClass('highlighted');
+          $(this).addClass('highlighted');
+          highlight.clear();
+          if ($(this).attr('box')) {
+              var box = $(this).attr('box').split('_');
+              var id = $(this).attr('id');
+              var high = highlight.create({
+                  x: box[0],
+                  y: box[1],
+                  width: box[2],
+                  height: box[3],
+                  id: id
+              });
+              scrollToElem(high);
+          }
       });
     }
 
@@ -186,40 +220,28 @@ var mockr = function(){
       }});
     }
 
-    function initialize(){
-        mockView = document.getElementById("mock");
+    function initialize() {
+        mockView = $("#mock");
         threadView = document.getElementById("comments_list");
+        sidebar = $('#sidebar');
+        
         highlight.initialize();
         
-        $("#comments_list >li").click(function(){
-            $("#comments_list >li").removeClass('highlighted');
-            $(this).addClass('highlighted');
-            highlight.clear();
-            if ($(this).attr('box')) {
-                var box = $(this).attr('box').split('_');
-                var id = $(this).attr('id');
-                var high = highlight.create({
-                    x: box[0],
-                    y: box[1],
-                    width: box[2],
-                    height: box[3],
-                    id: id
-                });
-                scrollToElem(high);
-            }
-        });
         initializeFeatureList();
         initializeFeedbackFilter();
         initializeTextareas();
+        initializeComments();
         initializeChildComments();
         adjustHeights();
     }
 
     return {
-        initialize: initialize,
-        highlight: highlight,
+        initialize:      initialize,
+        highlight:       highlight,
         startCommenting: startCommenting,
-        adjustHeights: adjustHeights
+        adjustHeights:   adjustHeights,
+        hideSidebar:     hideSidebar,
+        showSidebar:     showSidebar
     };
 }();
 
