@@ -17,7 +17,9 @@
           <span class="fakelink replylink">Reply</span> - 
         <% end %>
         <% if comment.author_id == viewer.id %>
-          <%= link_to "Delete", comment_path(comment), :method => :delete %> - 
+          <%= link_to "Delete", comment_path(comment), :method => :delete,
+            :confirm =>
+              "Are you sure? Your comment and all replies will be permanently deleted." %> - 
         <% end %>
         <span class="time"
           title="<%= comment.created_at.strftime("%b %e, %l:%M%p").squish %>">
