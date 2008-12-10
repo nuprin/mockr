@@ -29,13 +29,13 @@
         <% unless comment.text.blank? %>says:<% end %>
       </span>
       <% unless comment.text.blank? %>
-        <div class="text"><%= comment.text %></div>
+        <div class="text"><%= nl2br(comment.text) %></div>
       <% end %>
       <% if comment.children.any? %>
         <ul id="children_comments_list">
           <% comment.children.each do |child| %>
             <li>
-              <%= child.text %>
+              <%= nl2br(child.text) %>
               <div class="meta">
                 <%= child.author.first_name %>,
                 <span
