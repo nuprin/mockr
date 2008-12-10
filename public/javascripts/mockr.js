@@ -239,9 +239,26 @@ var mockr = function() {
         startCommenting: startCommenting,
         adjustHeights:   adjustHeights,
         hideSidebar:     hideSidebar,
-        showSidebar:     showSidebar
+        showSidebar:     showSidebar,
+        toggleSidebar:   toggleSidebar,
     };
 }();
 
 $(document).ready(mockr.initialize);
 $(window).resize(mockr.adjustHeights);
+
+$('textarea').focus(function() {
+  $(document.body).addClass("typing");
+});
+
+$('textarea').blur(function() {
+  $(document.body).removeClass("typing");
+});
+
+$(window).keydown(function(event) {
+  if (!$(document.body).hasClass("typing") && 
+      user.keyboard.character() == "F") {
+    event.preventDefault();
+    mockr.toggleSidebar();
+  }
+});   
