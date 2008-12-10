@@ -17,6 +17,12 @@ class CommentsController < ApplicationController
       return
     end
   end
+  
+  def destroy
+    comment = Comment.find(params[:id])
+    comment.destroy
+    redirect_to mock_url(comment.mock)
+  end
 
   def forge_author_if_requested
     @md, @name, @actual_comment =

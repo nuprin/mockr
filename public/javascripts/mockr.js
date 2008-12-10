@@ -1,6 +1,5 @@
 var mockr = function() {
     var mockView;
-    var threadView;
     var sidebar;
     
     // highlight    : creates a highlighted section by clicking and draging
@@ -222,7 +221,6 @@ var mockr = function() {
 
     function initialize() {
         mockView = $("#mock");
-        threadView = document.getElementById("comments_list");
         sidebar = $('#sidebar');
         
         highlight.initialize();

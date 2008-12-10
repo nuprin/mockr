@@ -16,6 +16,9 @@
         <% if comment.children.empty? %>
           <span class="fakelink replylink">Reply</span> - 
         <% end %>
+        <% if comment.author_id == viewer.id %>
+          <%= link_to "Delete", comment_path(comment), :method => :delete %> - 
+        <% end %>
         <span class="time"
           title="<%= comment.created_at.strftime("%b %e, %l:%M%p").squish %>">
           <%= distance_of_time_in_words_to_now comment.created_at %> ago
@@ -40,7 +43,11 @@
                   child.created_at.strftime("%b %e, %l:%M%p").squish %>"><%=
                   distance_of_time_in_words(comment.created_at,
                                             child.created_at) %> later</span>
-              </div>
+                <% if child.author_id == viewer.id %>
+                  - <%= link_to "Delete", comment_path(child),
+                    :method => :delete %>
+                <% end %>
+              </div>  
             </li>
           <% end %>
           <li>
