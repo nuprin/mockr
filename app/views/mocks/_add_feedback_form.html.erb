@@ -6,7 +6,7 @@
   <% if flash[:notice] %>
     <div id="notice"><%= flash[:notice] %></div>
   <% end %>
-  <% form_for :comment, @comment, :url => comments_url,
+  <% form_for :comment, @comment, :url => comments_path,
               :html => {:id => 'add_feedback_form'} do |f| %>
     <%= f.hidden_field :mock_id, :value => @mock.id %>
     <%= f.hidden_field :x %>
