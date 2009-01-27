@@ -7,13 +7,13 @@ class CreateUsers < ActiveRecord::Migration
     end
 
     ['Kristján Pétursson', 'Brad Fults',
-     'Chris Chan', 'Chase Matthewson',
+     'Chris Chan',
      'Jimmy Kittiyachavalit', 'Kevin Ball',
      'Keith Rarick', 'Jen Kelly',
      'Josh Adams', 'Joe Green',
      'Sean Parker', 'Randall Winston',
      'Matt Mahan', 'Susan Gordon',
-     'Tam Vo', 'Sara Koch', 'Josh Williams'].each do |name|
+     'Sara Koch', 'Josh Williams'].each do |name|
        User.create(:name => name)
      end
   end
