@@ -30,8 +30,8 @@ class Comment < ActiveRecord::Base
       comment.parent
     }
   validates_presence_of :author
-  validates_presence_of :feeling, :unless => Proc.new { |comment|
-      !comment.parent.nil?
+  validates_presence_of :feeling, :if => Proc.new { |comment|
+      comment.parent.nil? && comment.text.blank?
     }
 
   def siblings
