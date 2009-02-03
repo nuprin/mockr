@@ -16,13 +16,12 @@
     <%= f.text_area :text %>
     <div>
       <ul class="clearfix" id="feelings_input_fields">
-        <% Feeling.find(:all).each do |feeling| %>
+        <% Comment.feelings.each do |feeling| %>
           <li>
-            <label for="comment_feeling_id_<%= feeling.id %>"
-              title="I am <%= feeling.name %>">
-              <%= image_tag feeling.path %>
+            <label title="<%= feeling.titleize %>">
+              <%= image_tag "feelings/#{feeling}.gif" %>
             </label>
-            <%= f.radio_button :feeling_id, feeling.id %>
+            <%= f.radio_button :feeling, feeling %>
           </li>
         <% end %>
         <% if viewer.real? %>

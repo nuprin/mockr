@@ -1,14 +1,10 @@
 class Comment < ActiveRecord::Base
+
   belongs_to :author,
     :class_name => "User"
-
-  belongs_to :feeling
-
   belongs_to :mock
-
   belongs_to :parent,
     :class_name => 'Comment'
-
   has_many :children,
     :class_name => 'Comment',
     :foreign_key => 'parent_id'
@@ -16,12 +12,12 @@ class Comment < ActiveRecord::Base
 
   named_scope :about, lambda {|mock| {:conditions => {:mock_id => mock.id}}}
   named_scope :by, lambda {|author| {:conditions => {:author_id => author.id}}}
-  named_scope :happy, :conditions => {:feeling_id => Feeling.happy.id}
+  named_scope :happy, :conditions => {:feeling => "happy"}
   named_scope :in_reply_to, lambda {|parent_id|
     {:conditions => {:parent_id => parent_id}}
   }
   named_scope :recent, :order => "created_at DESC"
-  named_scope :sad, :conditions => {:feeling_id => Feeling.sad.id}
+  named_scope :sad, :conditions => {:feeling => "sad"}
   named_scope :since, lambda {|time| 
     {:conditions => ["created_at >= ?", time]}
   }
