@@ -19,23 +19,25 @@
         <%= render :partial => "feeling",
                    :collection => Comment.basic_feelings,
                    :locals => {:f => f} %>
+        <li><%= link_to_function "More Feelings...",
+          "$('#advanced_feelings').slideToggle();" %></li>
       </ul>
-        <% if viewer.real? %>
-          <%= f.hidden_field :author_id, :value => session[:user_id] %>
-        <% else %>
-          <select id="comment_author_id" name="comment[author_id]">
-            <option>I am...</option>
-            <% User.find(:all).sort_by(&:name).each do |user| %>
-              <option value="<%= user.id %>"><%= user.name %></option>
-            <% end %>
-          </select>
-        <% end %>
-      </ul>
+      <% if viewer.real? %>
+        <%= f.hidden_field :author_id, :value => session[:user_id] %>
+      <% else %>
+        <select id="comment_author_id" name="comment[author_id]">
+          <option>I am...</option>
+          <% User.find(:all).sort_by(&:name).each do |user| %>
+            <option value="<%= user.id %>"><%= user.name %></option>
+          <% end %>
+        </select>
+      <% end %>
       <%= image_submit_tag("buttons/add_feedback.gif") %>
     </div>
     <% if viewer.real? && viewer.name == "Chris Chan" %>
       <div class="clearfix">
-        <ul class="feelings_list clearfix" id="advanced_feelings">
+        <ul class="feelings_list clearfix" id="advanced_feelings" 
+        style="display: none;">
           <%= render :partial => "feeling",
                      :collection => Comment.advanced_feelings,
                      :locals => {:f => f} %>

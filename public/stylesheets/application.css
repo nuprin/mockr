@@ -65,9 +65,6 @@ p.unread_notice a:hover {
   width: 100%;
 }
 #advanced_feelings {
-  border-top: 1px solid #666;
-  margin-top: 10px;
-  padding-top: 10px;
   text-align: left;
 }
 #advanced_feelings img {
@@ -83,6 +80,8 @@ p.unread_notice a:hover {
   margin-top: 2px;
 }
 #feelings_input_fields {
+  line-height: 19px;
+  margin-bottom: 10px;
   text-align: left;
 }
 #children_comments_list {
@@ -177,7 +176,7 @@ p.unread_notice a:hover {
   padding-right: 10px;
 }
 .feelings_list input {
-  margin: 3px 0 0 4px;
+  margin: 3px 1px 0 4px;
 }
 #header {
   background-color: black;
