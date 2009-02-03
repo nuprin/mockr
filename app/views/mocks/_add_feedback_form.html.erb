@@ -1,4 +1,4 @@
-<div class="module<%= ' commenting' if true || flash[:notice] %>" id="add_feedback_form_container">
+<div class="module<%= ' commenting' if flash[:notice] %>" id="add_feedback_form_container">
   <p class="instructions">
     <%= link_to_function "Add general feedback", "mockr.startCommenting()" %> 
     or drag a section on the screen.

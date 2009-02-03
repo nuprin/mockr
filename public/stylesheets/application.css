@@ -127,9 +127,6 @@ p.unread_notice a:hover {
 #comments_list .text {
   margin: 1em 0;
 }
-#comments_list .text:first-child {
-  margin-top: 1em;
-}
 #comments_list .parent_meta {
   color: #888;
   float: right;
