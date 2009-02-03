@@ -101,12 +101,6 @@ p.unread_notice a:hover {
 #comments_list>li.highlighted {
     background-color: #1a1a33;
 }
-#comments_list li.happy {
-  background-image: url("../images/happy.gif");
-}
-#comments_list li.sad {
-  background-image: url("../images/sad.gif");
-}
 #comments_list .author {
   color: #888;
 }
@@ -281,12 +275,6 @@ p.unread_notice a:hover {
   background-repeat: no-repeat;
   float: left;
   padding: 2px 23px 2px 12px;
-}
-#stats_list li#happy_count {
-  background-image: url("../images/happy.gif");
-}
-#stats_list li#sad_count {
-  background-image: url("../images/sad.gif");
 }
 #userlight {
   background: #99c;

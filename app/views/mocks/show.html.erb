@@ -1,3 +1,11 @@
+<style type="text/css">
+<% Comment.feelings.each do |feeling| %>
+  li.<%= feeling %> {
+    background-image: url("../images/feelings/<%= feeling %>.gif");
+  }
+<% end %>
+</style>
+
 <%= link_to_function image_tag("show-sidebar.gif"), "mockr.showSidebar();",
   :id => "show_sidebar", :title => "Show Sidebar" %>
 <div id="sidebar">

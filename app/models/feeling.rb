@@ -6,4 +6,8 @@ class Feeling < ActiveRecord::Base
     end
     super(method, *args)
   end
+  
+  def path
+    "feelings/#{self.name}.gif"
+  end
 end

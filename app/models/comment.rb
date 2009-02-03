@@ -55,4 +55,9 @@ class Comment < ActiveRecord::Base
     end
   end
 
+  def self.feelings
+    Dir.glob("public/images/feelings/*").map do |name|
+      name.split("/").last.gsub(".gif", "")
+    end
+  end
 end
