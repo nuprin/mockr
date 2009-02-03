@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
 
   def forge_author_if_requested
     @md, @name, @actual_comment =
-      *params[:comment][:text].match(/^(\w+\s?\w*):\s*(.*)/)
+      *params[:comment][:text].match(/^(\w+\s?\w*):\s*(.*)/m)
     if @name && (@actual_author = User.with_first_name(@name).first)
       params[:comment][:author_id] = @actual_author.id
       params[:comment][:text] = @actual_comment
