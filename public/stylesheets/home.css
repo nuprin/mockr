@@ -14,29 +14,88 @@ h2 {
   margin-bottom: 50px;
   text-align: left;
 }
+#active_mocks img {
+  background: #444;
+  padding: 4px;
+  display: block;
+  width: 144px;
+}
+#active_mocks a:hover img {
+  background-color: #619df2;
+}
+#active_mocks .fresh .text {
+  background-image: url(../images/dot.gif);
+  background-position: 0 3px;
+  background-repeat: no-repeat;
+  padding-left: 18px;
+}
 #active_mocks li {
   float: left;
-  width: 144px;
-  margin-right: 20px;
+  margin-right: 22px;
+  width: 152px;
+}
+#active_mocks a {
+  line-height: 20px;
 }
 #active_mocks ul {
-  margin-right: -20px;
+  margin: 10px -22px 15px 0;
 }
 #active_mocks .meta {
   color: #555;
   font-size: 10px;
   margin-top: .5em;
 }
-#content {
-  margin: 200px auto 0;
-  text-align: center;
-  width: 800px;
+#active_mocks .preview_container {
+  height: 100px;
+  margin-bottom: 10px;
+  overflow: hidden;
 }
-#content img {
-  margin-bottom: 40px;
+#content {
+  background: #333;
+  margin: 0 auto;
+  padding: 50px 40px;
+  text-align: center;
+  width: 500px;
+}
+#discussions {
+  color: white;
+  line-height: 24px;
+  text-align: left;
+}
+#discussions .time {
+  color: #aaa;
+  float: right;
+  margin-right: 10px;
+}
+#discussions a {
+  border-bottom: 1px solid #555;
+  color: white;
+  display: block;
+  padding: 6px 5px;
+  text-decoration: none;
+}
+#discussions a:hover {
+  background: #347adc;
+}
+#discussions a:hover .reply_count {
+  background: white;
+  color: #347adc;
+}
+#discussions ul {
+  margin-bottom: 50px;
+  width: 100%;
+}
+#discussions .reply_count {
+  color: white;
+  float: right;
+  background: #347adc;
+  -moz-border-radius: 12px;
+  text-align: center;
+  height: 24px;
+  width: 24px;
 }
 #features  {
-  line-height: 30px;
+  line-height: 38px;
   text-align: justify;
 }
 #features a:hover {
@@ -44,10 +103,13 @@ h2 {
   border-bottom: 1px dotted #999;
   text-decoration: none;
 }
-#logo {
+#logo a {
   border-bottom: none;
   text-decoration: none;
 }
-#logo:hover {
+#logo a:hover {
   background: none;
+}
+#logo img {
+  margin-bottom: 60px;
 }

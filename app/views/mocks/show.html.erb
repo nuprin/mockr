@@ -1,3 +1,5 @@
+<%= link_to_function image_tag("show-sidebar.gif"), "mockr.showSidebar();",
+  :id => "show_sidebar", :title => "Show Sidebar" %>
 <div id="sidebar">
   <%= render :partial => "mocks/mockr_header" %>
   <%= render :partial => "mocks/mock_header" %>
@@ -6,5 +8,6 @@
   <%= render :partial => "mocks/comments" %>
 </div>
 
-<div id="mock" style="background-image: url('<%= image_path(@mock.image_path) %>');">
+<div id="mock">
+  <%= image_tag(@mock.image_path) %>
 </div>

@@ -1,8 +1,12 @@
-<div class="module">
+<div class="module<%= ' commenting' if flash[:notice] %>" id="add_feedback_form_container">
+  <p class="instructions">
+    <%= link_to_function "Add general feedback", "mockr.startCommenting()" %> 
+    or drag a section on the screen.
+  </p>
   <% if flash[:notice] %>
     <div id="notice"><%= flash[:notice] %></div>
   <% end %>
-  <% form_for :comment, @comment, :url => comments_url,
+  <% form_for :comment, @comment, :url => comments_path,
               :html => {:id => 'add_feedback_form'} do |f| %>
     <%= f.hidden_field :mock_id, :value => @mock.id %>
     <%= f.hidden_field :x %>
@@ -10,7 +14,6 @@
     <%= f.hidden_field :width %>
     <%= f.hidden_field :height %>
     <%= f.text_area :text %>
-    <%= image_submit_tag("buttons/add_feedback.gif") %>
     <div>
       <ul class="clearfix" id="feelings_input_fields">
         <% Feeling.find(:all).each do |feeling| %>
@@ -33,6 +36,7 @@
           </select>
         <% end %>
       </ul>
+      <%= image_submit_tag("buttons/add_feedback.gif") %>
     </div>
   <% end %>
 </div>

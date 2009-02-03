@@ -1,27 +1,60 @@
 body {
-  background: #333;
-  width: 1400px;
+  background: #282828;
+  position: relative;
 }
-textarea {
+body, textarea {
   font-size: 11px;
+}
+.commenting .instructions {
+  display: none;
+}
+.commenting #add_feedback_form {
+  display: block;
+}
+p.unread_notice {
+  background: #f8f671;
+  border-bottom: 1px solid #ab8234;
+  color: black;
+  margin: 0;
+  padding: 10px 0;
+  text-align: center;
+}
+p.unread_notice a {
+  color: black;
+  font-weight: bold;
+}
+p.unread_notice a:hover {
+  background: none;
+}
+#show_sidebar {
+  display: none;
+}
+.fullscreen #show_sidebar {
+  display: block;
+  left: 0;
+  position: absolute;
+  top: 10px;
+  z-index: 1000;
 }
 .highlight {
   background: #4e4e99;
   border: 1px solid #1a1a33;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
   position: absolute;
   z-index: 10;
 }
+.instructions {
+  font-size: 12px;
+  margin: 0;
+  padding: 0 8px;
+}
 .module {
-  border-bottom: 1px solid #555;
+  border-bottom: 1px solid #444;
   padding: 8px 0;
 }
 #add_feedback_form {
+  display: none;
   margin: 0 10px;
-}
-#add_feedback_form input[type=image] {
-  float: right;
+  text-align: right;
 }
 #add_feedback_form textarea {
   background: #444;
@@ -35,24 +68,35 @@ textarea {
   margin-top: 10px;
 }
 #children_comments_list li {
-  background: #444;
+  background: #404040;
   font-size: 11px;
   margin: 0 -10px 1px 0;
-  padding: 4px 10px;
+  padding: 4px 26px 4px 10px;
 }
 #children_comments_list .meta {
+  color: #888;
   font-size: 10px;
   margin-top: 5px;
-  text-align: right;
 }
 #comments_list {
   font-size: 12px;
+  height: 400px;
+  overflow: auto;
 }
 #comments_list>li {
   background-position: 8px 9px;
   background-repeat: no-repeat;
-  border-bottom: 1px solid #555;
+  border-bottom: 1px solid #444;
   padding: 12px 10px 12px 32px;
+}
+#comments_list .arrow {
+  float: right;
+  height: 16px;
+  width: 16px;
+}
+#comments_list li[box] .arrow {
+  background-image: url("../images/arrow.gif");
+  background-position: 5px -2px;
 }
 #comments_list>li.highlighted {
     background-color: #1a1a33;
@@ -96,16 +140,22 @@ textarea {
   display: block;
 }
 #feedback_header {
-  border-bottom: 1px solid #555;
-  padding: 10px 10px 5px 10px;
+  background-image: url(../images/glass-shadow.gif);
+  background-repeat: repeat-x;
+  border-bottom: 1px solid #333;
+  padding: 10px 10px 8px;
 }
 #feedback_header h3 {
   color: #ccc;
   font-size: 12px;
+  font-weight: normal;
   margin: 0;
 }
 #feedback_header select {
   font-size: 9px;
+}
+#feelings_input_fields {
+  float: left;
 }
 #feelings_input_fields li {
   float: left;
@@ -121,40 +171,47 @@ textarea {
 }
 #header {
   background-color: black;
-  padding: 0 10px;
+  padding: 0 28px 0 10px;
+  position: relative;
 }
 #header div {
   float: right;
   font-size: 9px;
-  margin-top: 12px;
+  margin-top: 13px;
 }
 #header select {
   font-size: 9px;
 }
-#header a {
+#header h1 a {
   border-bottom: none;
   color: white;
   display: block;
-  padding: 8px 0 10px;
+  padding: 8px 0;
 }
 #header a:hover {
   background-color: black;
   border-bottom: none;
 }
+#header .hide_link {
+  position: absolute;
+  top: 11px;
+  right: 0;
+}
 #mock {
-  background-repeat: no-repeat;
+  background-color: white;
   background-position: left top;
+  background-repeat: no-repeat;
   cursor: crosshair;
-  float: left;
   position: relative;
-  height: 1000px;
-  width: 1000px;
+  overflow: auto;
+  height: 500px;
+  margin-left: 400px;
 }
 #mock_header {
-  background-image: url(../images/glass.gif);
+  background-image: url(../images/glass-2.gif);
   background-repeat: repeat-x;
   font-weight: bold;
-  line-height: 45px;
+  line-height: 35px;
   padding: 0 0 0 10px;
 }
 #mock_header a {
@@ -162,16 +219,25 @@ textarea {
   color: white;
 }
 #mock_header h2 {
-  font-size: 16px;
-  height: 45px;
+  color: #eee;
+  font-size: 15px;
+  font-weight: normal;
+  height: 35px;
   overflow: hidden;
+}
+#mock_header h2 .date {
+  color: #999;
+  float: right;
+  font-size: 12px;
+  font-weight: normal;
+  margin-right: 10px;
 }
 #nav_list {
   float: right;
   font-size: 12px;
 }
 #nav_list li {
-  border-left: 1px solid #aaa;
+  border-left: 1px solid #222;
   float: left;
 }
 #nav_list a {
@@ -180,8 +246,7 @@ textarea {
   padding: 0 10px;
 }
 #nav_list a:hover {
-  background-image: url(../images/glass_hover.gif);
-  background-repeat: repeat-x;
+  background-image: url(../images/glass-2.gif);
 }
 #nav_list a.none {
   color: #999;
@@ -200,22 +265,22 @@ textarea {
   text-align: center;
 }
 #sidebar {
-  background-color: #333;
   color: white;
-  float: left;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 400px;
 }
 #stats_list {
   float: right;
   font-size: 12px;
   font-weight: normal;
-  margin-right: 10px;
 }
 #stats_list li {
   background-position: right 50%;
   background-repeat: no-repeat;
   float: left;
-  padding: 0 23px 0 12px;
+  padding: 2px 23px 2px 12px;
 }
 #stats_list li#happy_count {
   background-image: url("../images/happy.gif");

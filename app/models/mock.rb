@@ -46,19 +46,18 @@ class Mock < ActiveRecord::Base
     mock
   end
 
-  def filtered_comments(filter)
-    return comments if filter.blank?
-    author_id = filter.to_i
-    if author_id > 0
-      return Comment.find(:all, :conditions => {:mock_id => self.id,
-                                                :author_id => author_id})
-    else
-      feeling_id = Feeling.send(filter)
-      return Comment.find(:all, :conditions => {:mock_id => self.id,
-                                                :feeling_id => feeling_id})
+  def filtered_comments(filter, user)
+    if filter == "new"
+      return user.unread_comments_for(self)
     end
-  rescue
-    comments
+    conditions = {:mock_id => self.id, :parent_id => nil}
+    if filter.to_i > 0
+      conditions.merge!(:author_id => filter.to_i)
+    elsif filter && Feeling.respond_to?(filter)
+      feeling_id = Feeling.send(filter)
+      conditions.merge!(:feeling_id => feeling_id)
+    end
+    Comment.recent.all(:conditions => conditions)
   end
 
   def image_path
@@ -107,18 +106,29 @@ class Mock < ActiveRecord::Base
       Mock.for(sibling_path)
     end.sort
   end
+
   def ordered_feature
     Mock.ordered_feature(dir)
   end
 
   def happy_count
-    Comment.count(:conditions => {:mock_id => self.id,
-                                  :feeling_id => Feeling.happy.id})
+    Comment.happy.about(self).count
   end
 
   def sad_count
-    Comment.count(:conditions => {:mock_id => self.id,
-                                  :feeling_id => Feeling.sad.id})  end
+    Comment.sad.about(self).count
+  end
+
+  # A mock is "fresh" if there are new comments since the user last viewed.
+  def fresh?(user)
+    if user.real?
+      last_viewed_at = MockView.last_viewed_at(self, user)
+      if comment = most_recent_comment
+        return last_viewed_at.nil? || (comment.created_at > last_viewed_at)
+      end
+    end
+    false
+  end
 
   def self.features
     Dir.glob("#{MOCK_PATH}/*").map {|path| path.split('/').last }
@@ -129,22 +139,25 @@ class Mock < ActiveRecord::Base
   end
 
   def most_recent_comment
-    Comment.most_recent_comment_for(self)
+    Comment.about(self).recent.first
   end
 
-  # TODO [chris]: So messy.
   def self.recently_commented_mocks
-    sql = <<-sql
-      select distinct mock_id from comments where mock_id IS NOT NULL
-      order by created_at DESC limit 5
-    sql
-    mock_ids = Comment.find_by_sql(sql).map(&:mock_id)
+    mock_ids =
+      Comment.recent.all(:select => "distinct mock_id", :limit => 6).
+      map(&:mock_id)
     mock_ids.map do |mock_id|
       mock = Mock.find(mock_id)
       [mock, mock.most_recent_comment]
-    end
+    end.sort do |(m1, c1), (m2, c2)|
+      c1.created_at <=> c2.created_at
+    end.reverse
   end
 
+  def self.sorted_features
+    @sorted_features ||= self.features.sort
+  end
+  
   def author_feedback
     comments.group_by(&:author).to_a.map do |author, coms|
       [author, coms.size]
