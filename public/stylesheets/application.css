@@ -125,7 +125,10 @@ p.unread_notice a:hover {
   color: #888;
 }
 #comments_list .text {
-  margin: 1em 0 0;
+  margin: 1em 0;
+}
+#comments_list .text:first-child {
+  margin-top: 1em;
 }
 #comments_list .parent_meta {
   color: #888;
@@ -135,7 +138,6 @@ p.unread_notice a:hover {
 }
 #comments_list .reply {
   display: none;
-  margin-top: 10px;
 }
 #comments_list .reply textarea {
   background: #444;
@@ -143,15 +145,11 @@ p.unread_notice a:hover {
   color: white;
   display: block;
   height: 60px;
-  margin-bottom: 8px;
-  margin-right: 3px;
+  margin: 0 0 8px 0;
   width: 100%;
 }
 #comments_list .reply input[type=image] {
   float: right;
-}
-#comments_list .replying .reply {
-  display: block;
 }
 #feedback_header {
   background-image: url(../images/glass-shadow.gif);
