@@ -19,8 +19,10 @@
         <%= render :partial => "feeling",
                    :collection => Comment.basic_feelings,
                    :locals => {:f => f} %>
-        <li><%= link_to_function "More Feelings...",
-          "$('#advanced_feelings').slideToggle();" %></li>
+        <% if TopCommenter.top?(viewer) %>
+          <li><%= link_to_function "More Feelings...",
+            "$('#advanced_feelings').slideToggle();" %></li>
+        <% end %>
       </ul>
       <% if viewer.real? %>
         <%= f.hidden_field :author_id, :value => session[:user_id] %>
@@ -34,15 +36,13 @@
       <% end %>
       <%= image_submit_tag("buttons/add_feedback.gif") %>
     </div>
-    <% if viewer.real? && viewer.name == "Chris Chan" %>
-      <div class="clearfix">
-        <ul class="feelings_list clearfix" id="advanced_feelings" 
-        style="display: none;">
-          <%= render :partial => "feeling",
-                     :collection => Comment.advanced_feelings,
-                     :locals => {:f => f} %>
-        </ul>
-      </div>
-    <% end %>
+    <div class="clearfix">
+      <ul class="feelings_list clearfix" id="advanced_feelings" 
+      style="display: none;">
+        <%= render :partial => "feeling",
+                   :collection => Comment.advanced_feelings,
+                   :locals => {:f => f} %>
+      </ul>
+    </div>
   <% end %>
 </div>
