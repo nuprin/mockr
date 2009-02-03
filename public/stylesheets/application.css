@@ -64,6 +64,27 @@ p.unread_notice a:hover {
   margin: 0 3px 8px 0;
   width: 100%;
 }
+#advanced_feelings {
+  border-top: 1px solid #666;
+  margin-top: 10px;
+  padding-top: 10px;
+  text-align: left;
+}
+#advanced_feelings img {
+  float: left;
+}
+#advanced_feelings li {
+  height: 27px;
+  width: 66px;
+}
+#advanced_feelings input {
+  float: left;
+  margin-right: 9px;
+  margin-top: 2px;
+}
+#feelings_input_fields {
+  text-align: left;
+}
 #children_comments_list {
   margin-top: 10px;
 }
@@ -148,20 +169,15 @@ p.unread_notice a:hover {
 #feedback_header select {
   font-size: 9px;
 }
-#feelings_input_fields {
+.feelings_list,
+.feelings_list li {
   float: left;
 }
-#feelings_input_fields li {
-  float: left;
-}
-#feelings_input_fields input {
-  margin: 3px 0 0 4px;
-}
-#feelings_input_fields label {
-  float: left;
-}
-#feelings_input_fields li {
+.feelings_list li {
   padding-right: 10px;
+}
+.feelings_list input {
+  margin: 3px 0 0 4px;
 }
 #header {
   background-color: black;

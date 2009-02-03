@@ -1,4 +1,4 @@
-<div class="module<%= ' commenting' if flash[:notice] %>" id="add_feedback_form_container">
+<div class="module<%= ' commenting' if true || flash[:notice] %>" id="add_feedback_form_container">
   <p class="instructions">
     <%= link_to_function "Add general feedback", "mockr.startCommenting()" %> 
     or drag a section on the screen.
@@ -15,15 +15,11 @@
     <%= f.hidden_field :height %>
     <%= f.text_area :text %>
     <div>
-      <ul class="clearfix" id="feelings_input_fields">
-        <% Comment.feelings.each do |feeling| %>
-          <li>
-            <label title="<%= feeling.titleize %>">
-              <%= image_tag "feelings/#{feeling}.gif" %>
-            </label>
-            <%= f.radio_button :feeling, feeling %>
-          </li>
-        <% end %>
+      <ul class="feelings_list clearfix" id="feelings_input_fields">
+        <%= render :partial => "feeling",
+                   :collection => Comment.basic_feelings,
+                   :locals => {:f => f} %>
+      </ul>
         <% if viewer.real? %>
           <%= f.hidden_field :author_id, :value => session[:user_id] %>
         <% else %>
@@ -37,5 +33,14 @@
       </ul>
       <%= image_submit_tag("buttons/add_feedback.gif") %>
     </div>
+    <% if viewer.real? && viewer.name == "Chris Chan" %>
+      <div class="clearfix">
+        <ul class="feelings_list clearfix" id="advanced_feelings">
+          <%= render :partial => "feeling",
+                     :collection => Comment.advanced_feelings,
+                     :locals => {:f => f} %>
+        </ul>
+      </div>
+    <% end %>
   <% end %>
 </div>
