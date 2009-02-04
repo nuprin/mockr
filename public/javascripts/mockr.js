@@ -14,14 +14,14 @@ var mockr = function() {
         var y;     // horizontal mouse data
 
         function initialize(){
-            x = {};
-            y = {};
-            mockView.mousedown(function(event){
-                event.preventDefault();
-                start();
-            });
-            mockView.mousemove(size);
-            mockView.mouseup(stop);
+          x = {};
+          y = {};
+          mockView.mousedown(function(event){
+              event.preventDefault();
+              start();
+          });
+          mockView.mousemove(size);
+          mockView.mouseup(stop);
         }
         function getArea(){
             return area;
@@ -170,27 +170,51 @@ var mockr = function() {
           slideToggle().find('textarea').focus();
       });
     }
-
-    function initializeComments() {
-      $("#comments_list >li").click(function(){
-          $("#comments_list >li").removeClass('highlighted');
-          $(this).addClass('highlighted');
-          highlight.clear();
-          if ($(this).attr('box')) {
-              var box = $(this).attr('box').split('_');
-              var id = $(this).attr('id');
-              var high = highlight.create({
-                  x: box[0],
-                  y: box[1],
-                  width: box[2],
-                  height: box[3],
-                  id: id
-              });
-              scrollToElem(high);
-          }
-      });
+    
+    function earlierComment() {
+      var elem = $("#comments_list>li.highlighted")
+      if (elem.length > 0) {
+        elem = elem.next();
+      } else {
+        elem = $("#comments_list>li:first-child")
+      }
+      if (elem.length > 0)
+        highlightComment(elem);
+    }
+    
+    function laterComment() {
+      var elem = $("#comments_list>li.highlighted")
+      if (elem.length > 0) {
+        elem = elem.prev();
+        if (elem.length > 0)
+          highlightComment(elem);
+      }
     }
 
+    function highlightComment(elem) {
+      $("#comments_list>li").removeClass('highlighted');
+      elem.addClass('highlighted');
+      highlight.clear();
+      if (elem.attr('box')) {
+        var box = elem.attr('box').split('_');
+        var id = elem.attr('id');
+        var high = highlight.create({
+            x: box[0],
+            y: box[1],
+            width: box[2],
+            height: box[3],
+            id: id
+        });
+        scrollToElem(high);
+      }      
+    }
+    
+    function initializeComments() {
+      $("#comments_list>li").click(function(){
+        highlightComment($(this));
+      });
+    }
+    
     function adjustHeights() {
       height = user.browser.height() - $('#comments_list').offset().top
       $("#comments_list").height(height)
@@ -224,13 +248,12 @@ var mockr = function() {
         sidebar = $('#sidebar');
         
         highlight.initialize();
-        
+        adjustHeights();        
         initializeFeatureList();
         initializeFeedbackFilter();
         initializeTextareas();
         initializeComments();
         initializeChildComments();
-        adjustHeights();
     }
 
     return {
@@ -241,12 +264,15 @@ var mockr = function() {
         hideSidebar:     hideSidebar,
         showSidebar:     showSidebar,
         toggleSidebar:   toggleSidebar,
+        earlierComment:  earlierComment,
+        laterComment:    laterComment
     };
 }();
 
 $(document).ready(mockr.initialize);
 $(window).resize(mockr.adjustHeights);
 
+/* TODO: Plug in keyboard shortcut. */
 $('textarea').focus(function() {
   $(document.body).addClass("typing");
 });
@@ -256,9 +282,18 @@ $('textarea').blur(function() {
 });
 
 $(window).keydown(function(event) {
-  if (!$(document.body).hasClass("typing") && 
-      user.keyboard.character() == "F") {
-    event.preventDefault();
-    mockr.toggleSidebar();
+  if (!$(document.body).hasClass("typing")) {
+    if (user.keyboard.character() == "F") {
+      event.preventDefault();
+      mockr.toggleSidebar();
+    }
+    if (user.keyboard.character() == "K") {
+      event.preventDefault();
+      mockr.laterComment();
+    }
+    if (user.keyboard.character() == "J") {
+      event.preventDefault();
+      mockr.earlierComment();
+    }
   }
 });   
