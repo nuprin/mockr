@@ -196,6 +196,10 @@ var mockr = function() {
         slideToggle().find('textarea').focus();
     }
 
+    function undoReply() {
+      $("#comments_list .highlighted .reply").slideToggle();      
+    }
+
     function nextMock() {
       location.href = $("#next_link").attr("href");
     }
@@ -281,7 +285,8 @@ var mockr = function() {
         laterComment:    laterComment,
         prevMock:        prevMock,
         nextMock:        nextMock,
-        reply:           reply
+        reply:           reply,
+        undoReply:       undoReply
     };
 }();
 
@@ -306,6 +311,10 @@ var KeyboardShortcuts = {
       "r": function() {
         mockr.reply();
       }
+      // TODO: Figure out how to make escape work in shortkeys.
+      // "esc", function() {
+      //   mockr.undoReply();
+      // }
     })
   }
 }
