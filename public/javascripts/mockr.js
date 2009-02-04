@@ -191,6 +191,11 @@ var mockr = function() {
       }
     }
 
+    function reply() {
+      $("#comments_list .highlighted .reply").
+        slideToggle().find('textarea').focus();
+    }
+
     function nextMock() {
       location.href = $("#next_link").attr("href");
     }
@@ -275,7 +280,8 @@ var mockr = function() {
         earlierComment:  earlierComment,
         laterComment:    laterComment,
         prevMock:        prevMock,
-        nextMock:        nextMock
+        nextMock:        nextMock,
+        reply:           reply
     };
 }();
 
@@ -296,6 +302,9 @@ var KeyboardShortcuts = {
       },
       "n": function() {
         mockr.nextMock();
+      },
+      "r": function() {
+        mockr.reply();
       }
     })
   }
