@@ -191,6 +191,14 @@ var mockr = function() {
       }
     }
 
+    function nextMock() {
+      location.href = $("#next_link").attr("href");
+    }
+    
+    function prevMock() {
+      location.href = $("#prev_link").attr("href");      
+    }
+
     function highlightComment(elem) {
       $("#comments_list>li").removeClass('highlighted');
       elem.addClass('highlighted');
@@ -265,35 +273,37 @@ var mockr = function() {
         showSidebar:     showSidebar,
         toggleSidebar:   toggleSidebar,
         earlierComment:  earlierComment,
-        laterComment:    laterComment
+        laterComment:    laterComment,
+        prevMock:        prevMock,
+        nextMock:        nextMock
     };
 }();
 
-$(document).ready(mockr.initialize);
-$(window).resize(mockr.adjustHeights);
-
-/* TODO: Plug in keyboard shortcut. */
-$('textarea').focus(function() {
-  $(document.body).addClass("typing");
-});
-
-$('textarea').blur(function() {
-  $(document.body).removeClass("typing");
-});
-
-$(window).keydown(function(event) {
-  if (!$(document.body).hasClass("typing")) {
-    if (user.keyboard.character() == "F") {
-      event.preventDefault();
-      mockr.toggleSidebar();
-    }
-    if (user.keyboard.character() == "K") {
-      event.preventDefault();
-      mockr.laterComment();
-    }
-    if (user.keyboard.character() == "J") {
-      event.preventDefault();
-      mockr.earlierComment();
-    }
+var KeyboardShortcuts = {
+  setup: function() {
+    $(document.body).shortkeys({
+      "f": function() {
+        mockr.toggleSidebar();
+      },
+      "k": function() {
+        mockr.laterComment();
+      },
+      "j": function() {
+        mockr.earlierComment();
+      },
+      "p": function() {
+        mockr.prevMock();
+      },
+      "n": function() {
+        mockr.nextMock();
+      }
+    })
   }
-});   
+}
+
+$(function() {
+  mockr.initialize();
+  KeyboardShortcuts.setup();
+});
+
+$(window).resize(mockr.adjustHeights);

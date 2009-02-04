@@ -3,13 +3,14 @@
     <title><%= @title || '' %> | Mockr</title>
     <%= stylesheet_link_tag "base" %>
     <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "jquery" %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "augments" %>
+    <%= javascript_include_tag "scrollto" %>
+    <%= javascript_include_tag "plugins/jquery.shortkeys" %>
+    <%= javascript_include_tag "mockr" %>
   </head>
   <body>      
     <%= yield %>
   </body>
 </html>
-<%= javascript_include_tag "jquery" %>
-<%= javascript_include_tag "user" %>
-<%= javascript_include_tag "augments" %>
-<%= javascript_include_tag "scrollto" %>
-<%= javascript_include_tag "mockr" %>
