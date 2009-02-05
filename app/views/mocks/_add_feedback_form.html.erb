@@ -14,7 +14,7 @@
     <%= f.hidden_field :width %>
     <%= f.hidden_field :height %>
     <%= f.text_area :text %>
-    <div>
+    <div class="clearfix">
       <ul class="feelings_list clearfix" id="feelings_input_fields">
         <%= render :partial => "/mocks/feeling",
                    :collection => Comment.basic_feelings,
