@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :awards
   has_many :discussions,
     :conditions => "reply_count > 0",
     :order      => "last_replied_at DESC",
