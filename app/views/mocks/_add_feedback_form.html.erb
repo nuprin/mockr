@@ -19,7 +19,7 @@
         <%= render :partial => "/mocks/feeling",
                    :collection => Comment.basic_feelings,
                    :locals => {:f => f} %>
-        <% if TopCommenter.top?(viewer) %>
+        <% if viewer.awards.any? %>
           <li><%= link_to_function "More Feelings...",
             "$('#advanced_feelings').slideToggle();" %></li>
         <% end %>
@@ -40,7 +40,7 @@
       <ul class="feelings_list clearfix" id="advanced_feelings" 
       style="display: none;">
         <%= render :partial => "/mocks/feeling",
-                   :collection => Comment.advanced_feelings,
+                   :collection => viewer.awarded_feelings,
                    :locals => {:f => f} %>
       </ul>
     </div>

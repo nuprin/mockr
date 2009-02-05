@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
   def first_name
     name.split.first
   end
+  
+  def awarded_feelings
+    self.awards.map(&:feeling)
+  end
 
   def real?
     !self.id.nil?
