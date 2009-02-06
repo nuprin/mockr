@@ -260,6 +260,57 @@ p.unread_notice a:hover {
   background: none;
   text-decoration: none;
 }
+#new_award {
+  background: white;
+  border: 1px solid black;
+  border-width: 0 1px 1px;
+  font-size: 13px;
+  left: 50%;
+  margin-left: -200px;
+  padding: 30px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 400px;
+  z-index: 10000;
+}
+#new_award .close {
+  font-size: 16px;
+  margin-top: 2em;
+}
+#new_award a {
+  color: #347adc;
+  font-weight: bold;
+}
+#new_award a:hover {
+  background: white;
+}
+#new_award h1 {
+  color: #444;
+  font-size: 32px;
+  margin-bottom: .5em;
+}
+#new_award h2 {
+  color: #444;
+  font-size: 16px;
+  font-weight: normal;
+  margin-bottom: .5em;
+}
+#new_award h3 {
+  color: #666;
+  margin-top: .5em;
+}
+#new_award .new_icon {
+  background: #ddd;
+  font-size: 10px;
+  margin: 2em auto;
+  padding: 15px 0;
+  width: 100px;
+  -moz-border-radius: 10px;
+}
+#new_award .new_icon img {
+  margin-bottom: 4px;
+}
 #notice {
   background: white;
   color: black;

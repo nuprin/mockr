@@ -9,7 +9,8 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
     begin
       @comment.save!
-      redirect_to mock_url(@comment.mock)
+      @feeling = Award.maybe_grant_award(@comment)
+      redirect_to mock_url(@comment.mock, "?feeling=#{@feeling}")
     rescue ActiveRecord::RecordInvalid => bang
       flash[:notice] = bang.message
       @mock = @comment.mock
