@@ -134,6 +134,18 @@ class Mock < ActiveRecord::Base
     Dir.glob("#{MOCK_PATH}/*").map {|path| path.split('/').last }
   end
 
+  def self.folders
+    Dir.glob(Mock::MOCK_PATH + "/*").map do |dir|
+      subdirectories =
+        Dir.glob(dir + "/*").map do |subdir|
+          subdir.gsub(dir + "/", "")
+        end.select do |subdir|
+          !subdir.match(/[.]+/)
+        end
+      [dir.gsub(Mock::MOCK_PATH + "/", ""), subdirectories]
+    end
+  end
+
   def self.last_mock_for(feature)
     self.ordered_feature(feature).last
   end
