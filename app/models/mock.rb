@@ -53,9 +53,8 @@ class Mock < ActiveRecord::Base
     conditions = {:mock_id => self.id, :parent_id => nil}
     if filter.to_i > 0
       conditions.merge!(:author_id => filter.to_i)
-    elsif filter && Feeling.respond_to?(filter)
-      feeling_id = Feeling.send(filter)
-      conditions.merge!(:feeling_id => feeling_id)
+    elsif filter
+      conditions.merge!(:feeling => filter)
     end
     Comment.recent.all(:conditions => conditions)
   end
