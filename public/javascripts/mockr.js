@@ -127,17 +127,19 @@ var mockr = function() {
     }
 
     function showSidebar() {
+      $.cookie('sidebar', 1);
       if ($(document.body).hasClass('fullscreen')) {
         sidebar.animate({left: '0'}, 'fast');
-        mockView.animate({left: '0', width: '-=400px'}, 'fast');
+        mockView.animate({left: '0'}, 'fast');
         $(document.body).toggleClass('fullscreen');
       }
     }
 
     function hideSidebar() {
+      $.cookie('sidebar', 0);
       if (!$(document.body).hasClass('fullscreen')) {
         sidebar.animate({left: '-400px'}, 'fast');
-        mockView.animate({left: '-400px', width: '+=400px'}, 'fast');
+        mockView.animate({left: '-400px'}, 'fast');
         $(document.body).toggleClass('fullscreen');
       }
     }
@@ -201,11 +203,15 @@ var mockr = function() {
     }
 
     function nextMock() {
-      location.href = $("#next_link").attr("href");
+      href = $("#next_link").attr("href");
+      if (href)
+        location.href = href;
     }
     
     function prevMock() {
-      location.href = $("#prev_link").attr("href");      
+      href = $("#prev_link").attr("href");
+      if (href)
+        location.href = href;
     }
 
     function highlightComment(elem) {

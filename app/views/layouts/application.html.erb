@@ -8,10 +8,11 @@
     <%= javascript_include_tag "user" %>
     <%= javascript_include_tag "augments" %>
     <%= javascript_include_tag "scrollto" %>
+    <%= javascript_include_tag "plugins/jquery.cookie" %>
     <%= javascript_include_tag "plugins/jquery.shortkeys" %>
     <%= javascript_include_tag "mockr" %>
   </head>
-  <body>      
+  <body<%= ' class="fullscreen"' unless @sidebar %>>
     <%= yield %>
   </body>
 </html>

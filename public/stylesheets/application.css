@@ -26,6 +26,13 @@ p.unread_notice a {
 p.unread_notice a:hover {
   background: none;
 }
+.fullscreen #mock,
+.fullscreen #sidebar {
+  left: -400px;
+}
+.fullscreen #mock {
+  width: 100%;
+}
 #show_sidebar {
   display: none;
 }
