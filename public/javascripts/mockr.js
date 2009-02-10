@@ -214,10 +214,23 @@ var mockr = function() {
         location.href = href;
     }
 
-    function highlightComment(elem) {
-      $("#comments_list>li").removeClass('highlighted');
-      elem.addClass('highlighted');
+    function highlightFeeling(feeling) {
       highlight.clear();
+      $("#comments_list>li." + feeling).each(function(i, elem) {
+        highlightElem($(elem));
+      });
+    }
+
+    function initializeFeedbackHighlight() {
+      $("#stats_list>li").each(function(i, elem) {
+        var className = $(elem).attr("class");
+        $(elem).click(function() {
+          highlightFeeling(className);          
+        });
+      })
+    }
+
+    function highlightElem(elem, scrollTo) {
       if (elem.attr('box')) {
         var box = elem.attr('box').split('_');
         var id = elem.attr('id');
@@ -228,8 +241,16 @@ var mockr = function() {
             height: box[3],
             id: id
         });
-        scrollToElem(high);
+        if (scrollTo)
+          scrollToElem(high);
       }      
+    }
+
+    function highlightComment(elem) {
+      $("#comments_list>li").removeClass('highlighted');
+      elem.addClass('highlighted');
+      highlight.clear();
+      highlightElem(elem, true);
     }
     
     function initializeComments() {
@@ -277,22 +298,23 @@ var mockr = function() {
         initializeTextareas();
         initializeComments();
         initializeChildComments();
+        initializeFeedbackHighlight();
     }
 
     return {
-        initialize:      initialize,
-        highlight:       highlight,
-        startCommenting: startCommenting,
-        adjustHeights:   adjustHeights,
-        hideSidebar:     hideSidebar,
-        showSidebar:     showSidebar,
-        toggleSidebar:   toggleSidebar,
-        earlierComment:  earlierComment,
-        laterComment:    laterComment,
-        prevMock:        prevMock,
-        nextMock:        nextMock,
-        reply:           reply,
-        undoReply:       undoReply
+        initialize:       initialize,
+        highlight:        highlight,
+        startCommenting:  startCommenting,
+        adjustHeights:    adjustHeights,
+        hideSidebar:      hideSidebar,
+        showSidebar:      showSidebar,
+        toggleSidebar:    toggleSidebar,
+        earlierComment:   earlierComment,
+        laterComment:     laterComment,
+        prevMock:         prevMock,
+        nextMock:         nextMock,
+        reply:            reply,
+        undoReply:        undoReply
     };
 }();
 
