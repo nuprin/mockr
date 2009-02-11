@@ -14,29 +14,35 @@
     <%= f.hidden_field :width %>
     <%= f.hidden_field :height %>
     <%= f.text_area :text %>
-    <div>
-      <ul class="clearfix" id="feelings_input_fields">
-        <% Feeling.find(:all).each do |feeling| %>
-          <li>
-            <label for="comment_feeling_id_<%= feeling.id %>"
-              title="I am <%= feeling.name %>">
-              <%= image_tag feeling.path %>
-            </label>
-            <%= f.radio_button :feeling_id, feeling.id %>
-          </li>
-        <% end %>
-        <% if viewer.real? %>
-          <%= f.hidden_field :author_id, :value => session[:user_id] %>
-        <% else %>
-          <select id="comment_author_id" name="comment[author_id]">
-            <option>I am...</option>
-            <% User.find(:all).sort_by(&:name).each do |user| %>
-              <option value="<%= user.id %>"><%= user.name %></option>
-            <% end %>
-          </select>
+    <div class="clearfix">
+      <ul class="feelings_list clearfix" id="feelings_input_fields">
+        <%= render :partial => "/mocks/feeling",
+                   :collection => Comment.basic_feelings,
+                   :locals => {:f => f} %>
+        <% if viewer.awards.any? %>
+          <li><%= link_to_function "More Feelings...",
+            "$('#advanced_feelings').slideToggle();", :tabindex => -1 %></li>
         <% end %>
       </ul>
+      <% if viewer.real? %>
+        <%= f.hidden_field :author_id, :value => session[:user_id] %>
+      <% else %>
+        <select id="comment_author_id" name="comment[author_id]">
+          <option>I am...</option>
+          <% User.find(:all).sort_by(&:name).each do |user| %>
+            <option value="<%= user.id %>"><%= user.name %></option>
+          <% end %>
+        </select>
+      <% end %>
       <%= image_submit_tag("buttons/add_feedback.gif") %>
+    </div>
+    <div class="clearfix">
+      <ul class="feelings_list clearfix" id="advanced_feelings" 
+      style="display: none;">
+        <%= render :partial => "/mocks/feeling",
+                   :collection => viewer.awarded_feelings,
+                   :locals => {:f => f} %>
+      </ul>
     </div>
   <% end %>
 </div>

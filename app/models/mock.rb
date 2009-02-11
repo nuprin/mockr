@@ -53,9 +53,8 @@ class Mock < ActiveRecord::Base
     conditions = {:mock_id => self.id, :parent_id => nil}
     if filter.to_i > 0
       conditions.merge!(:author_id => filter.to_i)
-    elsif filter && Feeling.respond_to?(filter)
-      feeling_id = Feeling.send(filter)
-      conditions.merge!(:feeling_id => feeling_id)
+    elsif filter
+      conditions.merge!(:feeling => filter)
     end
     Comment.recent.all(:conditions => conditions)
   end
@@ -134,6 +133,18 @@ class Mock < ActiveRecord::Base
     Dir.glob("#{MOCK_PATH}/*").map {|path| path.split('/').last }
   end
 
+  def self.folders
+    Dir.glob(Mock::MOCK_PATH + "/*").map do |dir|
+      subdirectories =
+        Dir.glob(dir + "/*").map do |subdir|
+          subdir.gsub(dir + "/", "")
+        end.select do |subdir|
+          !subdir.match(/[.]+/)
+        end
+      [dir.gsub(Mock::MOCK_PATH + "/", ""), subdirectories]
+    end
+  end
+
   def self.last_mock_for(feature)
     self.ordered_feature(feature).last
   end
@@ -144,7 +155,7 @@ class Mock < ActiveRecord::Base
 
   def self.recently_commented_mocks
     mock_ids =
-      Comment.recent.all(:select => "distinct mock_id", :limit => 6).
+      Comment.recent.all(:select => "distinct mock_id", :limit => 9).
       map(&:mock_id)
     mock_ids.map do |mock_id|
       mock = Mock.find(mock_id)

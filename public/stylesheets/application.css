@@ -26,6 +26,13 @@ p.unread_notice a {
 p.unread_notice a:hover {
   background: none;
 }
+.fullscreen #mock,
+.fullscreen #sidebar {
+  left: -400px;
+}
+.fullscreen #mock {
+  width: 100%;
+}
 #show_sidebar {
   display: none;
 }
@@ -64,6 +71,26 @@ p.unread_notice a:hover {
   margin: 0 3px 8px 0;
   width: 100%;
 }
+#advanced_feelings {
+  text-align: left;
+}
+#advanced_feelings img {
+  float: left;
+}
+#advanced_feelings li {
+  height: 27px;
+  width: 66px;
+}
+#advanced_feelings input {
+  float: left;
+  margin-right: 9px;
+  margin-top: 2px;
+}
+#feelings_input_fields {
+  line-height: 19px;
+  margin-bottom: 10px;
+  text-align: left;
+}
 #children_comments_list {
   margin-top: 10px;
 }
@@ -101,17 +128,11 @@ p.unread_notice a:hover {
 #comments_list>li.highlighted {
     background-color: #1a1a33;
 }
-#comments_list li.happy {
-  background-image: url("../images/happy.gif");
-}
-#comments_list li.sad {
-  background-image: url("../images/sad.gif");
-}
 #comments_list .author {
   color: #888;
 }
 #comments_list .text {
-  margin: 1em 0 0;
+  margin: 1em 0;
 }
 #comments_list .parent_meta {
   color: #888;
@@ -121,7 +142,6 @@ p.unread_notice a:hover {
 }
 #comments_list .reply {
   display: none;
-  margin-top: 10px;
 }
 #comments_list .reply textarea {
   background: #444;
@@ -129,15 +149,11 @@ p.unread_notice a:hover {
   color: white;
   display: block;
   height: 60px;
-  margin-bottom: 8px;
-  margin-right: 3px;
+  margin: 0 0 8px 0;
   width: 100%;
 }
 #comments_list .reply input[type=image] {
   float: right;
-}
-#comments_list .replying .reply {
-  display: block;
 }
 #feedback_header {
   background-image: url(../images/glass-shadow.gif);
@@ -154,20 +170,15 @@ p.unread_notice a:hover {
 #feedback_header select {
   font-size: 9px;
 }
-#feelings_input_fields {
+.feelings_list,
+.feelings_list li {
   float: left;
 }
-#feelings_input_fields li {
-  float: left;
-}
-#feelings_input_fields input {
-  margin: 3px 0 0 4px;
-}
-#feelings_input_fields label {
-  float: left;
-}
-#feelings_input_fields li {
+.feelings_list li {
   padding-right: 10px;
+}
+.feelings_list input {
+  margin: 3px 1px 0 4px;
 }
 #header {
   background-color: black;
@@ -256,6 +267,57 @@ p.unread_notice a:hover {
   background: none;
   text-decoration: none;
 }
+#new_award {
+  background: white;
+  border: 1px solid black;
+  border-width: 0 1px 1px;
+  font-size: 13px;
+  left: 50%;
+  margin-left: -200px;
+  padding: 30px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 400px;
+  z-index: 10000;
+}
+#new_award .close {
+  font-size: 16px;
+  margin-top: 2em;
+}
+#new_award a {
+  color: #347adc;
+  font-weight: bold;
+}
+#new_award a:hover {
+  background: white;
+}
+#new_award h1 {
+  color: #444;
+  font-size: 32px;
+  margin-bottom: .5em;
+}
+#new_award h2 {
+  color: #444;
+  font-size: 16px;
+  font-weight: normal;
+  margin-bottom: .5em;
+}
+#new_award h3 {
+  color: #666;
+  margin-top: .5em;
+}
+#new_award .new_icon {
+  background: #ddd;
+  font-size: 10px;
+  margin: 2em auto;
+  padding: 15px 0;
+  width: 100px;
+  -moz-border-radius: 10px;
+}
+#new_award .new_icon img {
+  margin-bottom: 4px;
+}
 #notice {
   background: white;
   color: black;
@@ -281,12 +343,6 @@ p.unread_notice a:hover {
   background-repeat: no-repeat;
   float: left;
   padding: 2px 23px 2px 12px;
-}
-#stats_list li#happy_count {
-  background-image: url("../images/happy.gif");
-}
-#stats_list li#sad_count {
-  background-image: url("../images/sad.gif");
 }
 #userlight {
   background: #99c;

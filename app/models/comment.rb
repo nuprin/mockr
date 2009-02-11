@@ -1,14 +1,10 @@
 class Comment < ActiveRecord::Base
+
   belongs_to :author,
     :class_name => "User"
-
-  belongs_to :feeling
-
   belongs_to :mock
-
   belongs_to :parent,
     :class_name => 'Comment'
-
   has_many :children,
     :class_name => 'Comment',
     :foreign_key => 'parent_id'
@@ -16,12 +12,12 @@ class Comment < ActiveRecord::Base
 
   named_scope :about, lambda {|mock| {:conditions => {:mock_id => mock.id}}}
   named_scope :by, lambda {|author| {:conditions => {:author_id => author.id}}}
-  named_scope :happy, :conditions => {:feeling_id => Feeling.happy.id}
+  named_scope :happy, :conditions => {:feeling => "happy"}
   named_scope :in_reply_to, lambda {|parent_id|
     {:conditions => {:parent_id => parent_id}}
   }
   named_scope :recent, :order => "created_at DESC"
-  named_scope :sad, :conditions => {:feeling_id => Feeling.sad.id}
+  named_scope :sad, :conditions => {:feeling => "sad"}
   named_scope :since, lambda {|time| 
     {:conditions => ["created_at >= ?", time]}
   }
@@ -30,8 +26,8 @@ class Comment < ActiveRecord::Base
       comment.parent
     }
   validates_presence_of :author
-  validates_presence_of :feeling, :unless => Proc.new { |comment|
-      !comment.parent.nil?
+  validates_presence_of :feeling, :if => Proc.new { |comment|
+      comment.parent.nil? && comment.text.blank?
     }
 
   def siblings
@@ -55,4 +51,17 @@ class Comment < ActiveRecord::Base
     end
   end
 
+  def self.basic_feelings
+    ["happy", "sad"]
+  end
+
+  def self.advanced_feelings
+     self.feelings - self.basic_feelings
+  end
+  
+  def self.feelings
+    Dir.glob("public/images/feelings/*").map do |name|
+      name.split("/").last.gsub(".gif", "")
+    end
+  end
 end

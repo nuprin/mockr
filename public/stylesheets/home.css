@@ -10,6 +10,20 @@ h2 {
   margin-bottom: .5em;
   text-align: left;
 }
+.folders {
+  float: left;
+  font-size: 12px;
+  line-height: 18px;
+  margin: 0 10px;
+  text-align: left;
+  width: 152px;
+}
+.folders ul {
+  margin-left: 10px;
+}
+.folders>li {
+  margin-bottom: .5em;
+}
 #active_mocks {
   margin-bottom: 50px;
   text-align: left;
@@ -94,9 +108,8 @@ h2 {
   height: 24px;
   width: 24px;
 }
-#features  {
-  line-height: 38px;
-  text-align: justify;
+#features {
+  margin: 0 -10px;
 }
 #features a:hover {
   background-color: #444;

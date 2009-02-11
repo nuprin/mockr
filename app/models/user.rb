@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :awards
+  has_many :comments, :foreign_key => :author_id
   has_many :discussions,
     :conditions => "reply_count > 0",
     :order      => "last_replied_at DESC",
@@ -10,6 +12,10 @@ class User < ActiveRecord::Base
 
   def first_name
     name.split.first
+  end
+  
+  def awarded_feelings
+    self.awards.map(&:feeling)
   end
 
   def real?

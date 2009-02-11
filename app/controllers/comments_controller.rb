@@ -9,7 +9,8 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
     begin
       @comment.save!
-      redirect_to mock_url(@comment.mock)
+      @feeling = Award.maybe_grant_award(@comment)
+      redirect_to mock_url(@comment.mock, "?feeling=#{@feeling}")
     rescue ActiveRecord::RecordInvalid => bang
       flash[:notice] = bang.message
       @mock = @comment.mock
@@ -26,7 +27,7 @@ class CommentsController < ApplicationController
 
   def forge_author_if_requested
     @md, @name, @actual_comment =
-      *params[:comment][:text].match(/^(\w+\s?\w*):\s*(.*)/)
+      *params[:comment][:text].match(/^(\w+\s?\w*):\s*(.*)/m)
     if @name && (@actual_author = User.with_first_name(@name).first)
       params[:comment][:author_id] = @actual_author.id
       params[:comment][:text] = @actual_comment

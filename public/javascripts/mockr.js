@@ -14,14 +14,14 @@ var mockr = function() {
         var y;     // horizontal mouse data
 
         function initialize(){
-            x = {};
-            y = {};
-            mockView.mousedown(function(event){
-                event.preventDefault();
-                start();
-            });
-            mockView.mousemove(size);
-            mockView.mouseup(stop);
+          x = {};
+          y = {};
+          mockView.mousedown(function(event){
+              event.preventDefault();
+              start();
+          });
+          mockView.mousemove(size);
+          mockView.mouseup(stop);
         }
         function getArea(){
             return area;
@@ -127,17 +127,19 @@ var mockr = function() {
     }
 
     function showSidebar() {
+      $.cookie('sidebar', 1);
       if ($(document.body).hasClass('fullscreen')) {
         sidebar.animate({left: '0'}, 'fast');
-        mockView.animate({left: '0', width: '-=400px'}, 'fast');
+        mockView.animate({left: '0'}, 'fast');
         $(document.body).toggleClass('fullscreen');
       }
     }
 
     function hideSidebar() {
+      $.cookie('sidebar', 0);
       if (!$(document.body).hasClass('fullscreen')) {
         sidebar.animate({left: '-400px'}, 'fast');
-        mockView.animate({left: '-400px', width: '+=400px'}, 'fast');
+        mockView.animate({left: '-400px'}, 'fast');
         $(document.body).toggleClass('fullscreen');
       }
     }
@@ -165,32 +167,98 @@ var mockr = function() {
     }
     
     function initializeChildComments() {
-      $("#comments_list .replylink").click(function (){
-        $(this).parents("li.comment_node").
-          toggleClass("replying").find('textarea').focus();
+      $("#comments_list .replylink").click(function() {
+        $(this).parents("li.comment_node").find(".reply").
+          slideToggle().find('textarea').focus();
+      });
+    }
+    
+    function earlierComment() {
+      var elem = $("#comments_list>li.highlighted")
+      if (elem.length > 0) {
+        elem = elem.next();
+      } else {
+        elem = $("#comments_list>li:first-child")
+      }
+      if (elem.length > 0)
+        highlightComment(elem);
+    }
+    
+    function laterComment() {
+      var elem = $("#comments_list>li.highlighted")
+      if (elem.length > 0) {
+        elem = elem.prev();
+        if (elem.length > 0)
+          highlightComment(elem);
+      }
+    }
+
+    function reply() {
+      $("#comments_list .highlighted .reply").
+        slideToggle().find('textarea').focus();
+    }
+
+    function undoReply() {
+      $("#comments_list .highlighted .reply").slideToggle();      
+    }
+
+    function nextMock() {
+      href = $("#next_link").attr("href");
+      if (href)
+        location.href = href;
+    }
+    
+    function prevMock() {
+      href = $("#prev_link").attr("href");
+      if (href)
+        location.href = href;
+    }
+
+    function highlightFeeling(feeling) {
+      highlight.clear();
+      $("#comments_list>li." + feeling).each(function(i, elem) {
+        highlightElem($(elem));
       });
     }
 
+    function initializeFeedbackHighlight() {
+      $("#stats_list>li").each(function(i, elem) {
+        var className = $(elem).attr("class");
+        $(elem).click(function() {
+          highlightFeeling(className);          
+        });
+      })
+    }
+
+    function highlightElem(elem, scrollTo) {
+      if (elem.attr('box')) {
+        var box = elem.attr('box').split('_');
+        var id = elem.attr('id');
+        var high = highlight.create({
+            x: box[0],
+            y: box[1],
+            width: box[2],
+            height: box[3],
+            id: id
+        });
+        if (scrollTo)
+          scrollToElem(high);
+      }      
+    }
+
+    function highlightComment(elem) {
+      $("#comments_list>li").removeClass('highlighted');
+      elem.addClass('highlighted');
+      highlight.clear();
+      highlightElem(elem, true);
+    }
+    
     function initializeComments() {
-      $("#comments_list >li").click(function(){
-          $("#comments_list >li").removeClass('highlighted');
-          $(this).addClass('highlighted');
-          highlight.clear();
-          if ($(this).attr('box')) {
-              var box = $(this).attr('box').split('_');
-              var id = $(this).attr('id');
-              var high = highlight.create({
-                  x: box[0],
-                  y: box[1],
-                  width: box[2],
-                  height: box[3],
-                  id: id
-              });
-              scrollToElem(high);
-          }
+      $("#comments_list>li").click(function(){
+        highlightComment($(this));
       });
     }
-
+    
     function adjustHeights() {
       height = user.browser.height() - $('#comments_list').offset().top
       $("#comments_list").height(height)
@@ -224,41 +292,64 @@ var mockr = function() {
         sidebar = $('#sidebar');
         
         highlight.initialize();
-        
+        adjustHeights();        
         initializeFeatureList();
         initializeFeedbackFilter();
         initializeTextareas();
         initializeComments();
         initializeChildComments();
-        adjustHeights();
+        initializeFeedbackHighlight();
     }
 
     return {
-        initialize:      initialize,
-        highlight:       highlight,
-        startCommenting: startCommenting,
-        adjustHeights:   adjustHeights,
-        hideSidebar:     hideSidebar,
-        showSidebar:     showSidebar,
-        toggleSidebar:   toggleSidebar,
+        initialize:       initialize,
+        highlight:        highlight,
+        startCommenting:  startCommenting,
+        adjustHeights:    adjustHeights,
+        hideSidebar:      hideSidebar,
+        showSidebar:      showSidebar,
+        toggleSidebar:    toggleSidebar,
+        earlierComment:   earlierComment,
+        laterComment:     laterComment,
+        prevMock:         prevMock,
+        nextMock:         nextMock,
+        reply:            reply,
+        undoReply:        undoReply
     };
 }();
 
-$(document).ready(mockr.initialize);
-$(window).resize(mockr.adjustHeights);
-
-$('textarea').focus(function() {
-  $(document.body).addClass("typing");
-});
-
-$('textarea').blur(function() {
-  $(document.body).removeClass("typing");
-});
-
-$(window).keydown(function(event) {
-  if (!$(document.body).hasClass("typing") && 
-      user.keyboard.character() == "F") {
-    event.preventDefault();
-    mockr.toggleSidebar();
+var KeyboardShortcuts = {
+  setup: function() {
+    $(document.body).shortkeys({
+      "f": function() {
+        mockr.toggleSidebar();
+      },
+      "k": function() {
+        mockr.laterComment();
+      },
+      "j": function() {
+        mockr.earlierComment();
+      },
+      "p": function() {
+        mockr.prevMock();
+      },
+      "n": function() {
+        mockr.nextMock();
+      },
+      "r": function() {
+        mockr.reply();
+      }
+      // TODO: Figure out how to make escape work in shortkeys.
+      // "esc", function() {
+      //   mockr.undoReply();
+      // }
+    })
   }
-});   
+}
+
+$(function() {
+  mockr.initialize();
+  KeyboardShortcuts.setup();
+});
+
+$(window).resize(mockr.adjustHeights);

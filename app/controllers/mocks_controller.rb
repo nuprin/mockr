@@ -6,6 +6,7 @@ class MocksController < ApplicationController
     path = params[:mock_path]
     @mock = Mock.for(path)
     @title = "#{@mock.dir} | #{@mock.title}"
+    @sidebar = !cookies[:sidebar] || (cookies[:sidebar].first.to_i == 1)
   rescue Mock::MockPathIsDirectory => ex
     @mock = ex.mock
     redirect_to ex.mock ? mock_url(ex.mock) : '/'

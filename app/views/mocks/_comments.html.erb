@@ -8,7 +8,7 @@
   <%
     @mock.filtered_comments(params[:feedback_filter], viewer).each do |comment| 
   %>
-    <li class="<%= comment.feeling.name %> comment_node"
+    <li class="<%= comment.feeling %> comment_node"
         id="comment_<%= comment.id %>"
         <%= comment.box_attribute %>>
       <div class="arrow"></div>
