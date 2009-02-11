@@ -140,9 +140,9 @@ class Mock < ActiveRecord::Base
           subdir.gsub(dir + "/", "")
         end.select do |subdir|
           !subdir.match(/[.]+/)
-        end
+        end.sort
       [dir.gsub(Mock::MOCK_PATH + "/", ""), subdirectories]
-    end
+    end.sort_by(&:first)
   end
 
   def self.last_mock_for(feature)
