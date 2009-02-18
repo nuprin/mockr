@@ -92,18 +92,25 @@ p.unread_notice a:hover {
   text-align: left;
 }
 #children_comments_list {
-  margin: 10px 0;
+  margin: 10px 0 0;
 }
 #children_comments_list li {
   background: #404040;
   font-size: 11px;
   margin: 0 -10px 1px 0;
-  padding: 4px 26px 4px 10px;
+  padding: 0 26px 0 10px;
 }
-#children_comments_list .meta {
+#children_comments_list li .meta {
   color: #888;
   font-size: 10px;
-  margin-top: 5px;
+  padding: 0 0 5px;
+}
+#children_comments_list li.reply_item {
+  padding: 4px 10px;
+}
+#children_comments_list li .text {
+  margin: 0;
+  padding: 5px 0 4px;
 }
 #comments_list {
   font-size: 12px;
@@ -130,6 +137,12 @@ p.unread_notice a:hover {
 }
 #comments_list .author {
   color: #888;
+}
+#comments_list .reply_container {
+  background: #404040;
+  font-size: 10px;
+  margin: 0 -10px 10px 0;
+  padding: 4px 10px;
 }
 #comments_list .text {
   margin: 1em 0;

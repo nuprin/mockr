@@ -26,6 +26,8 @@ class CommentsController < ApplicationController
   def ajax_create
     @comment = Comment.new(params[:comment])
     @comment.save!
+    @mock = @comment.mock
+    log_view
     render :partial => "/mocks/child_comment",
            :locals => {:comment => @comment.parent, :child => @comment}
   end

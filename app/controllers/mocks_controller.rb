@@ -14,9 +14,4 @@ class MocksController < ApplicationController
     render :text => "Mock does not exist: #{boom.path}"
   end
 
-  def log_view
-    if viewer.real? && @mock
-      MockView.log_view(@mock, viewer)
-    end
-  end
 end

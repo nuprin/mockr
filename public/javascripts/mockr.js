@@ -168,7 +168,7 @@ var mockr = function() {
     
     function initializeChildComments() {
       $("#comments_list .replylink").click(function() {
-        $(this).parents("li.comment_node").find(".reply").
+        $(this).parents(".comment_node").find(".reply").
           slideToggle().find('textarea').focus();
       });
       $(".comment_node form").submit(function(e) {
@@ -177,15 +177,13 @@ var mockr = function() {
         var submitComment = function() {
           form.ajaxSubmit({success: function(text) {
             var commentNode = form.parents(".comment_node");
-            var li = commentNode.find("#children_comments_list li:last");
             var comment = $(text).hide();
-            if (li.length == 0) {
+            var ul = commentNode.find("#children_comments_list");
+            if (ul.length == 0) {
               commentNode.find(">*:last").
                 before("<ul id='children_comments_list'></ul>");
-              commentNode.find("#children_comments_list").append(comment);
-            } else {
-              li.before(comment);
             }
+            commentNode.find("#children_comments_list").append(comment);
             comment.slideDown(500);
           }});
         }

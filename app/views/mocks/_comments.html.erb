@@ -36,13 +36,13 @@
       <% if comment.children.any? %>
         <ul id="children_comments_list">
           <% comment.children.each do |child| %>
-            <%= render :partial => "child_comment",
-                       :locals => {:child => child} %>
+            <%= render :partial => "child_comment", :locals => {:child => child}
+            %>
           <% end %>
-          <li>
-            <span class="fakelink replylink">Reply</span>
-          </li>
         </ul>
+        <div class="reply_container">
+          <span class="fakelink replylink">Reply</span>
+        </div>
       <% end %>
       <div class="reply clearfix">
         <% form_for :comment, Comment.new(:parent_id => comment.id,

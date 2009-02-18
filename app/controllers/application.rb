@@ -17,4 +17,10 @@ class ApplicationController < ActionController::Base
     @viewer = User.find_by_id(session[:user_id]) || User.new
   end
   helper_method :viewer
+
+  def log_view
+    if viewer.real?
+      MockView.log_view(@mock, viewer)
+    end
+  end
 end
