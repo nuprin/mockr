@@ -15,7 +15,7 @@ class MocksController < ApplicationController
   end
 
   def log_view
-    if viewer.real?
+    if viewer.real? && @mock
       MockView.log_view(@mock, viewer)
     end
   end
