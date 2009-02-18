@@ -185,6 +185,7 @@ var mockr = function() {
             }
             commentNode.find("#children_comments_list").append(comment);
             comment.slideDown(500);
+            form.find("textarea").val("");
           }});
         }
         $("#comments_list .highlighted .reply").slideUp(500, submitComment);
