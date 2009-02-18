@@ -92,7 +92,7 @@ p.unread_notice a:hover {
   text-align: left;
 }
 #children_comments_list {
-  margin-top: 10px;
+  margin: 10px 0;
 }
 #children_comments_list li {
   background: #404040;

@@ -1,0 +1,15 @@
+<li>
+  <%= nl2br(h(child.text)) %>
+  <div class="meta">
+    <%= child.author.first_name %>,
+    <span
+      title="<%=
+      child.created_at.strftime("%b %e, %l:%M%p").squish %>"><%=
+      distance_of_time_in_words(child.parent.created_at,
+                                child.created_at) %> later</span>
+    <% if child.author_id == viewer.id %>
+      - <%= link_to "Delete", comment_path(child),
+        :method => :delete %>
+    <% end %>
+  </div>  
+</li>

@@ -36,21 +36,8 @@
       <% if comment.children.any? %>
         <ul id="children_comments_list">
           <% comment.children.each do |child| %>
-            <li>
-              <%= nl2br(h(child.text)) %>
-              <div class="meta">
-                <%= child.author.first_name %>,
-                <span
-                  title="<%=
-                  child.created_at.strftime("%b %e, %l:%M%p").squish %>"><%=
-                  distance_of_time_in_words(comment.created_at,
-                                            child.created_at) %> later</span>
-                <% if child.author_id == viewer.id %>
-                  - <%= link_to "Delete", comment_path(child),
-                    :method => :delete %>
-                <% end %>
-              </div>  
-            </li>
+            <%= render :partial => "child_comment",
+                       :locals => {:child => child} %>
           <% end %>
           <li>
             <span class="fakelink replylink">Reply</span>
@@ -60,8 +47,8 @@
       <div class="reply clearfix">
         <% form_for :comment, Comment.new(:parent_id => comment.id,
                                           :mock_id => @mock.id),
-                    :url => {:controller => 'comments', :action => 'create'},
-                    :html => {:id => "reply_form_#{comment.id}"} do |f| %>
+                    :url => ajax_create_comments_url,
+                    :html => {:id => "reply_form_#{comment.id}", :method => :post} do |f| %>
           <%= f.hidden_field :author_id, :value => viewer.id %>
           <%= f.hidden_field :mock_id %>
           <%= f.hidden_field :parent_id %>

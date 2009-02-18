@@ -10,7 +10,11 @@ class CommentsController < ApplicationController
     begin
       @comment.save!
       @feeling = Award.maybe_grant_award(@comment)
-      redirect_to mock_url(@comment.mock, "?feeling=#{@feeling}")
+      if @feeling
+        redirect_to mock_url(@comment.mock, "?feeling=#{@feeling}")
+      else
+        redirect_to mock_url(@comment.mock)
+      end
     rescue ActiveRecord::RecordInvalid => bang
       flash[:notice] = bang.message
       @mock = @comment.mock
@@ -18,7 +22,14 @@ class CommentsController < ApplicationController
       return
     end
   end
-  
+
+  def ajax_create
+    @comment = Comment.new(params[:comment])
+    @comment.save!
+    render :partial => "/mocks/child_comment",
+           :locals => {:comment => @comment.parent, :child => @comment}
+  end
+
   def destroy
     comment = Comment.find(params[:id])
     comment.destroy

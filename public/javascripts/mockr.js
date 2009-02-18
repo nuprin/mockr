@@ -171,6 +171,26 @@ var mockr = function() {
         $(this).parents("li.comment_node").find(".reply").
           slideToggle().find('textarea').focus();
       });
+      $(".comment_node form").submit(function(e) {
+        e.preventDefault();
+        var form = $(this);
+        var submitComment = function() {
+          form.ajaxSubmit({success: function(text) {
+            var commentNode = form.parents(".comment_node");
+            var li = commentNode.find("#children_comments_list li:last");
+            var comment = $(text).hide();
+            if (li.length == 0) {
+              commentNode.find(">*:last").
+                before("<ul id='children_comments_list'></ul>");
+              commentNode.find("#children_comments_list").append(comment);
+            } else {
+              li.before(comment);
+            }
+            comment.slideDown(500);
+          }});
+        }
+        $("#comments_list .highlighted .reply").slideUp(500, submitComment);
+      })
     }
     
     function earlierComment() {
