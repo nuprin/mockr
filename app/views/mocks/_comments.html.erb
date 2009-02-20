@@ -47,7 +47,7 @@
       <div class="reply clearfix">
         <% form_for :comment, Comment.new(:parent_id => comment.id,
                                           :mock_id => @mock.id),
-                    :url => ajax_create_comments_url,
+                    :url => ajax_create_comments_path,
                     :html => {:id => "reply_form_#{comment.id}", :method => :post} do |f| %>
           <%= f.hidden_field :author_id, :value => viewer.id %>
           <%= f.hidden_field :mock_id %>
