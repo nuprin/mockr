@@ -23,7 +23,7 @@ class MockView < ActiveRecord::Base
     related_comments = [comment.parent] + comment.siblings
     author_ids = related_comments.map(&:author_id).uniq
     conditions = {:user_id => author_ids, :mock_id => comment.mock_id}
-    self.find(:all, :conditions => conditions)
+    self.all(:conditions => conditions)
   end
 
 end

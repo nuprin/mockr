@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   helper_method :viewer
 
   def log_view
-    if viewer.real?
+    if viewer.real? && @mock
       MockView.log_view(@mock, viewer)
     end
   end
