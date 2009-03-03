@@ -2,9 +2,11 @@ class MocksController < ApplicationController
 
   after_filter :log_view, :only => :show
 
+  # TODO [chris]: Don't allow guest viewers to view this page.
   def show
     path = params[:mock_path]
     @mock = Mock.for(path)
+    @last_viewed_at = MockView.last_viewed_at(@mock, viewer) if viewer.real?
     @title = "#{@mock.dir} | #{@mock.title}"
     @sidebar = !cookies[:sidebar] || (cookies[:sidebar].first.to_i == 1)
   rescue Mock::MockPathIsDirectory => ex

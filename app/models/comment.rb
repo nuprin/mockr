@@ -64,4 +64,16 @@ class Comment < ActiveRecord::Base
       name.split("/").last.gsub(".gif", "")
     end
   end
+  
+  # A comment is fresh if it has a new child comment or it hasn't been viewed
+  # yet.
+  def fresh?(mock_viewed_at)
+    if !mock_viewed_at
+      true
+    elsif self.children.any?
+      self.children.last.created_at > mock_viewed_at
+    else
+      self.created_at > mock_viewed_at
+    end
+  end
 end
