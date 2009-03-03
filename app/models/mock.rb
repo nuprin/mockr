@@ -2,8 +2,7 @@ class Mock < ActiveRecord::Base
 
   MOCK_PATH = "public/images/mocks"
 
-  has_many :comments,
-    :order => "created_at DESC"
+  has_many :comments, :order => "created_at DESC"
 
   class MockDoesNotExist < StandardError
     attr_reader :path
@@ -103,7 +102,7 @@ class Mock < ActiveRecord::Base
   def self.ordered_feature(feature)
     feature_filenames(feature).map do |sibling_path|
       Mock.for(sibling_path)
-    end.sort
+    end.sort_by(&:title)
   end
 
   def ordered_feature
