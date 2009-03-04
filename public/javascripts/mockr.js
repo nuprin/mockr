@@ -276,6 +276,9 @@ var mockr = function() {
       $("#comments_list>li").click(function(){
         highlightComment($(this));
       });
+      $("#comments_list .read").click(function() {
+        $(this).find(".body").show();
+      })
     }
     
     function adjustHeights() {
@@ -311,7 +314,7 @@ var mockr = function() {
         sidebar = $('#sidebar');
         
         highlight.initialize();
-        adjustHeights();        
+        adjustHeights();
         initializeFeatureList();
         initializeFeedbackFilter();
         initializeTextareas();

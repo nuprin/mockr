@@ -46,16 +46,13 @@ class Mock < ActiveRecord::Base
   end
 
   def filtered_comments(filter, user)
-    if filter == "new"
-      return user.unread_comments_for(self)
-    end
     conditions = {:mock_id => self.id, :parent_id => nil}
     if filter.to_i > 0
       conditions.merge!(:author_id => filter.to_i)
     elsif filter
       conditions.merge!(:feeling => filter)
     end
-    Comment.recent.all(:conditions => conditions)
+    Comment.all(:conditions => conditions)
   end
 
   def image_path

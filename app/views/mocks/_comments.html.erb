@@ -1,14 +1,8 @@
-<% if params[:feedback_filter] %>
-  <p class="unread_notice">
-    Displaying only unread comments.
-    <%= link_to "See All Comments", mock_url(@mock) %>
-  </p>
-<% end %>
 <ul id="comments_list">
   <%
     @mock.filtered_comments(params[:feedback_filter], viewer).each do |comment| 
   %>
-    <li class="<%= comment.feeling %> <%= comment.fresh?(@last_viewed_at) ? "expanded" : "collapsed" %> comment_node"
+    <li class="<%= comment.feeling %> <%= comment.fresh?(@last_viewed_at) ? "" : "read" %> comment_node"
         id="comment_<%= comment.id %>"
         <%= comment.box_attribute %>>
       <div class="arrow"></div>
@@ -28,33 +22,41 @@
       </div>
       <span class="author">
         <%= comment.author.first_name %>
-        <% unless comment.text.blank? %>says:<% end %>
-      </span>
-      <% unless comment.text.blank? %>
-        <div class="text"><%= nl2br(h(comment.text)) %></div>
-      <% end %>
-      <% if comment.children.any? %>
-        <ul id="children_comments_list">
-          <% comment.children.each do |child| %>
-            <%= render :partial => "child_comment", :locals => {:child => child}
-            %>
+        <% unless comment.text.blank? %>
+          <% if comment.fresh?(@last_viewed_at) %>
+            says:          
+          <% else %>
+            says&hellip;
           <% end %>
-        </ul>
-        <div class="reply_container">
-          <span class="fakelink replylink">Reply</span>
-        </div>
-      <% end %>
-      <div class="reply clearfix">
-        <% form_for :comment, Comment.new(:parent_id => comment.id,
-                                          :mock_id => @mock.id),
-                    :url => ajax_create_comments_path,
-                    :html => {:id => "reply_form_#{comment.id}", :method => :post} do |f| %>
-          <%= f.hidden_field :author_id, :value => viewer.id %>
-          <%= f.hidden_field :mock_id %>
-          <%= f.hidden_field :parent_id %>
-          <%= f.text_area :text %>
-          <%= image_submit_tag "buttons/add_feedback.gif" %>
         <% end %>
+      </span>
+      <div class="body">
+        <% unless comment.text.blank? %>
+          <div class="text"><%= nl2br(h(comment.text)) %></div>
+        <% end %>
+        <% if comment.children.any? %>
+          <ul id="children_comments_list">
+            <% comment.children.each do |child| %>
+              <%= render :partial => "child_comment", :locals => {:child => child}
+              %>
+            <% end %>
+          </ul>
+          <div class="reply_container">
+            <span class="fakelink replylink">Reply</span>
+          </div>
+        <% end %>
+        <div class="reply clearfix">
+          <% form_for :comment, Comment.new(:parent_id => comment.id,
+                                            :mock_id => @mock.id),
+                      :url => ajax_create_comments_path,
+                      :html => {:id => "reply_form_#{comment.id}", :method => :post} do |f| %>
+            <%= f.hidden_field :author_id, :value => viewer.id %>
+            <%= f.hidden_field :mock_id %>
+            <%= f.hidden_field :parent_id %>
+            <%= f.text_area :text %>
+            <%= image_submit_tag "buttons/add_feedback.gif" %>
+          <% end %>
+        </div>
       </div>
     </li>
   <% end %>

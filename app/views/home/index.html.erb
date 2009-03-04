@@ -9,8 +9,7 @@
       <ul>
         <% viewer.discussions.each do |discussion| %>
           <li>
-            <a href='<%= mock_url(discussion.mock, "?feedback_filter=new") 
-            %>'>
+            <a href='<%= mock_url(discussion.mock) %>'>
               <span class="reply_count">
                 <%= discussion.reply_count %> 
               </span>

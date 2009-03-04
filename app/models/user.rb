@@ -22,18 +22,6 @@ class User < ActiveRecord::Base
     !self.id.nil?
   end
   
-  def unread_comments_for(mock)
-    last_viewed_at = MockView.last_viewed_at(mock, self)
-    if last_viewed_at
-      comment_ids = self.subscribed_comment_ids(mock)
-      comments = 
-        Comment.about(mock).in_reply_to(comment_ids).since(last_viewed_at)
-      Comment.find(comments.map(&:parent_id))
-    else
-      Comment.about(mock)
-    end
-  end
-
   # Returns the set of comments that the user is interested in tracking
   # new replies to.
   def subscribed_comment_ids(mock)
