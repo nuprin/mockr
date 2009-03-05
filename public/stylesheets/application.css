@@ -119,7 +119,9 @@ p.unread_notice a:hover {
   padding: 5px 0 4px;
 }
 #comments_list {
+  color: #eee;
   font-size: 12px;
+  line-height: 15px;
   height: 400px;
   overflow: auto;
 }
