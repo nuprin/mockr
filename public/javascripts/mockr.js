@@ -284,6 +284,14 @@ var mockr = function() {
       $("#mock").height(user.browser.height())
     }
     
+    function expandAll() {
+      $("#comments_list > li").removeClass("read");
+    }
+    
+    function collapseAll() {
+      $("#comments_list > li").addClass("read");      
+    }
+
     function scrollToElem(elem) {
       boxTop = parseInt(elem.style.top);
       mockTop = parseInt($('#mock').height() / 2);
@@ -333,7 +341,9 @@ var mockr = function() {
         prevMock:         prevMock,
         nextMock:         nextMock,
         reply:            reply,
-        undoReply:        undoReply
+        undoReply:        undoReply,
+        expandAll:        expandAll,
+        collapseAll:      collapseAll
     };
 }();
 

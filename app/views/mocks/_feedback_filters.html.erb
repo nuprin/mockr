@@ -7,28 +7,9 @@
       title="<%= pluralize(@mock.sad_count, "sad reaction") %>"><%=
       @mock.sad_count %></li>
   </ul>
-  <h3>Feedback
-    <% if @mock.comments.any? %>
-      from
-      <select id="feedback_filter" name="feedback_filter">
-        <option>All (<%= @mock.comments.size %>)</option>
-        <% if @mock.happy_count > 0 && @mock.sad_count > 0 %>
-          <option disabled="disabled">----</option>
-          <% ["happy", "sad"].each do |feeling| %>
-            <option value="<%= feeling %>"<%= ' selected="selected"' if feeling == params[:feedback_filter] %>>
-              <%= feeling.capitalize %> (<%= @mock.send(feeling + "_count") %>)
-            </option>
-          <% end %>
-        <% end %>
-        <% if @mock.author_feedback.size > 1 %>
-          <option disabled="disabled">----</option>
-          <% @mock.author_feedback.each do |author, count| %>
-            <option value="<%= author.id %>"<%= ' selected="selected"' if author.id == params[:feedback_filter].to_i %>>
-              <%= author.name %> (<%= count %>)
-            </option>
-          <% end %>
-        <% end %>
-      </select>
-    <% end %>
+  <h3>
+    <%= link_to_function "Expand All", "mockr.expandAll()" %>
+    -
+    <%= link_to_function "Collapse All", "mockr.collapseAll()" %>
   </h3>
 </div>
