@@ -180,7 +180,7 @@ var mockr = function() {
             var comment = $(text).hide();
             var ul = commentNode.find("#children_comments_list");
             if (ul.length == 0) {
-              commentNode.find(">*:last").
+              commentNode.find(".reply_container").
                 before("<ul id='children_comments_list'></ul>");
             }
             commentNode.find("#children_comments_list").append(comment);

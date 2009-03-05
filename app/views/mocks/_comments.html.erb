@@ -7,9 +7,6 @@
         <%= comment.box_attribute %>>
       <div class="arrow"></div>
       <div class="parent_meta">
-        <% if comment.children.empty? %>
-          <span class="fakelink replylink">Reply</span> - 
-        <% end %>
         <% if comment.author_id == viewer.id %>
           <%= link_to "Delete", comment_path(comment), :method => :delete,
             :confirm =>
@@ -37,10 +34,10 @@
               %>
             <% end %>
           </ul>
-          <div class="reply_container">
-            <span class="fakelink replylink">Reply</span>
-          </div>
         <% end %>
+        <div class="reply_container">
+          <span class="fakelink replylink">Reply</span>
+        </div>
         <div class="reply clearfix">
           <% form_for :comment, Comment.new(:parent_id => comment.id,
                                             :mock_id => @mock.id),
