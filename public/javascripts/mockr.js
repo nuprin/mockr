@@ -276,9 +276,6 @@ var mockr = function() {
       $("#comments_list>li").click(function(){
         highlightComment($(this));
       });
-      $("#comments_list .read").click(function() {
-        $(this).find(".body").show();
-      })
     }
     
     function adjustHeights() {

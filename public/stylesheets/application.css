@@ -28,7 +28,10 @@ p.unread_notice a:hover {
 }
 .read .body {
   display: none;
-} 
+}
+.read.highlighted .body {
+  display: block;
+}
 .fullscreen #mock,
 .fullscreen #sidebar {
   left: -400px;
