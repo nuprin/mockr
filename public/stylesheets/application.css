@@ -365,16 +365,21 @@ p.unread_notice a:hover {
   left: 0;
   width: 400px;
 }
-#stats_list {
-  float: right;
+#feedback_header ul {
   font-size: 12px;
   font-weight: normal;
 }
-#stats_list li {
-  background-position: right 50%;
+#feedback_header li {
+  background-position: left 50%;
   background-repeat: no-repeat;
   float: left;
-  padding: 2px 23px 2px 12px;
+  padding: 2px 12px 2px 23px;
+}
+#feedback_header .filter_links {
+  color: #888;
+  float: right;
+  font-size: 12px;
+  line-height: 17px;
 }
 #userlight {
   background: #99c;
