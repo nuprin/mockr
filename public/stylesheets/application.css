@@ -26,8 +26,19 @@ p.unread_notice a {
 p.unread_notice a:hover {
   background: none;
 }
-.read .body {
+.read .body,
+.single-line,
+.read.highlighted .single-line,
+.read .multi-line {
   display: none;
+}
+.multi-line,
+.read .single-line,
+.highlighted .multi-line {
+  display: inline;
+}
+.single-line .preview {
+  color: #555;
 }
 .read.highlighted .body {
   display: block;

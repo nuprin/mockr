@@ -23,11 +23,7 @@
       <span class="author">
         <%= comment.author.first_name %>
         <% unless comment.text.blank? %>
-          <% if comment.fresh?(@last_viewed_at) %>
-            says:          
-          <% else %>
-            says&hellip;
-          <% end %>
+          says<span class="multi-line">:</span><span class="single-line">, <span class="preview">&ldquo;<%= comment.text.first(15)%>&rdquo;</span></span>
         <% end %>
       </span>
       <div class="body">
