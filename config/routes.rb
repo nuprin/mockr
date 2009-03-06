@@ -1,8 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :mocks
+  map.resource  :session
   map.resources :users
-  map.resources :comments,
-    :collection => {:ajax_create => :post}
+  map.resources :comments, :collection => {:ajax_create => :post}
 
   map.home '', :controller => 'home', :actions => 'index'
 

@@ -1,0 +1,14 @@
+<%= stylesheet_link_tag "sessions/new" %>
+
+<h1>Hi!</h1>
+<h2>My name is</h2>
+
+<% form_for :session do |f| %>
+  <ul>
+    <% User.all.each do |u| %>
+      <li><%= u.name %></li>
+    <% end %>
+  </ul>
+
+  <%= f.submit "Start Mocking" %>
+<% end %>

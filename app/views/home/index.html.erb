@@ -1,74 +1,72 @@
-<div id="content">
-  <div id="logo">
-    <%= link_to image_tag('logo.gif'), '/Mockr'  %>
-  </div>
+<div id="logo">
+  <%= link_to image_tag('logo.gif'), '/Mockr'  %>
+</div>
 
-  <% if viewer.real? && viewer.discussions.any? %>
-    <div id="discussions">
-      <h2>DISCUSSIONS</h2>
-      <ul>
-        <% viewer.discussions.each do |discussion| %>
-          <li>
-            <a href='<%= mock_url(discussion.mock) %>'>
-              <span class="reply_count">
-                <%= discussion.reply_count %> 
-              </span>
-              <span class="time">
-              <%= 
-                distance_of_time_in_words_to_now(discussion.last_replied_at)
-              %> ago
-              </span>
-              <%= discussion.mock.title %>
-            </a>
-          </li>
-        <% end %>
-      </ul>
-    </div>
+<% if viewer.real? && viewer.discussions.any? %>
+  <div id="discussions">
+    <h2>DISCUSSIONS</h2>
+    <ul>
+      <% viewer.discussions.each do |discussion| %>
+        <li>
+          <a href='<%= mock_url(discussion.mock) %>'>
+            <span class="reply_count">
+              <%= discussion.reply_count %> 
+            </span>
+            <span class="time">
+            <%= 
+              distance_of_time_in_words_to_now(discussion.last_replied_at)
+            %> ago
+            </span>
+            <%= discussion.mock.title %>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div id="active_mocks">
+  <h2>ACTIVE MOCKS</h2>
+  <% Mock.recently_commented_mocks.in_groups_of(3) do |row| %>
+    <ul class="clearfix">
+      <% row.each do |mock, comment| %>
+        <li<%= ' class="fresh"' if mock.fresh?(viewer) %>>
+          <div class="preview_container">
+            <%= link_to image_tag(mock.image_path), mock_url(mock) %>
+          </div>
+          <div class="text">
+            <%= link_to mock.title, mock_url(mock) %>
+            <div class="meta">
+              by <%= comment.author.first_name %> -
+              <%= distance_of_time_in_words_to_now comment.created_at %> ago
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
   <% end %>
+</div>
 
-  <div id="active_mocks">
-    <h2>ACTIVE MOCKS</h2>
-    <% Mock.recently_commented_mocks.in_groups_of(3) do |row| %>
-      <ul class="clearfix">
-        <% row.each do |mock, comment| %>
-          <li<%= ' class="fresh"' if mock.fresh?(viewer) %>>
-            <div class="preview_container">
-              <%= link_to image_tag(mock.image_path), mock_url(mock) %>
-            </div>
-            <div class="text">
-              <%= link_to mock.title, mock_url(mock) %>
-              <div class="meta">
-                by <%= comment.author.first_name %> -
-                <%= distance_of_time_in_words_to_now comment.created_at %> ago
-              </div>
-            </div>
+<h2>ALL FEATURES</h2>
+<div class="clearfix" id="features">
+  <% Mock.folders.in_groups_of((Mock.folders.size / 3.0).ceil).
+    each do |col| %>
+    <ul class="folders">
+      <% col.each do |(folder, subfolders)| %>
+        <% if folder %>
+          <li>
+            <strong><%= link_to folder, "/#{URI.escape(folder)}" %></strong>
+            <ul>
+              <% subfolders.each do |subfolder| %>
+                <li>
+                  <%= link_to subfolder,
+                              "/#{URI.escape(folder)}/#{subfolder}" %>
+                </li>
+              <% end %>
+            </ul>
           </li>
         <% end %>
-      </ul>
-    <% end %>
-  </div>
-
-  <h2>ALL FEATURES</h2>
-  <div class="clearfix" id="features">
-    <% Mock.folders.in_groups_of((Mock.folders.size / 3.0).ceil).
-      each do |col| %>
-      <ul class="folders">
-        <% col.each do |(folder, subfolders)| %>
-          <% if folder %>
-            <li>
-              <strong><%= link_to folder, "/#{URI.escape(folder)}" %></strong>
-              <ul>
-                <% subfolders.each do |subfolder| %>
-                  <li>
-                    <%= link_to subfolder,
-                                "/#{URI.escape(folder)}/#{subfolder}" %>
-                  </li>
-                <% end %>
-              </ul>
-            </li>
-          <% end %>
-        <% end %>
-      </ul>
-    <% end %>
-  </div>
+      <% end %>
+    </ul>
+  <% end %>
 </div>
