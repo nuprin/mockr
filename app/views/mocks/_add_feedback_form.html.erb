@@ -25,16 +25,7 @@
             "$('#advanced_feelings').slideToggle();", :tabindex => -1 %></li>
         <% end %>
       </ul>
-      <% if viewer.real? %>
-        <%= f.hidden_field :author_id, :value => session[:user_id] %>
-      <% else %>
-        <select id="comment_author_id" name="comment[author_id]">
-          <option>I am...</option>
-          <% User.find(:all).sort_by(&:name).each do |user| %>
-            <option value="<%= user.id %>"><%= user.name %></option>
-          <% end %>
-        </select>
-      <% end %>
+      <%= f.hidden_field :author_id, :value => session[:user_id] %>
       <%= image_submit_tag("buttons/add_feedback.gif") %>
     </div>
     <div class="clearfix">
