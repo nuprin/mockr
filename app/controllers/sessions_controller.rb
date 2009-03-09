@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
   layout "home"
+
+  skip_before_filter :require_authentication
+
   def new; end
   
   def create
