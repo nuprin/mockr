@@ -10,6 +10,14 @@ class User < ActiveRecord::Base
     {:conditions => ["name LIKE '%s%%'", first_name]}
   }
 
+  def self.active
+    self.all
+  end
+
+  def self.sorted
+    self.active.sort_by(&:name)
+  end
+
   def first_name
     name.split.first
   end

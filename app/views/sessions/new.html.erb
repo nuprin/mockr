@@ -1,14 +1,19 @@
 <%= stylesheet_link_tag "sessions/new" %>
 
 <h1>Hi!</h1>
-<h2>My name is</h2>
+<h2>MY NAME IS</h2>
 
-<% form_for :session do |f| %>
-  <ul>
-    <% User.all.each do |u| %>
-      <li><%= u.name %></li>
+<% form_for :session, :url => session_path do |f| %>
+  <%= f.hidden_field :redirect_url, :value => params[:redirect_url] %>
+  <ul class="clearfix" id="name_list">
+    <% User.sorted.each do |u| %>
+      <li>
+        <%= f.radio_button :user_id, u.id %>
+        <%= f.label "user_id_#{u.id}", u.name %>
+      </li>
     <% end %>
   </ul>
-
-  <%= f.submit "Start Mocking" %>
+  <div id="session_submit_container">
+    <%= f.submit "Start Mocking" %>
+  </div>
 <% end %>

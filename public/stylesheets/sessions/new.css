@@ -1,3 +1,28 @@
 body {
   color: white;
 }
+h1 {
+  font-size: 48px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+#name_list {
+  margin: 2em 0;
+  text-align: left;
+}
+#name_list li {
+  float: left;
+  font-size: 12px;
+  padding-bottom: 12px;
+  width: 150px;
+}
+#name_list input {
+  margin-right: 2px;
+  vertical-align: middle;
+}
+#session_submit_container {
+  text-align: right;
+}
+#session_submit {
+  font-size: 20px;
+}
