@@ -20,12 +20,13 @@
       <span class="author">
         <%= comment.author.first_name %>
         <% unless comment.text.blank? %>
-          says<span class="multi-line">:</span><span class="single-line">, <span class="preview">&ldquo;<%= comment.text.first(15)%>&rdquo;</span></span>
+          says<span class="multi-line">:</span><span class="single-line">, <span class="preview">&ldquo;<%= strip_tags(comment.text).first(30)
+          %>&rdquo;</span></span>
         <% end %>
       </span>
       <div class="body">
         <% unless comment.text.blank? %>
-          <div class="text"><%= nl2br(h(comment.text)) %></div>
+          <div class="text"><%= format_text(comment.text) %></div>
         <% end %>
         <% if comment.children.any? %>
           <ul id="children_comments_list">
