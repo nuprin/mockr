@@ -76,4 +76,17 @@ class Comment < ActiveRecord::Base
       self.created_at > mock_viewed_at
     end
   end
+  
+  def siblings
+    self.parent_id ? (self.parent.children - [self]) : []
+  end
+
+  def subscriber_emails
+    if self.parent_id
+      [self.parent + self.siblings].map(&:author).uniq.map(&:email)
+    else
+      # Until we have an uplaod flow, assume Chris is the author of all mocks.
+      "chris@causes.com"
+    end
+  end
 end

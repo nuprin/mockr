@@ -1,0 +1,11 @@
+<p><%= @comment.author.name %> says:</p>
+
+<p>
+&ldquo;
+<%= @comment.text %>
+&rdquo;
+</p>
+
+<p>
+<%= link_to "Reply to #{@comment.author.name}", mock_url(@comment.mock) %>
+</p>
