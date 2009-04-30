@@ -87,7 +87,7 @@ class Comment < ActiveRecord::Base
       ([self.parent] + self.siblings).map(&:author).uniq.map(&:email)
     else
       # Until we have an uplaod flow, assume Chris is the author of all mocks.
-      "chris@causes.com"
+      ["chris@causes.com"]
     end
   end
 end
