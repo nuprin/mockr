@@ -72,7 +72,7 @@ p.unread_notice a:hover {
   padding: 0 8px;
 }
 .module {
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid #222;
   padding: 8px 0;
 }
 #add_feedback_form {
@@ -139,7 +139,7 @@ p.unread_notice a:hover {
 #comments_list>li {
   background-position: 8px 9px;
   background-repeat: no-repeat;
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid #222;
   padding: 12px 10px 12px 32px;
 }
 #comments_list .arrow {
