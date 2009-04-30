@@ -7,7 +7,7 @@ class Notifier < ActionMailer::Base
     from REPLY_TO
     reply_to REPLY_TO
     subject "#{comment.mock.title}"
-    recipients comment.subscriber_emails
+    recipients comment.subscriber_emails - [comment.author.email]
     content_type "text/html"
     body :comment => comment
   end  
