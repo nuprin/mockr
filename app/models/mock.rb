@@ -29,6 +29,7 @@ class Mock < ActiveRecord::Base
   end
   
   def self.for(path)
+    full_path = "#{MOCK_PATH}/#{path}"
     unless File.exist?(full_path)
       raise MockDoesNotExist.new(full_path)
     end
