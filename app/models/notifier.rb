@@ -18,11 +18,11 @@ class Notifier < ActionMailer::Base
     reply_to REPLY_TO
     subject "#{mock.title}"
     recipients recipients
-    content_type "text/html"
+    # content_type "text/html"
     attachment :body => File.read(mock.full_path),
                :content_type => "image/png"
     body :mock => mock
-    # part :body => render_message("new_mock", :mock => mock),
-    #      :content_type => "text/html"
+    part :body => render_message("new_mock", :mock => mock),
+         :content_type => "text/html"
   end
 end
