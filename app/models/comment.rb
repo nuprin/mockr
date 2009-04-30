@@ -41,6 +41,7 @@ class Comment < ActiveRecord::Base
       discussion.last_replied_at = comment.created_at
       discussion.save!
     end
+    Notifier.deliver_new_comment(comment)
   end
 
   def box_attribute
@@ -83,7 +84,7 @@ class Comment < ActiveRecord::Base
 
   def subscriber_emails
     if self.parent_id
-      [self.parent + self.siblings].map(&:author).uniq.map(&:email)
+      ([self.parent] + self.siblings).map(&:author).uniq.map(&:email)
     else
       # Until we have an uplaod flow, assume Chris is the author of all mocks.
       "chris@causes.com"

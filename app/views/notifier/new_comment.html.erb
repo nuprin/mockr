@@ -7,5 +7,6 @@
 </p>
 
 <p>
-<%= link_to "Reply to #{@comment.author.name}", mock_url(@comment.mock) %>
+<%= link_to "Reply to #{@comment.author.first_name}",
+  "http://mockr/#{@comment.mock.path}" %>
 </p>
