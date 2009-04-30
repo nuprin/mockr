@@ -41,7 +41,9 @@ class Comment < ActiveRecord::Base
       discussion.last_replied_at = comment.created_at
       discussion.save!
     end
-    Notifier.deliver_new_comment(comment)
+    if comment.recipient_emails.any?
+      Notifier.deliver_new_comment(comment)
+    end
   end
 
   def box_attribute
@@ -76,6 +78,10 @@ class Comment < ActiveRecord::Base
     else
       self.created_at > mock_viewed_at
     end
+  end
+
+  def recipient_emails
+    self.subscriber_emails - [self.author.email]
   end
   
   def siblings
