@@ -19,5 +19,8 @@
   <h2>
     <span class="date"><%= @mock.created_at.strftime("%b %e") %></span>
     <%= @mock.title %>
+    <% if viewer.creator?(@mock) %>
+      <%= link_to "edit", edit_mock_path(@mock) %>
+    <% end %>
   </h2>
 </div>

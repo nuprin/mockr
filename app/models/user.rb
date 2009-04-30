@@ -23,6 +23,10 @@ class User < ActiveRecord::Base
     self.awards.map(&:feeling)
   end
 
+  def creator?(mock)
+    self.name.starts_with?("Chris")
+  end
+
   def real?
     !self.id.nil?
   end

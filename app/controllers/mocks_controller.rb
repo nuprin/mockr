@@ -16,4 +16,13 @@ class MocksController < ApplicationController
     render :text => "Mock does not exist: #{boom.path}"
   end
 
+  def edit
+    @mock = Mock.find(params[:id])
+  end
+  
+  def update
+    @mock = Mock.find(params[:id])
+    @mock.update_attributes(params[:mock])
+    redirect_to mock_url(@mock)
+  end
 end
