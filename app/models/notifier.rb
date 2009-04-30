@@ -21,7 +21,7 @@ class Notifier < ActionMailer::Base
     # content_type "text/html"
     attachment :body => File.read(mock.full_path),
                :content_type => "image/png"
-    body :mock => mock
+    # body :mock => mock
     part :body => render_message("new_mock", :mock => mock),
          :content_type => "text/html"
   end
