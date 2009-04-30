@@ -1,5 +1,5 @@
-<%= @mock.description %>
+<p><%= @mock.description %></p>
 
-<%= link_to "View Mock", "http://mockr/#{@mock.path}" %>
+<p><%= link_to "View Mock", "http://mockr/#{@mock.path}" %></p>
 
-<%= image_tag("http://mockr/#{@mock.path}") %>
+<%= image_tag("http://mockr/images/mocks/#{@mock.path}") %>
