@@ -4,6 +4,7 @@ class Notifier < ActionMailer::Base
   REPLY_TO = "Mockr <do-not-reply@causes.com>"
 
   def new_comment(comment)
+    from REPLY_TO
     reply_to REPLY_TO
     subject "#{comment.mock.title}"
     recipients comment.subscriber_emails
@@ -12,6 +13,7 @@ class Notifier < ActionMailer::Base
   end  
   
   def new_mock(mock, recipients = nil)
+    from REPLY_TO
     recipients ||= "ui@causes.com"
     reply_to REPLY_TO
     subject "#{mock.title}"
