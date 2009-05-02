@@ -5,6 +5,5 @@
 </p>
 
 <p>
-<%= link_to "Reply to #{@comment.author.first_name}",
-  "http://mockr/#{@comment.mock.path}" %>
+<%= link_to "Reply to #{@comment.author.first_name}", @comment.mock.url %>
 </p>

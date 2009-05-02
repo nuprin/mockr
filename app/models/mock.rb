@@ -28,6 +28,16 @@ class Mock < ActiveRecord::Base
     "#{MOCK_PATH}/#{self.path}"
   end
   
+  # url and image_url are hacks until I can figure out how to get normal
+  # routes working in rich text emails.
+  def url
+    "http://mockr/#{URI.encode(self.path)}"
+  end
+
+  def image_url
+    "http://mockr/images/mocks/#{URI.encode(self.path)}"
+  end
+
   def self.for(path)
     full_path = "#{MOCK_PATH}/#{path}"
     unless File.exist?(full_path)
