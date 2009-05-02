@@ -23,6 +23,7 @@ class MocksController < ApplicationController
   def update
     @mock = Mock.find(params[:id])
     @mock.update_attributes(params[:mock])
+    Notifier.deliver_new_mock(@mock)
     redirect_to mock_url(@mock)
   end
 end
