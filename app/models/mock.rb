@@ -186,4 +186,9 @@ class Mock < ActiveRecord::Base
       author.name
     end
   end
+  
+  def feature
+    dirs = self.path.split("/")
+    dirs.first(dirs.length - 1).join(" ")
+  end
 end
