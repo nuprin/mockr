@@ -6,9 +6,9 @@
 
 <p>
 <%= link_to "Reply to #{@comment.author.first_name}", @comment.mock.url %>
-----
 </p>
 <% if @comment.parent_id && @comment.siblings.any? %>
+  ----
   <br />
   <% @comment.siblings.sort_by(&:created_at).reverse.each do |c| %>
     <p>
