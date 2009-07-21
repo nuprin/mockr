@@ -22,13 +22,13 @@ jQuery.fn.shortkeys = jQuery.fn.keys = function (obj, settings) {
 		for(i in this.keys) {
 			var quickArr = new Array();
 			for(j in this.keys[i]) {
-				quickArr.push(this.convertToNumbers(this.keys[i][j].toUpperCase()));
+				quickArr.push(this.convertToNumbers(j.toUpperCase()));
 			}
 			quickArr.sort();
 			this.keys[i] = quickArr;
 		}
 	};	
-	this.convertToNumbers = function (inp) {
+	this.convertToNumbers = function(inp) {
 		if (this.wackyKeys[inp] != undefined) {
 			return this.wackyKeys[inp];
 		}
@@ -38,7 +38,7 @@ jQuery.fn.shortkeys = jQuery.fn.keys = function (obj, settings) {
 		this.keysDown.push(keyCode);
 		this.keysDown.sort();
 	};
-	this.keyRemove = function (keyCode) {
+	this.keyRemove = function(keyCode) {
 		for(i in this.keysDown) {
 			if(this.keysDown[i] == keyCode) {
 				this.keysDown.splice(i,1);
@@ -46,7 +46,7 @@ jQuery.fn.shortkeys = jQuery.fn.keys = function (obj, settings) {
 		};	
 		this.keysDown.sort();	
 	};		
-	this.keyTest = function (i) {
+	this.keyTest = function(i) {
 		if (this.keys[i].length != this.keysDown.length) return false;
 		for(j in this.keys[i]) {
 			if(this.keys[i][j] != this.keysDown[j]) {
@@ -55,10 +55,10 @@ jQuery.fn.shortkeys = jQuery.fn.keys = function (obj, settings) {
 		}	
 		return true;
 	};
-	this.keyRemoveAll = function () {
+	this.keyRemoveAll = function() {
 		this.keysDown = new Array();	
 	};
-	this.focused = function (bool) {
+	this.focused = function(bool) {
 		this.onFormElement = bool;
 	}	
 	$(document).keydown(function(e) {
@@ -77,14 +77,14 @@ jQuery.fn.shortkeys = jQuery.fn.keys = function (obj, settings) {
 		el.keyRemove(e.keyCode);
 	});	
 	for(x in this.formElements) {
-		$(this.formElements[x]).focus( function () {
+		$(this.formElements[x]).focus(function () {
 			el.focused(true);
 		});
-		$(this.formElements[x]).blur( function () {
+		$(this.formElements[x]).blur(function () {
 			el.focused(false);
 		});
 	}	
-	$(document).focus( function () {
+	$(document).focus(function () {
 		el.keyRemoveAll();
 	});
 
