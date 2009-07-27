@@ -16,6 +16,13 @@ class MocksController < ApplicationController
     render :text => "Mock does not exist: #{boom.path}"
   end
 
+  def index
+    @mocks = Mock.all(:order => "id desc")
+    respond_to do |format|
+      format.atom
+    end
+  end
+
   def edit
     @mock = Mock.find(params[:id])
   end
