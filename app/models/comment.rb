@@ -41,9 +41,9 @@ class Comment < ActiveRecord::Base
       discussion.last_replied_at = comment.created_at
       discussion.save!
     end
-    if comment.recipient_emails.any?
-      Notifier.deliver_new_comment(comment)
-    end
+    # if comment.recipient_emails.any?
+    #   Notifier.deliver_new_comment(comment)
+    # end
   end
 
   def box_attribute
