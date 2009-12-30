@@ -13,7 +13,7 @@
   <% @comment.siblings.sort_by(&:created_at).reverse.each do |c| %>
     <p>
       <%= distance_of_time_in_words(c.parent.created_at, c.created_at) %> 
-      before, <%= c.author.name %> said:<br />
+      after, <%= c.author.name %> said:<br />
       &ldquo;<%= c.text %>&rdquo;
     </p>
   <% end %>
