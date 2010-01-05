@@ -365,6 +365,13 @@ p.unread_notice a:hover {
   left: 0;
   width: 400px;
 }
+#click_tooltip {
+  background: white;
+  left: 24px;
+  position: absolute;
+  top: 5px;
+  width: 120px;
+}
 #feedback_header ul {
   font-size: 12px;
   font-weight: normal;

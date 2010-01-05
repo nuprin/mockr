@@ -82,8 +82,9 @@ var mockr = function() {
             });
         }
         function stop(){
-            showSidebar();
             startCommenting();
+            $("<div id='click_tooltip'>" +
+              "Click to comment</div>").appendTo("#show_sidebar");
             var o = {
                 x : x.start < x.drag ? x.start : x.drag,
                 y : y.start < y.drag ? y.start : y.drag,
