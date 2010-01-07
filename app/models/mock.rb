@@ -73,6 +73,10 @@ class Mock < ActiveRecord::Base
     "mocks/#{path}"
   end
 
+  def full_relative_path
+    "public/images/#{self.image_path}"
+  end
+
   def dir
     path.split('/')[0...-1].join('/')
   end
@@ -113,7 +117,9 @@ class Mock < ActiveRecord::Base
   def self.ordered_feature(feature)
     feature_filenames(feature).map do |sibling_path|
       Mock.for(sibling_path)
-    end.sort_by(&:title)
+    end.sort_by do |mock|
+      File.new(mock.full_relative_path).mtime
+    end
   end
 
   def ordered_feature
