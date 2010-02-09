@@ -24,5 +24,7 @@
     <% end %>
   </h2>
 
-  <p><%= link_to "Download Mock", @mock.image_path %></p>
+  <p class="download">
+    <%= link_to "Download Mock", image_path(@mock.image_path) %>
+  </p>
 </div>

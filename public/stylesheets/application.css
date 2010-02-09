@@ -276,6 +276,10 @@ p.unread_notice a:hover {
   font-weight: normal;
   margin-right: 10px;
 }
+#mock_header p.download {
+  margin: 3px 0;
+  text-align: right;
+}
 #nav_list {
   float: right;
   font-size: 12px;
