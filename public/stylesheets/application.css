@@ -269,17 +269,15 @@ p.unread_notice a:hover {
   height: 35px;
   overflow: hidden;
 }
+#mock_header img {
+  float: right;
+  margin: 8px 5px 0 0;
+}
 #mock_header h2 .date {
   color: #999;
-  float: right;
   font-size: 12px;
   font-weight: normal;
-  margin-right: 10px;
-}
-#mock_header p.download {
-  margin: 0;
-  padding-right: 10px;
-  text-align: right;
+  margin-left: 5px;
 }
 #nav_list {
   float: right;

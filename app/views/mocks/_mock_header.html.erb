@@ -17,14 +17,9 @@
   </ul>
 
   <h2>
-    <span class="date"><%= @mock.created_at.strftime("%b %e") %></span>
+    <%= link_to image_tag("email.png"), edit_mock_path(@mock) %>
+    <%= link_to image_tag("download.png"), image_path(@mock.image_path) %>
     <%= @mock.title %>
-    <% if viewer.creator?(@mock) %>
-      <%= link_to "edit", edit_mock_path(@mock) %>
-    <% end %>
+    <span class="date"><%= @mock.created_at.strftime("%b %e") %></span>
   </h2>
-
-  <p class="download">
-    <%= link_to "Download Mock", image_path(@mock.image_path) %>
-  </p>
 </div>
