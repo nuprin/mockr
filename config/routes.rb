@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :mock_lists
+
   map.resources :mocks
   map.resource  :session
   map.resources :users
