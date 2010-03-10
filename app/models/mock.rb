@@ -101,7 +101,7 @@ class Mock < ActiveRecord::Base
   end
 
   def revision
-    /\w+-(\d+)\.(jpg|gif|png)/ =~ filename ? $1.to_i : -1
+    /\D+(\d+)\.(jpg|gif|png)/ =~ filename ? $1.to_i : -1
   end
 
   def self.feature_filenames(feature)
@@ -184,7 +184,7 @@ class Mock < ActiveRecord::Base
   def self.sorted_features
     @sorted_features ||= self.features.sort
   end
-  
+
   def author_feedback
     comments.group_by(&:author).to_a.map do |author, coms|
       [author, coms.size]
@@ -196,5 +196,16 @@ class Mock < ActiveRecord::Base
   def feature
     dirs = self.path.split("/")
     dirs.first(dirs.length - 1).join(" ")
+  end
+  
+  def self.set_all_metadata!
+    self.set_all_versions!
+  end
+  
+  def self.set_all_versions!
+    Mock.all.each do |m|
+      version = m.revision == -1 ? 1 : m.revision
+      m.update_attribute(:version, version)
+    end
   end
 end
