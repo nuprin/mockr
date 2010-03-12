@@ -1,13 +1,4 @@
 <div class="module" id="header">
-  <div>
-    <label for="feature_list">Feature:</label>&nbsp;
-    <select id="feature_list">
-      <option value="">Go to feature...</option>
-      <% Mock.sorted_features.each do |feature| %>
-        <option value="<%= feature %>"<%= ' selected="selected"' if @mock.dir == feature %>><%= feature %></option>
-      <% end %>
-    </select>
-  </div>
   <%= link_to_function image_tag("hide-sidebar.gif"), "mockr.hideSidebar();",
       :class => "hide_link", :title => "Hide Sidebar" %>    
   <h1><%= link_to image_tag("logo-sm.gif"), "/" %></h1>
