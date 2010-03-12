@@ -6,7 +6,7 @@ class CreateMockLists < ActiveRecord::Migration
       t.timestamps
     end
     
-    add_index :mock_lists, :project_id
+    add_index :mock_lists, [:project_id, :title], :unique => true
   end
 
   def self.down
