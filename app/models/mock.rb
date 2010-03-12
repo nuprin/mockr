@@ -101,7 +101,7 @@ class Mock < ActiveRecord::Base
   end
 
   def revision
-    /\D+(\d+)\.(jpg|gif|png)/ =~ filename ? $1.to_i : -1
+    /\D+(\d+)\.(jpg|gif|png)/ =~ self.filename ? $1.to_i : -1
   end
 
   def self.feature_filenames(feature)
@@ -198,8 +198,15 @@ class Mock < ActiveRecord::Base
     dirs.first(dirs.length - 1).join(" ")
   end
   
+  def title_without_revision
+    self.title.gsub(/\s+\d+$/, '')
+  end
+
   def self.set_all_metadata!
     self.set_all_versions!
+    self.set_all_projects!
+    self.set_all_mock_lists!
+    self.set_all_mocks!
   end
   
   def self.set_all_versions!
@@ -208,4 +215,68 @@ class Mock < ActiveRecord::Base
       m.update_attribute(:version, version)
     end
   end
+  
+  def self.set_all_projects!
+    Mock.features.each do |title|
+      Project.create(:title => title)
+    end
+  end
+  
+  def self.set_all_mock_lists!
+    self.set_all_mock_lists_via_subdirectories!
+    self.set_all_mock_lists_via_title!
+  end
+  
+  def self.set_all_mock_lists_via_subdirectories!
+    Mock.folders.each do |project_title, mock_list_titles|
+      project = Project.find_by_title(project_title)
+      mock_list_titles.each do |mock_list_title|
+        begin
+          MockList.create!(:title => mock_list_title, :project_id => project.id)
+        rescue ActiveRecord::StatementInvalid
+          
+        end
+      end
+    end    
+  end
+  
+  def self.set_all_mock_lists_via_title!
+    Mock.all.each do |mock|
+      project = Project.find_by_title(mock.feature)
+      if project
+        begin
+          MockList.create!(:title => mock.title_without_revision,
+                           :project_id => project.id)
+          puts "Created mock list for #{mock.id}!"
+        rescue
+          puts "Couldn't create mock list for #{mock.id}."
+        end
+      else
+        puts "Couldn't find project for #{mock.id}."
+      end
+    end
+  end
+
+  def inferred_project
+    dirs = self.path.split("/")
+    dirs.first
+  end
+
+  def self.set_all_mocks!
+    Mock.all.each do |mock|
+      project = Project.find_by_title(mock.inferred_project)
+      if project
+        ml = MockList.find_by_title_and_project_id mock.title_without_revision, 
+                                                   project.id
+        if !ml
+          alt_title = mock.feature.gsub(/#{mock.inferred_project}\s+/, '')
+          ml = MockList.find_by_title_and_project_id alt_title, 
+                                                     project.id
+        end
+        if ml
+          mock.update_attribute(:mock_list_id, ml.id)
+        end
+      end
+    end
+  end  
 end
