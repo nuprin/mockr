@@ -23,27 +23,3 @@
     </ul>
   <% end %>
 </div>
-
-<h2>ALL FEATURES</h2>
-<div class="clearfix" id="features">
-  <% Mock.folders.in_groups_of((Mock.folders.size / 3.0).ceil).
-    each do |col| %>
-    <ul class="folders">
-      <% col.each do |(folder, subfolders)| %>
-        <% if folder %>
-          <li>
-            <strong><%= link_to folder, "/#{URI.escape(folder)}" %></strong>
-            <ul>
-              <% subfolders.each do |subfolder| %>
-                <li>
-                  <%= link_to subfolder,
-                              "/#{URI.escape(folder)}/#{subfolder}" %>
-                </li>
-              <% end %>
-            </ul>
-          </li>
-        <% end %>
-      <% end %>
-    </ul>
-  <% end %>
-</div>
