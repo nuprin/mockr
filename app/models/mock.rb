@@ -75,9 +75,9 @@ class Mock < ActiveRecord::Base
     "http://#{HOST_AND_PORT}/#{URI.encode(self.path)}"
   end
 
-  # def title
-  #   "#{self.mock_list.title} #{self.version}"
-  # end
+  def title
+    "#{self.mock_list.title} #{self.version}"
+  end
 
   def image_url
     "http://#{HOST_AND_PORT}/images/mocks/#{URI.encode(self.path)}"
@@ -212,7 +212,7 @@ class Mock < ActiveRecord::Base
   def feature
     return nil if self.path.blank?
     dirs = self.path.split("/")
-    dirs.first(dirs.length - 1).join(" ")
+    dirs.first(dirs.length - 1).join(" ").strip
   end
   
   def title_without_revision
@@ -224,8 +224,8 @@ class Mock < ActiveRecord::Base
     self.set_all_projects!
     self.set_all_mock_lists!
     self.set_all_mocks!
-    self.translate_mocks_to_attachments!
     self.i_authored_all_mocks!
+    self.translate_mocks_to_attachments!
     true
   end
   
@@ -285,11 +285,12 @@ class Mock < ActiveRecord::Base
 
   def inferred_project
     dirs = self.path.split("/")
-    dirs.first
+    dirs.select{|dir| !dir.blank?}.first
   end
 
   def self.set_all_mocks!
     Mock.all.each do |mock|
+      puts "Setting mock for #{mock.id}..."
       project = Project.find_by_title(mock.inferred_project)
       if project
         ml = MockList.find_by_title_and_project_id mock.title_without_revision, 
@@ -300,7 +301,10 @@ class Mock < ActiveRecord::Base
                                                      project.id
         end
         if ml
+          puts "Success"
           mock.update_attribute(:mock_list_id, ml.id)
+        else
+          puts "Fail"
         end
       end
     end
@@ -315,6 +319,8 @@ class Mock < ActiveRecord::Base
       rescue Errno::ENOENT, Errno::EISDIR
         puts "Couldn't find mock for #{mock.id}..."
         mock.destroy
+      rescue ActiveRecord::RecordInvalid
+        puts "Mock #{mock.id} still has no mock list..."
       end
     end
   end
