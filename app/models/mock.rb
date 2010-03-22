@@ -41,7 +41,7 @@ class Mock < ActiveRecord::Base
   end
 
   before_validation do |mock|
-    mock.assign_version
+    mock.assign_version if version.nil?
   end
 
   def attach_mock_list_if_necessary!(project_id)
