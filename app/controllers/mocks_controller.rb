@@ -17,7 +17,7 @@ class MocksController < ApplicationController
     end
     begin
       mock.save!
-      redirect_to mock_url(mock)
+      redirect_to mock_path(mock)
     rescue ActiveRecord::RecordInvalid
       render :action => :new
     end
@@ -34,7 +34,7 @@ class MocksController < ApplicationController
     render :layout => "/layouts/mocks/show"
   rescue Mock::MockPathIsDirectory => ex
     @mock = ex.mock
-    redirect_to ex.mock ? mock_url(ex.mock) : '/'
+    redirect_to ex.mock ? mock_path(ex.mock) : '/'
   rescue Mock::MockDoesNotExist => boom
     redirect_to home_url
   end
@@ -54,6 +54,6 @@ class MocksController < ApplicationController
     @mock = Mock.find(params[:id])
     @mock.update_attributes(params[:mock])
     Notifier.deliver_new_mock(@mock)
-    redirect_to mock_url(@mock)
+    redirect_to mock_path(@mock)
   end
 end

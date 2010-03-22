@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
     begin
       @project = Project.new(params[:project])
       @project.save!
-      redirect_to project_url(@project)
+      redirect_to project_path(@project)
     rescue ActiveRecord::RecordInvalid
       render :action => "new"
     end
@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
     if params[:inline].to_i == 1
       render :text => params[:project].values.first
     else
-      redirect_to project_url(project)
+      redirect_to project_path(project)
     end
   end
 

@@ -5,11 +5,11 @@
 <%= render :partial => "/shared/subnav",
            :locals => {
              :header => "Settings",
-             :links => [["Email", email_settings_url]],
+             :links => [["Email", email_settings_path]],
            } %>
 
 <div id="tabbed_content">
-  <% form_for :setting, @setting, :url => setting_url(@setting),
+  <% form_for :setting, @setting, :url => setting_path(@setting),
     :html => {:method => :put} do |f| %>
     <%= f.hidden_field :key %>
     <%= f.label :value, "Deliver email notifications to:" %>

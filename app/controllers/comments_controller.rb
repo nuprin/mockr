@@ -11,9 +11,9 @@ class CommentsController < ApplicationController
       @comment.save!
       @feeling = Award.maybe_grant_award(@comment)
       if @feeling
-        redirect_to mock_url(:id => @comment.mock, :feeling => @feeling)
+        redirect_to mock_path(:id => @comment.mock, :feeling => @feeling)
       else
-        redirect_to mock_url(@comment.mock)
+        redirect_to mock_path(@comment.mock)
       end
     rescue ActiveRecord::RecordInvalid => bang
       flash[:notice] = bang.message
@@ -35,7 +35,7 @@ class CommentsController < ApplicationController
   def destroy
     comment = Comment.find(params[:id])
     comment.destroy
-    redirect_to mock_url(comment.mock)
+    redirect_to mock_path(comment.mock)
   end
 
   def forge_author_if_requested

@@ -60,7 +60,7 @@ class MockListsController < ApplicationController
     if params[:inline].to_i == 1
       render :text => params[:mock_list].values.first
     else
-      redirect_to project_url(@mock_list.project_id)
+      redirect_to project_path(@mock_list.project_id)
     end
   end
 
@@ -71,7 +71,7 @@ class MockListsController < ApplicationController
     @mock_list.destroy
 
     respond_to do |format|
-      format.html { redirect_to(mock_lists_url) }
+      format.html { redirect_to(mock_lists_path) }
       format.xml  { head :ok }
     end
   end

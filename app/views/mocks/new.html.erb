@@ -3,7 +3,7 @@
 <%= stylesheet_link_tag "shared/form" %>
 
 <div class="form_holder debossed">
-  <% form_for :mock, :url => mocks_url, :html => {:multipart => true} do |f| %>
+  <% form_for :mock, :url => mocks_path, :html => {:multipart => true} do |f| %>
     <%= f.hidden_field :path, :value => "" %>
     <%= f.hidden_field :author_id, :value => viewer.id %>
     <div class="field_row">
@@ -28,9 +28,9 @@
     <% end %>
     <div class="submit_bar">
       <% if params[:project_id] %>
-        <%= link_to "Cancel", project_url(params[:project_id]) %>
+        <%= link_to "Cancel", project_path(params[:project_id]) %>
       <% else %>
-        <%= link_to "Cancel", home_url %>
+        <%= link_to "Cancel", home_path %>
       <% end %>
       or <%= f.submit "Create Mock" %>
     </div>
