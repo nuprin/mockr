@@ -13,6 +13,8 @@ class Notifier < ActionMailer::Base
   end  
   
   def new_mock(mock, recipients = nil)
+    host = self.class.default_url_options[:host]
+
     from REPLY_TO
     recipients ||= Setting[:notification_email]
     reply_to REPLY_TO
@@ -21,14 +23,14 @@ class Notifier < ActionMailer::Base
     attachment :body => File.read(mock.image.path),
                :content_type => "image/png",
                :filename => "#{mock.title}.png"
-    part :body => render_message("new_mock", :mock => mock),
+    part :body => render_message("new_mock", :host => host, :mock => mock),
          :content_type => "text/html"
   end
   
   private
   
   def mock_subject(mock)
-    "#{mock.feature}: #{mock.title}"
+    mock.title
   end
   
 end
