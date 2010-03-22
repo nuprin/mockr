@@ -75,9 +75,9 @@ class Mock < ActiveRecord::Base
     "http://#{HOST_AND_PORT}/#{URI.encode(self.path)}"
   end
 
-  def title
-    "#{self.mock_list.title} #{self.version}"
-  end
+  # def title
+  #   "#{self.mock_list.title} #{self.version}"
+  # end
 
   def image_url
     "http://#{HOST_AND_PORT}/images/mocks/#{URI.encode(self.path)}"
