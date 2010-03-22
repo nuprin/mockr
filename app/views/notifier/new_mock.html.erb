@@ -1,5 +1,5 @@
 <p><%= @mock.description %></p>
 
-<p><%= link_to "View Mock", @mock.url %></p>
+<p><%= link_to "View Mock", mock_url(@mock) %></p>
 
-<%= link_to(image_tag(@mock.image_url, :width => '400'), @mock.url) %>
+<%= link_to(image_tag(@mock.image.path, :width => '400'), mock_url(@mock)) %>

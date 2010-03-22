@@ -5,7 +5,7 @@
 </p>
 
 <p>
-<%= link_to "Reply to #{@comment.author.first_name}", @comment.mock.url %>
+<%= link_to "Reply to #{@comment.author.first_name}", mock_url(@comment.mock) %>
 </p>
 <% if @comment.parent_id && @comment.siblings.any? %>
   ----
