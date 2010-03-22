@@ -1,5 +1,4 @@
 class MockView < ActiveRecord::Base
-
   belongs_to :mock
 
   def self.log_view(mock, user)
@@ -25,5 +24,4 @@ class MockView < ActiveRecord::Base
     conditions = {:user_id => author_ids, :mock_id => comment.mock_id}
     self.all(:conditions => conditions)
   end
-
 end
