@@ -1,7 +1,4 @@
 class MocksController < ApplicationController
-
-  after_filter :log_view, :only => :show
-
   def new
   end
 
@@ -31,6 +28,7 @@ class MocksController < ApplicationController
     @last_viewed_at = MockView.last_viewed_at(@mock, viewer) if viewer.real?
     @title = "#{@mock.dir} | #{@mock.title}"
     @sidebar = !cookies[:sidebar] || (cookies[:sidebar].first.to_i == 1)
+    log_view
     render :layout => "/layouts/mocks/show"
   rescue Mock::MockPathIsDirectory => ex
     @mock = ex.mock
@@ -40,7 +38,7 @@ class MocksController < ApplicationController
   end
 
   def index
-    @mocks = Mock.all(:order => "id desc")
+    @mocks = Mock.recent.all
     respond_to do |format|
       format.atom
     end
