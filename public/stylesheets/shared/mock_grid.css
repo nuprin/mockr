@@ -8,10 +8,9 @@
   margin: 0 auto;
 }
 .mock_grid .fresh .text {
-  background-image: url(../images/dot.gif);
-  background-position: 0 3px;
+  background-image: url(../../images/dot.gif);
+  background-position: right 4px;
   background-repeat: no-repeat;
-  padding-left: 18px;
 }
 .mock_grid li {
   float: left;
