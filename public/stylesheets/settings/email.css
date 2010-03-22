@@ -1,0 +1,21 @@
+.subnav {
+  background: #333;
+  margin-bottom: 30px;
+  padding: 0 20px;
+}
+.subnav a {
+  font-weight: bold;
+  padding: 12px 20px;
+}
+.subnav h1 {
+  padding: 20px 0 0;
+}
+.subnav .current {
+  background: #2d2d2d;
+}
+.field_row {
+  margin-top: 5px;
+}
+#tabbed_content {
+  margin: 0 20px;
+}

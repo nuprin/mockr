@@ -2,18 +2,41 @@ class MocksController < ApplicationController
 
   after_filter :log_view, :only => :show
 
+  def new
+  end
+
+  def create
+    mock = Mock.new(params[:mock])
+    if params[:project]
+      if params[:project][:id].blank?
+        project_id = Project.create_new_untitled_project!.id
+      else
+        project_id = params[:project][:id].to_i
+      end
+      mock.attach_mock_list_if_necessary!(project_id)
+    end
+    begin
+      mock.save!
+      redirect_to mock_url(mock)
+    rescue ActiveRecord::RecordInvalid
+      render :action => :new
+    end
+  end
+
   # TODO [chris]: Don't allow guest viewers to view this page.
   def show
-    path = params[:mock_path]
-    @mock = Mock.for(path)
+    # path = params[:mock_path]
+    # @mock = Mock.for(path)
+    @mock = Mock.find(params[:id])
     @last_viewed_at = MockView.last_viewed_at(@mock, viewer) if viewer.real?
     @title = "#{@mock.dir} | #{@mock.title}"
     @sidebar = !cookies[:sidebar] || (cookies[:sidebar].first.to_i == 1)
+    render :layout => "/layouts/mocks/show"
   rescue Mock::MockPathIsDirectory => ex
     @mock = ex.mock
     redirect_to ex.mock ? mock_url(ex.mock) : '/'
   rescue Mock::MockDoesNotExist => boom
-    render :text => "Mock does not exist: #{boom.path}"
+    redirect_to home_url
   end
 
   def index

@@ -23,6 +23,6 @@ h1 {
 #session_submit_container {
   text-align: right;
 }
-#session_submit {
-  font-size: 20px;
+#user_name {
+  margin-bottom: 30px;
 }

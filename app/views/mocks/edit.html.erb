@@ -1,6 +1,6 @@
-<%= stylesheet_link_tag "mocks/edit" %>
+<%= stylesheet_link_tag "shared/form" %>
 
-<% render :layout => "/layouts/minimal" do %>
+<div class="form_holder debossed">
   <% form_for :mock, @mock, :url => mock_path(@mock),
     :html => {:method => :put} do |f| %>
     <div class="field_row">
@@ -16,4 +16,4 @@
       <%= f.submit "Send Email" %>
     </div>
   <% end %>
-<% end %>
+</div>

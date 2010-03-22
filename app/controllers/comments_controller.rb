@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
       @comment.save!
       @feeling = Award.maybe_grant_award(@comment)
       if @feeling
-        redirect_to mock_url(@comment.mock, "?feeling=#{@feeling}")
+        redirect_to mock_url(:id => @comment.mock, :feeling => @feeling)
       else
         redirect_to mock_url(@comment.mock)
       end

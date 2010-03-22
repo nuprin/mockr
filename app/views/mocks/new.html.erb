@@ -1,0 +1,38 @@
+<% @title = "Add a Mock" %>
+
+<%= stylesheet_link_tag "shared/form" %>
+
+<div class="form_holder debossed">
+  <% form_for :mock, :url => mocks_url, :html => {:multipart => true} do |f| %>
+    <%= f.hidden_field :path, :value => "" %>
+    <%= f.hidden_field :author_id, :value => viewer.id %>
+    <div class="field_row">
+      <%= f.label :image %><br />
+      <%= f.file_field :image %>
+    </div>
+    <div class="field_row">
+      <%= f.label :description %><br />
+      <%= f.text_area :description %>
+    </div>
+    <% if params[:mock_list_id].blank? %>
+      <div class="field_row">
+        <% fields_for :project do |g| %>
+          <%= g.label :id, "Add to Project:" %>
+          <%= g.select :id, Project.form_options,
+            {:selected => params[:project_id].to_i,
+             :disabled => Project::DISABLED_PROJECT_FORM_VALUE} %>
+        <% end %>
+      </div>
+    <% else %>
+      <%= f.hidden_field :mock_list_id, :value => params[:mock_list_id] %>    
+    <% end %>
+    <div class="submit_bar">
+      <% if params[:project_id] %>
+        <%= link_to "Cancel", project_url(params[:project_id]) %>
+      <% else %>
+        <%= link_to "Cancel", home_url %>
+      <% end %>
+      or <%= f.submit "Create Mock" %>
+    </div>
+  <% end %>
+</div>

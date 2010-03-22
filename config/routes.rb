@@ -1,13 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :mock_lists
-
-  map.resources :mocks
-  map.resource  :session
-  map.resources :users
   map.resources :comments, :collection => {:ajax_create => :post}
+  map.resources :mocks
+  map.resources :mock_lists
+  map.resources :projects, :member => {:mock_list_selector => :get}
+  map.resource  :session
+  map.resources :settings, :collection => {:email => :get}
+  map.resources :users
 
   map.home '', :controller => 'home', :actions => 'index'
-
-  map.connect ':mock_path', :controller => 'mocks', :action => 'show',
-                            :mock_path => /.*/
 end

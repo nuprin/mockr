@@ -2,7 +2,23 @@ class Mock < ActiveRecord::Base
 
   MOCK_PATH = "public/images/mocks"
 
+  belongs_to :author, :class_name => "User"
+  belongs_to :mock_list
+
   has_many :comments, :order => "created_at DESC"
+
+  named_scope :recent, lambda {|limit| {:order => "id DESC", :limit => limit}}
+
+  has_attached_file :image,
+    :styles => {
+      :small  => "100x>",    # 100 pixel, width-limited
+      :thumb  => "150x150#", # 150x150 thumbnail
+      :medium => "200x>",    # 200 pixel, width-limited
+    },
+    :url  => "/mocks/:id/:basename-:style.:extension",
+    :path => ":rails_root/public/mocks/:id/:basename-:style.:extension"
+
+  validates_presence_of :author, :image_file_name, :mock_list, :version
 
   class MockDoesNotExist < StandardError
     attr_reader :path
@@ -24,6 +40,31 @@ class Mock < ActiveRecord::Base
     end
   end
 
+  before_validation do |mock|
+    mock.assign_version
+  end
+
+  def attach_mock_list_if_necessary!(project_id)
+    if !self.mock_list_id
+      project = Project.find(project_id)
+      ml = project.mock_lists.create(:title => project.default_mock_list_title)
+      self.mock_list_id = ml.id
+    end
+  end
+
+  def assign_version
+    self.version = self.inferred_version
+  end
+
+  def inferred_version
+    if self.mock_list
+      previous_iterations_count = self.mock_list.mocks.size
+      previous_iterations_count + 1
+    else
+      1
+    end
+  end
+
   def full_path
     "#{MOCK_PATH}/#{self.path}"
   end
@@ -34,20 +75,16 @@ class Mock < ActiveRecord::Base
     "http://#{HOST_AND_PORT}/#{URI.encode(self.path)}"
   end
 
+  def title
+    "#{self.mock_list.title} #{self.version}"
+  end
+
   def image_url
     "http://#{HOST_AND_PORT}/images/mocks/#{URI.encode(self.path)}"
   end
 
   def self.for(path)
     full_path = "#{MOCK_PATH}/#{path}"
-    unless File.exist?(full_path)
-      raise MockDoesNotExist.new(full_path)
-    end
-
-    if File.directory?(full_path)
-      raise MockPathIsDirectory.new(Mock.last_mock_for(path))
-    end
-
     mock = Mock.find_by_path(path)
     if mock.nil?
       clean_filename = path.split('/').last.
@@ -69,14 +106,6 @@ class Mock < ActiveRecord::Base
     Comment.all(:conditions => conditions)
   end
 
-  def image_path
-    "mocks/#{path}"
-  end
-
-  def full_relative_path
-    "public/images/#{self.image_path}"
-  end
-
   def dir
     path.split('/')[0...-1].join('/')
   end
@@ -86,14 +115,17 @@ class Mock < ActiveRecord::Base
   end
 
   def next
-    my_index = ordered_feature.index(self)
-    ordered_feature[my_index + 1]
+    self.class.first(:conditions => {
+      :mock_list_id => self.mock_list_id,
+      :version => self.version + 1
+    })
   end
 
   def prev
-    my_index = ordered_feature.index(self)
-    return nil if my_index == 0
-    ordered_feature[my_index - 1]
+    self.class.first(:conditions => {
+      :mock_list_id => self.mock_list_id,
+      :version => self.version - 1
+    })
   end
 
   def <=>(other)
@@ -112,18 +144,6 @@ class Mock < ActiveRecord::Base
     end.map do |path|
       path.split('/')[3..-1].join('/')
     end
-  end
-
-  def self.ordered_feature(feature)
-    feature_filenames(feature).map do |sibling_path|
-      Mock.for(sibling_path)
-    end.sort_by do |mock|
-      File.new(mock.full_relative_path).mtime
-    end
-  end
-
-  def ordered_feature
-    Mock.ordered_feature(dir)
   end
 
   def happy_count
@@ -161,10 +181,6 @@ class Mock < ActiveRecord::Base
     end.sort_by(&:first)
   end
 
-  def self.last_mock_for(feature)
-    self.ordered_feature(feature).last
-  end
-
   def most_recent_comment
     Comment.about(self).recent.first
   end
@@ -194,6 +210,7 @@ class Mock < ActiveRecord::Base
   end
   
   def feature
+    return nil if self.path.blank?
     dirs = self.path.split("/")
     dirs.first(dirs.length - 1).join(" ")
   end
@@ -202,11 +219,14 @@ class Mock < ActiveRecord::Base
     self.title.gsub(/\s+\d+$/, '')
   end
 
-  def self.set_all_metadata!
+  def self.migrate!
     self.set_all_versions!
     self.set_all_projects!
     self.set_all_mock_lists!
     self.set_all_mocks!
+    self.translate_mocks_to_attachments!
+    self.i_authored_all_mocks!
+    true
   end
   
   def self.set_all_versions!
@@ -215,7 +235,12 @@ class Mock < ActiveRecord::Base
       m.update_attribute(:version, version)
     end
   end
-  
+
+  def self.i_authored_all_mocks!
+    u = User.find_by_name("Chris Chan")
+    self.update_all "author_id = #{u.id}" if u
+  end
+
   def self.set_all_projects!
     Mock.features.each do |title|
       Project.create(:title => title)
@@ -242,6 +267,7 @@ class Mock < ActiveRecord::Base
   
   def self.set_all_mock_lists_via_title!
     Mock.all.each do |mock|
+      next unless mock.feature
       project = Project.find_by_title(mock.feature)
       if project
         begin
@@ -279,4 +305,17 @@ class Mock < ActiveRecord::Base
       end
     end
   end  
+  
+  def self.translate_mocks_to_attachments!
+    Mock.all.each do |mock|
+      puts "Translating mock #{mock.id}..."
+      begin
+        mock.image = File.new(mock.full_path)
+        mock.save!
+      rescue Errno::ENOENT, Errno::EISDIR
+        puts "Couldn't find mock for #{mock.id}..."
+        mock.destroy
+      end
+    end
+  end
 end

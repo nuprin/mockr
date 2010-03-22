@@ -1,24 +1,49 @@
-<div id="logo">
-  <%= link_to image_tag('logo.gif'), '/Mockr'  %>
+<% @title = "Home" %>
+
+<%= stylesheet_link_tag "shared/mock_grid" %>
+<%= stylesheet_link_tag "home" %>
+
+<div id="primary_col">
+  <div id="recent_mocks">
+    <h2>Recent Mocks</h2>
+      <% Mock.recent(18).in_groups_of(3) do |mocks| %>
+        <ul class="mock_grid clearfix">
+          <% mocks.each do |mock| %>
+            <li<%= ' class="fresh"' if mock.fresh?(viewer) %>>
+              <div class="preview_container">
+                <%= link_to image_tag(mock.image.url(:thumb)), mock_url(mock) %>
+              </div>
+              <div class="text">
+                <%= link_to mock.title, mock_url(mock) %>
+                <div class="meta">
+                  by <%= mock.author.first_name %> -
+                  <%= distance_of_time_in_words_to_now mock.created_at %> ago
+                  <br />
+                  in <%= link_to mock.mock_list.project.title,
+                                 project_url(mock.mock_list.project) %>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+  </div>
 </div>
 
-<div id="active_mocks">
-  <h2>ACTIVE MOCKS</h2>
-  <% Mock.recently_commented_mocks.in_groups_of(3) do |row| %>
-    <ul class="clearfix">
-      <% row.each do |mock, comment| %>
-        <li<%= ' class="fresh"' if mock.fresh?(viewer) %>>
-          <div class="preview_container">
-            <%= link_to image_tag(mock.image_path), mock_url(mock) %>
-          </div>
-          <div class="text">
-            <%= link_to mock.title, mock_url(mock) %>
-            <div class="meta">
-              by <%= comment.author.first_name %> -
-              <%= distance_of_time_in_words_to_now comment.created_at %> ago
-            </div>
-          </div>
-        </li>
+<div id="secondary_col">
+  <% if Project.active.any? %>
+    <h2>Active Projects</h2>
+    <ul class="project_list">
+      <% Project.active.each do |project| %>
+        <li><%= link_to project.title, project_url(project) %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <% if Project.all.any? %>
+    <h2>All Projects</h2>
+    <ul class="project_list">
+      <% Project.alphabetical.all.each do |project| %>
+        <li><%= link_to project.title, project_url(project) %></li>
       <% end %>
     </ul>
   <% end %>

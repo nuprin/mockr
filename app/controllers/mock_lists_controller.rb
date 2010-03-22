@@ -54,20 +54,13 @@ class MockListsController < ApplicationController
     end
   end
 
-  # PUT /mock_lists/1
-  # PUT /mock_lists/1.xml
   def update
     @mock_list = MockList.find(params[:id])
-
-    respond_to do |format|
-      if @mock_list.update_attributes(params[:mock_list])
-        flash[:notice] = 'MockList was successfully updated.'
-        format.html { redirect_to(@mock_list) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @mock_list.errors, :status => :unprocessable_entity }
-      end
+    @mock_list.update_attributes(params[:mock_list])
+    if params[:inline].to_i == 1
+      render :text => params[:mock_list].values.first
+    else
+      redirect_to project_url(@mock_list.project_id)
     end
   end
 

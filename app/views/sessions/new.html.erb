@@ -1,19 +1,32 @@
+<%= stylesheet_link_tag "shared/form" %>
 <%= stylesheet_link_tag "sessions/new" %>
 
-<h1>Hi!</h1>
-<h2>MY NAME IS</h2>
+<div class="form_holder debossed">
+  <h1>Hi!</h1>
+  <h2>My name is...</h2>
 
-<% form_for :session, :url => session_path do |f| %>
-  <%= f.hidden_field :redirect_url, :value => params[:redirect_url] %>
-  <ul class="clearfix" id="name_list">
-    <% User.sorted.each do |u| %>
+  <% form_for :session, :url => session_path do |f| %>
+    <%= f.hidden_field :redirect_url, :value => params[:redirect_url] %>
+    <ul class="clearfix" id="name_list">
+      <% User.sorted.each do |u| %>
+        <li>
+          <%= f.radio_button :user_id, u.id %>
+          <%= f.label "user_id_#{u.id}", u.name %>
+        </li>
+      <% end %>
       <li>
-        <%= f.radio_button :user_id, u.id %>
-        <%= f.label "user_id_#{u.id}", u.name %>
+        <%= f.radio_button :user_id, 0 %>
+        <%= f.label "user_id_0", "I'm new here!" %>
       </li>
+    </ul>
+    If you're new, fill in your name below:
+    <% fields_for :user, User.new(:active => 1, :fbuid => 0) do |u| %>
+      <%= u.hidden_field :fbuid %>
+      <%= u.hidden_field :active %>
+      <%= u.text_field :name %>
     <% end %>
-  </ul>
-  <div id="session_submit_container">
-    <%= f.submit "Start Mocking" %>
-  </div>
-<% end %>
+    <div id="session_submit_container">
+      <%= f.submit "Start Mocking" %>
+    </div>
+  <% end %>
+</div>

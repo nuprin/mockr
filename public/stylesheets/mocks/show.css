@@ -1,9 +1,6 @@
-body {
-  background: #282828;
-  position: relative;
-}
-body, textarea {
-  font-size: 11px;
+#sidebar h1,
+#sidebar h2 {
+  margin-bottom: 0;
 }
 .commenting .instructions {
   display: none;
@@ -148,7 +145,7 @@ p.unread_notice a:hover {
   width: 16px;
 }
 #comments_list li[box] .arrow {
-  background-image: url("../images/arrow.gif");
+  background-image: url("../../images/arrow.gif");
   background-position: 5px -2px;
 }
 #comments_list>li.highlighted {
@@ -189,7 +186,7 @@ p.unread_notice a:hover {
   float: right;
 }
 #feedback_header {
-  background-image: url(../images/glass-shadow.gif);
+  background-image: url(../../images/glass-shadow.gif);
   background-repeat: repeat-x;
   border-bottom: 1px solid #333;
   padding: 10px 10px 8px;
@@ -252,7 +249,7 @@ p.unread_notice a:hover {
   margin-left: 400px;
 }
 #mock_header {
-  background-image: url(../images/glass-2.gif);
+  background-image: url(../../images/glass-2.gif);
   background-repeat: repeat-x;
   font-weight: bold;
   line-height: 35px;
@@ -293,7 +290,7 @@ p.unread_notice a:hover {
   padding: 0 10px;
 }
 #nav_list a:hover {
-  background-image: url(../images/glass-2.gif);
+  background-image: url(../../images/glass-2.gif);
 }
 #nav_list a.none {
   color: #999;

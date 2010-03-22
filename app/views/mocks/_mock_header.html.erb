@@ -18,7 +18,7 @@
 
   <h2>
     <%= link_to image_tag("email.png"), edit_mock_path(@mock) %>
-    <%= link_to image_tag("download.png"), image_path(@mock.image_path) %>
+    <%= link_to image_tag("download.png"), image_path(@mock.image.url) %>
     <%= @mock.title %>
     <span class="date"><%= @mock.created_at.strftime("%b %e") %></span>
   </h2>

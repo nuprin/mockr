@@ -3,7 +3,7 @@
     <title><%= @title || '' %> | Mockr</title>
     <link rel="shortcut icon" href="/images/feelings/happy.gif" />
     <%= stylesheet_link_tag "base" %>
-    <%= stylesheet_link_tag "application" %>
+    <%= stylesheet_link_tag "layouts/application" %>
     <%= javascript_include_tag "jquery" %>
     <%= javascript_include_tag "user" %>
     <%= javascript_include_tag "scrollto" %>
@@ -13,6 +13,20 @@
     <%= javascript_include_tag "mockr" %>
   </head>
   <body<%= ' class="fullscreen"' unless @sidebar %>>
-    <%= yield %>
+    <div class="clearfix" id="header">
+      <div class="buttons">
+        <%= link_to image_tag('buttons/upload-mock.png'), new_mock_url %>
+        <%= link_to image_tag('buttons/new-project.png'), new_project_url %>
+      </div>
+      <%= link_to image_tag('logo-new.png'), home_url, :id => "logo" %>
+      <div class="nav">
+        <%= link_to "Home", home_url, :class => "home hoverable" %>
+        <%= link_to "Settings", email_settings_url,
+          :class => "settings hoverable" %>
+      </div>
+    </div>
+    <div id="content">
+      <%= yield %>
+    </div>
   </body>
 </html>
