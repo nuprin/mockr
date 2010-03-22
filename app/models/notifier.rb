@@ -31,6 +31,5 @@ class Notifier < ActionMailer::Base
   
   def mock_subject(mock)
     mock.title
-  end
-  
+  end  
 end
