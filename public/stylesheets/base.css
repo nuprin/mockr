@@ -22,7 +22,7 @@ body, form, h1, h2 {
 body, textarea {
   font-family: Helvetica, Arial, sans-serif;
 }
-input[type=file],
+
 input[type=text],
 textarea {
   background: #666;
@@ -32,6 +32,9 @@ textarea {
 input[type=text],
 textarea {
   padding: 5px;
+}
+input[type=file] {
+  color: #fff;
 }
 body {
   background: #222;
