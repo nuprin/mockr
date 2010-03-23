@@ -2,14 +2,14 @@
   <ul id="nav_list">
     <li>
       <% if @mock.prev %>
-        <%= link_to "prev", mock_url(@mock.prev), :id => "prev_link" %>
+        <%= link_to "prev", mock_path(@mock.prev), :id => "prev_link" %>
       <% else %>
         <%= link_to_function "prev", :class => "none" %>
       <% end %>
     </li>
     <li class="next">
       <% if @mock.next %>
-        <%= link_to "next", mock_url(@mock.next), :id => "next_link" %>
+        <%= link_to "next", mock_path(@mock.next), :id => "next_link" %>
       <% else %>
         <%= link_to_function "next", "", :class => "none" %>
       <% end %>
