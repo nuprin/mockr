@@ -6,8 +6,9 @@
 <div id="primary_col">
   <div id="recent_mocks">
     <h2>Recent Mocks</h2>
-      <% Mock.recent(18).all(:include => {:mock_list => :project}).
-        in_groups_of(3) do |mocks| %>
+      <%
+        Mock.recent(18).with_author_and_project_data.in_groups_of(3) do |mocks|
+      %>
         <ul class="mock_grid clearfix">
           <% mocks.each do |mock| %>
             <li<%= ' class="fresh"' if mock.fresh?(viewer) %>>

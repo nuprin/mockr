@@ -8,7 +8,9 @@ class Mock < ActiveRecord::Base
   has_many :comments, :order => "created_at DESC"
 
   named_scope :recent, lambda {|limit| {:order => "id DESC", :limit => limit}}
-
+  named_scope :with_author_and_project_data,
+              :include => [:author, {:mock_list => :project}]
+  
   has_attached_file :image,
     :styles => {
       :small  => "100x>",    # 100 pixel, width-limited
@@ -148,11 +150,10 @@ class Mock < ActiveRecord::Base
   def fresh?(user)
     if user.real?
       last_viewed_at = MockView.last_viewed_at(self, user)
-      if comment = most_recent_comment
-        return last_viewed_at.nil? || (comment.created_at > last_viewed_at)
-      end
+      self.updated_at > last_viewed_at
+    else
+      false
     end
-    false
   end
 
   def self.features
@@ -169,22 +170,6 @@ class Mock < ActiveRecord::Base
         end.sort
       [dir.gsub(Mock::MOCK_PATH + "/", ""), subdirectories]
     end.sort_by(&:first)
-  end
-
-  def most_recent_comment
-    Comment.about(self).recent.first
-  end
-
-  def self.recently_commented_mocks
-    mock_ids =
-      Comment.recent.all(:select => "distinct mock_id", :limit => 9).
-      map(&:mock_id)
-    mock_ids.map do |mock_id|
-      mock = Mock.find(mock_id)
-      [mock, mock.most_recent_comment]
-    end.sort do |(m1, c1), (m2, c2)|
-      c1.created_at <=> c2.created_at
-    end.reverse
   end
 
   def self.sorted_features
