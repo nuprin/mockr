@@ -20,21 +20,12 @@ class MocksController < ApplicationController
     end
   end
 
-  # TODO [chris]: Don't allow guest viewers to view this page.
   def show
-    # path = params[:mock_path]
-    # @mock = Mock.for(path)
     @mock = Mock.find(params[:id])
     @last_viewed_at = MockView.last_viewed_at(@mock, viewer) if viewer.real?
-    @title = "#{@mock.dir} | #{@mock.title}"
     @sidebar = !cookies[:sidebar] || (cookies[:sidebar].first.to_i == 1)
     log_view
     render :layout => "/layouts/mocks/show"
-  rescue Mock::MockPathIsDirectory => ex
-    @mock = ex.mock
-    redirect_to ex.mock ? mock_path(ex.mock) : '/'
-  rescue Mock::MockDoesNotExist => boom
-    redirect_to home_url
   end
 
   def index
