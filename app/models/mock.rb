@@ -95,4 +95,8 @@ class Mock < ActiveRecord::Base
       author.name
     end
   end
+  
+  def deliver(email)
+    Notifier.deliver_new_mock(self, email)
+  end
 end

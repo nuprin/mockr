@@ -14,6 +14,7 @@ class MocksController < ApplicationController
     end
     begin
       mock.save!
+      mock.deliver(params[:email]) if params[:send_email].to_i == 1
       redirect_to mock_path(mock)
     rescue ActiveRecord::RecordInvalid
       render :action => :new

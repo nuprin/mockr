@@ -1,6 +1,7 @@
 <% @title = "Add a Mock" %>
 
 <%= stylesheet_link_tag "shared/form" %>
+<%= stylesheet_link_tag "mocks/new" %>
 
 <div class="form_holder debossed">
   <% form_for :mock, :url => mocks_path, :html => {:multipart => true} do |f| %>
@@ -26,6 +27,22 @@
     <% else %>
       <%= f.hidden_field :mock_list_id, :value => params[:mock_list_id] %>    
     <% end %>
+
+      <%= check_box_tag :send_email %>
+    <% if Setting[:notification_email] %>
+      Send email to
+      <span id="default_email">
+        <strong><%= Setting[:notification_email] %></strong>      
+        <%= link_to_function "change",
+          "$('#email').show().select(); $('#default_email').hide()" %>
+      </span>
+      <%= text_field_tag :email, Setting[:notification_email],
+        :style => "display: none" %>
+    <% else %>
+      <%= label_tag :send_email, "Send email to" %>
+      <%= text_field_tag :email %>
+    <% end %>
+
     <div class="submit_bar">
       <% if params[:project_id] %>
         <%= link_to "Cancel", project_path(params[:project_id]) %>
