@@ -1,5 +1,5 @@
 class Notifier < ActionMailer::Base
-  include ApplicationHelper
+  helper ApplicationHelper
 
   REPLY_TO = "Mockr <do-not-reply@causes.com>"
 
