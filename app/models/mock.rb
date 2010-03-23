@@ -150,7 +150,7 @@ class Mock < ActiveRecord::Base
   def fresh?(user)
     if user.real?
       last_viewed_at = MockView.last_viewed_at(self, user)
-      self.updated_at > last_viewed_at
+      !last_viewed_at || (self.updated_at > last_viewed_at)
     else
       false
     end
