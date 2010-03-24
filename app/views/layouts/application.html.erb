@@ -13,16 +13,18 @@
     <%= javascript_include_tag "mockr" %>
   </head>
   <body<%= ' class="fullscreen"' unless @sidebar %>>
-    <div class="clearfix" id="header">
-      <div class="buttons">
-        <%= link_to image_tag('buttons/upload-mock.png'), new_mock_path %>
-        <%= link_to image_tag('buttons/new-project.png'), new_project_path %>
-      </div>
-      <%= link_to image_tag('logo-new.png'), home_path, :id => "logo" %>
-      <div class="nav">
-        <%= link_to "Home", home_path, :class => "home hoverable" %>
-        <%= link_to "Settings", email_settings_path,
-          :class => "settings hoverable" %>
+    <div id="header_container">
+      <div class="clearfix" id="header">
+        <div class="buttons">
+          <%= link_to image_tag('buttons/upload-mock.png'), new_mock_path %>
+          <%= link_to image_tag('buttons/new-project.png'), new_project_path %>
+        </div>
+        <%= link_to image_tag('logo-new.png'), home_path, :id => "logo" %>
+        <div class="nav">
+          <%= link_to "Home", home_path, :class => "home hoverable" %>
+          <%= link_to "Settings", email_settings_path,
+            :class => "settings hoverable" %>
+        </div>
       </div>
     </div>
     <div id="content">

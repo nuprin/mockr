@@ -1,7 +1,5 @@
 body {
   background: #2d2d2d;
-  background-repeat: repeat-x;
-  background-image: url(../../images/home_background.png);
   color: #ddd;
 }
 body, textarea {
@@ -14,8 +12,14 @@ body, textarea {
   margin: 0 auto;
   padding: 25px 40px;
 }
+#header_container {
+  background-image: url(../../images/home_background.png);  
+  border-bottom: 1px solid #333;
+  margin-bottom: 20px;
+  padding: 25px 0;
+}
 #header {
-  margin: 25px auto 45px;
+  margin: 0 auto;
 }
 #header a {
   border-bottom: none;
