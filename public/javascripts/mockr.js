@@ -2,7 +2,7 @@ var mockr = function() {
     var mockView;
     var sidebar;
     
-    // highlight    : creates a highlighted section by clicking and draging
+    // .highlight() : creates a highlighted section by clicking and dragging
     // .initialize() : binds user highlight to the page (start,size,stop)
     // .create()    : create a new highlighted section
     // .clear()     : removes all highlighted sections
@@ -17,8 +17,8 @@ var mockr = function() {
           x = {};
           y = {};
           mockView.mousedown(function(event){
-              event.preventDefault();
-              start();
+            event.preventDefault();
+            start();
           });
           mockView.mousemove(size);
           mockView.mouseup(stop);
@@ -27,7 +27,7 @@ var mockr = function() {
             return area;
         }
         function clear(){
-            $('#mock div.highlight').animate({opacity:0},500,null,function(){
+            $('#mock div.highlight').animate({opacity:0}, 500,null,function(){
                 $(this).remove();
             });
             $('#area').remove();
@@ -279,10 +279,14 @@ var mockr = function() {
       });
     }
     
-    function adjustHeights() {
-      height = user.browser.height() - $('#comments_list').offset().top
-      $("#comments_list").height(height)
-      $("#mock").height(user.browser.height())
+    function adjustDimensions() {
+      setTimeout(function() {
+        height = user.browser.height() - $('#header').height() - 1;
+        width = user.browser.width() - $("#sidebar").width();
+        $("#sidebar").height(height);
+        $("#mock").height(height);
+        $("#mock").width(width);
+      }, 10);
     }
     
     function expandAll() {
@@ -290,7 +294,7 @@ var mockr = function() {
     }
     
     function collapseAll() {
-      $("#comments_list > li").addClass("read");      
+      $("#comments_list > li").addClass("read");
     }
 
     function scrollToElem(elem) {
@@ -320,7 +324,7 @@ var mockr = function() {
         sidebar = $('#sidebar');
         
         highlight.initialize();
-        adjustHeights();
+        adjustDimensions();
         initializeFeatureList();
         initializeFeedbackFilter();
         initializeTextareas();
@@ -333,7 +337,7 @@ var mockr = function() {
         initialize:       initialize,
         highlight:        highlight,
         startCommenting:  startCommenting,
-        adjustHeights:    adjustHeights,
+        adjustDimensions:    adjustDimensions,
         hideSidebar:      hideSidebar,
         showSidebar:      showSidebar,
         toggleSidebar:    toggleSidebar,
@@ -350,6 +354,7 @@ var mockr = function() {
 
 var KeyboardShortcuts = {
   setup: function() {
+    console.log("In setup")
     $(document.body).shortkeys({
       "f": function() {
         mockr.toggleSidebar();
@@ -380,6 +385,7 @@ var KeyboardShortcuts = {
 $(function() {
   mockr.initialize();
   KeyboardShortcuts.setup();
+  mockr.adjustDimensions();
 });
 
-$(window).resize(mockr.adjustHeights);
+$(window).resize(mockr.adjustDimensions);

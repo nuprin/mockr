@@ -35,6 +35,7 @@ jQuery.fn.shortkeys = jQuery.fn.keys = function (obj, settings) {
 		return inp.toUpperCase().charCodeAt(0);
 	};	
 	this.keyAdd = function(keyCode) {
+	  console.log("Pushing")
 		this.keysDown.push(keyCode);
 		this.keysDown.sort();
 	};

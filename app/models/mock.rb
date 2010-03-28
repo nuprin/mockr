@@ -42,6 +42,10 @@ class Mock < ActiveRecord::Base
     end
   end
 
+  def project
+    self.mock_list.project
+  end
+  
   def title
     "#{self.mock_list.title} #{self.version}"
   end

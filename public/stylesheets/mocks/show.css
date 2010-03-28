@@ -88,22 +88,28 @@ p.unread_notice a:hover {
 #advanced_feelings {
   text-align: left;
 }
-#advanced_feelings img {
-  float: left;
-}
 #advanced_feelings li {
-  height: 27px;
   width: 66px;
 }
-#advanced_feelings input {
+.feelings_list img {
+  float: left;
+}
+.feelings_list li {
+  height: 27px;
+}
+.feelings_list input {
   float: left;
   margin-right: 9px;
   margin-top: 2px;
 }
 #feelings_input_fields {
+  font-size: 12px;
   line-height: 19px;
   margin-bottom: 10px;
   text-align: left;
+}
+#feelings_input_fields li {
+  margin-right: 5px;
 }
 #children_comments_list {
   margin: 10px 0 0;
@@ -130,10 +136,9 @@ p.unread_notice a:hover {
   color: #eee;
   font-size: 12px;
   line-height: 15px;
-  height: 400px;
   overflow: auto;
 }
-#comments_list>li {
+#comments_list > li {
   background-position: 8px 9px;
   background-repeat: no-repeat;
   border-bottom: 1px solid #222;
@@ -186,9 +191,6 @@ p.unread_notice a:hover {
   float: right;
 }
 #feedback_header {
-  background-image: url(../../images/glass-shadow.gif);
-  background-repeat: repeat-x;
-  border-bottom: 1px solid #333;
   padding: 10px 10px 8px;
 }
 #feedback_header h3 {
@@ -208,97 +210,17 @@ p.unread_notice a:hover {
   padding-right: 10px;
 }
 .feelings_list input {
-  margin: 3px 1px 0 4px;
-}
-#header {
-  background-color: black;
-  padding: 0 28px 0 10px;
-  position: relative;
-}
-#header div {
-  float: right;
-  font-size: 9px;
-  margin-top: 13px;
-}
-#header select {
-  font-size: 9px;
-}
-#header h1 a {
-  border-bottom: none;
-  color: white;
-  display: block;
-  padding: 8px 0;
-}
-#header a:hover {
-  background-color: black;
-  border-bottom: none;
-}
-#header .hide_link {
-  position: absolute;
-  top: 11px;
-  right: 0;
+  margin-bottom: 4px;
 }
 #mock {
-  background-color: white;
+  background-color: #555;
   background-position: left top;
   background-repeat: no-repeat;
   cursor: crosshair;
   position: relative;
   overflow: auto;
-  height: 500px;
+/*  height: 500px;*/
   margin-left: 400px;
-}
-#mock_header {
-  background-image: url(../../images/glass-2.gif);
-  background-repeat: repeat-x;
-  font-weight: bold;
-  line-height: 35px;
-  padding: 0 0 0 10px;
-}
-#mock_header a {
-  border-bottom: none;
-  color: white;
-}
-#mock_header h2 {
-  color: #eee;
-  font-size: 15px;
-  font-weight: normal;
-  height: 35px;
-  overflow: hidden;
-}
-#mock_header img {
-  float: right;
-  margin: 8px 5px 0 0;
-}
-#mock_header h2 .date {
-  color: #999;
-  font-size: 12px;
-  font-weight: normal;
-  margin-left: 5px;
-}
-#nav_list {
-  float: right;
-  font-size: 12px;
-}
-#nav_list li {
-  border-left: 1px solid #222;
-  float: left;
-}
-#nav_list a {
-  display: block;
-  font-weight: normal;
-  padding: 0 10px;
-}
-#nav_list a:hover {
-  background-image: url(../../images/glass-2.gif);
-}
-#nav_list a.none {
-  color: #999;
-}
-#nav_list a.none:hover {
-  cursor: default;
-  background: none;
-  text-decoration: none;
 }
 #new_award {
   background: white;
@@ -362,7 +284,7 @@ p.unread_notice a:hover {
 #sidebar {
   color: white;
   position: absolute;
-  top: 0;
+  top: 60px;
   left: 0;
   width: 400px;
 }
@@ -388,6 +310,71 @@ p.unread_notice a:hover {
   float: right;
   font-size: 12px;
   line-height: 17px;
+}
+#header {
+  background-image: url(../../images/home_background.png);  
+  border-bottom: 1px solid #333;
+  height: 59px;
+  width: 100%;
+}
+#header h1,
+#header h2 {
+  float: left;
+  margin: 0;
+}
+#header h1 #logo {
+  display: block;
+  margin: 12px 15px;
+}
+#header h2 {
+  border-left: 1px dotted #666;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 17px 0;
+  padding: 0 15px;
+}
+#header .mock_actions {
+  float: right;
+  font-size: 12px;
+  margin: 17px 10px 15px;
+}
+#header .mock_actions a {
+  background: #666;
+  border-left: 1px solid #666;
+  border-right: 1px solid #666;
+  border-top: 1px solid #aaa;
+  display: block;
+  float: left;
+  margin-left: 6px;
+  padding: 6px 12px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 3px;
+  -moz-box-shadow: 0 1px 0 #111;
+  -webkit-box-shadow: 0 1px 0 #111;
+  background: -moz-linear-gradient(top, #777, #666);
+  background: -webkit-gradient(linear, left top, left bottom, from(#777),
+    to(#666));
+}
+#header .mock_actions li {
+  border-left: 1px solid #222;
+  float: left;
+}
+#header .mock_actions a {
+  display: block;
+  font-weight: normal;
+}
+#header .mock_actions a.none {
+  color: #999;
+}
+#header .mock_actions a.none:hover {
+  cursor: default;
+}
+#header .mock_title {
+  background-image: url(../../images/arrow.png);
+  background-position: left 50%;
+  background-repeat: no-repeat;
+  margin-left: 5px;
+  padding-left: 15px;
 }
 #userlight {
   background: #99c;
