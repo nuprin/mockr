@@ -1,7 +1,10 @@
 <% @title = @project.title %>
 
-<%= stylesheet_link_tag "shared/mock_grid", "projects/show" %>
-<%= javascript_include_tag "plugins/jquery.inlineeditor.js", "projects/show" %>
+<% content_for :head do %>
+  <%= stylesheet_link_tag "shared/mock_grid", "projects/show" %>
+  <%= javascript_include_tag "plugins/jquery.inlineeditor.js",
+    "projects/show" %>
+<% end %>
 
 <div id="project_header">
   <h1>

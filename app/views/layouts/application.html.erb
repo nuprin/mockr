@@ -13,6 +13,7 @@
     <%= javascript_include_tag "plugins/jquery.cookie" %>
     <%= javascript_include_tag "plugins/jquery.shortkeys" %>
     <%= javascript_include_tag "mockr" %>
+    <%= yield :head %>
   </head>
   <body<%= ' class="fullscreen"' unless @sidebar %>>
     <div id="header_container">
