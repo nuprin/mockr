@@ -333,16 +333,17 @@ p.unread_notice a:hover {
   margin: 17px 0;
   padding: 0 15px;
 }
-#header .mock_actions {
+#header .mock_actions,
+#header .mock_nav {
   float: right;
   font-size: 12px;
   margin: 17px 10px 15px;
 }
 #header .mock_actions a {
   background: #666;
-  border-left: 1px solid #666;
-  border-right: 1px solid #666;
-  border-top: 1px solid #aaa;
+  border-left: 1px solid #222;
+  border-right: 1px solid #222;
+  border-top: 1px solid #444;
   display: block;
   float: left;
   margin-left: 6px;
@@ -351,9 +352,9 @@ p.unread_notice a:hover {
   -webkit-border-radius: 3px;
   -moz-box-shadow: 0 1px 0 #111;
   -webkit-box-shadow: 0 1px 0 #111;
-  background: -moz-linear-gradient(top, #777, #666);
-  background: -webkit-gradient(linear, left top, left bottom, from(#777),
-    to(#666));
+  background: -moz-linear-gradient(top, #333, #222);
+  background: -webkit-gradient(linear, left top, left bottom, from(#333),
+    to(#222));
 }
 #header .mock_actions li {
   border-left: 1px solid #222;
@@ -368,6 +369,35 @@ p.unread_notice a:hover {
 }
 #header .mock_actions a.none:hover {
   cursor: default;
+}
+#header .mock_nav {
+  margin-left: 0;
+  text-indent: -9999px;
+  width: 60px;
+}
+#header .mock_nav a {
+  display: block;
+  float: left;
+  height: 27px;
+  width: 30px;
+}
+#header .mock_nav li a {
+  background-image: url(../../images/prev.png);
+  background-repeat: no-repeat;
+  float: left;
+  height: 27px;
+  width: 30px;
+}
+#header .mock_nav li a.none,
+#header .mock_nav li a.none:hover {
+  background-position: 0 -27px;
+  cursor: default;
+}
+#header .mock_nav li.next a {
+  background-image: url(../../images/next.png);
+}
+#header .mock_nav li a:hover {
+  background-position: 0 -54px;
 }
 #header .mock_title {
   background-image: url(../../images/arrow.png);
