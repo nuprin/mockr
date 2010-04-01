@@ -284,7 +284,7 @@ p.unread_notice a:hover {
 #sidebar {
   color: white;
   position: absolute;
-  top: 60px;
+  top: 50px;
   left: 0;
   width: 400px;
 }
@@ -314,7 +314,7 @@ p.unread_notice a:hover {
 #header {
   background-image: url(../../images/home_background.png);  
   border-bottom: 1px solid #333;
-  height: 59px;
+  height: 49px;
   width: 100%;
 }
 #header h1,
@@ -324,20 +324,20 @@ p.unread_notice a:hover {
 }
 #header h1 #logo {
   display: block;
-  margin: 12px 15px;
+  margin: 8px 12px 0 9px;
 }
 #header h2 {
   border-left: 1px dotted #666;
-  font-size: 16px;
-  line-height: 24px;
-  margin: 17px 0;
+  font-size: 15px;
+  line-height: 23px;
+  margin: 14px 0 12px;
   padding: 0 15px;
 }
 #header .mock_actions,
 #header .mock_nav {
   float: right;
   font-size: 12px;
-  margin: 17px 10px 15px;
+  margin: 12px 10px 10px;
 }
 #header .mock_actions a {
   background: #666;
