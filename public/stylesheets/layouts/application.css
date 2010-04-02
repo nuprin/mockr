@@ -10,12 +10,11 @@ body, textarea {
 }
 #content {
   margin: 0 auto;
-  padding: 25px 40px;
+  padding: 40px;
 }
 #header_container {
   background-image: url(../../images/home_background.png);  
   border-bottom: 1px solid #333;
-  margin-bottom: 20px;
   padding: 25px 0;
 }
 #header {
@@ -72,4 +71,14 @@ a:hover#logo {
 }
 a#logo img {
   visibility: hidden;
+}
+#notice {
+  background: white;
+  color: #333;
+  font-weight: bold;
+  padding: 16px 0 12px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 100%;
 }

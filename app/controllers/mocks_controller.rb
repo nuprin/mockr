@@ -15,6 +15,7 @@ class MocksController < ApplicationController
     begin
       mock.save!
       mock.deliver(params[:email]) if params[:send_email].to_i == 1
+      flash[:notice] = "Mock created!"
       redirect_to mock_path(mock)
     rescue ActiveRecord::RecordInvalid
       render :action => :new
@@ -44,6 +45,7 @@ class MocksController < ApplicationController
     @mock = Mock.find(params[:id])
     @mock.update_attributes(params[:mock])
     Notifier.deliver_new_mock(@mock)
+    flash[:notice] = "Email sent!"
     redirect_to mock_path(@mock)
   end
 end

@@ -354,7 +354,6 @@ var mockr = function() {
 
 var KeyboardShortcuts = {
   setup: function() {
-    console.log("In setup")
     $(document.body).shortkeys({
       "f": function() {
         mockr.toggleSidebar();
@@ -382,10 +381,18 @@ var KeyboardShortcuts = {
   }
 }
 
+var Flash = {
+  setup: function() {
+    window.setTimeout(function() {
+      $("#notice").animate({top: -100});
+    }, 2000);
+  }
+}
 $(function() {
   mockr.initialize();
   KeyboardShortcuts.setup();
   mockr.adjustDimensions();
+  Flash.setup();
 });
 
 $(window).resize(mockr.adjustDimensions);

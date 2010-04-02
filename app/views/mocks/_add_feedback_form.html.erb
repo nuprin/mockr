@@ -4,9 +4,6 @@
     <%= link_to_function "Add general feedback", "mockr.startCommenting()" %> 
     or drag a section on the screen.
   </p>
-  <% if flash[:notice] %>
-    <div id="notice"><%= flash[:notice] %></div>
-  <% end %>
   <% form_for :comment, @comment, :url => comments_path,
               :html => {:id => 'add_feedback_form'} do |f| %>
     <%= f.hidden_field :mock_id, :value => @mock.id %>

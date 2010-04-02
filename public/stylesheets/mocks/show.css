@@ -83,7 +83,7 @@ p.unread_notice a:hover {
   color: white;
   height: 60px;
   margin: 0 3px 8px 0;
-  width: 100%;
+  width: 367px;
 }
 #advanced_feelings {
   text-align: left;
@@ -272,14 +272,6 @@ p.unread_notice a:hover {
 }
 #new_award .new_icon img {
   margin-bottom: 4px;
-}
-#notice {
-  background: white;
-  color: black;
-  font-size: 11px;
-  margin: 0 10px 10px;
-  padding: 10px 10px;
-  text-align: center;
 }
 #sidebar {
   color: white;

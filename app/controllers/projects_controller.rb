@@ -6,6 +6,7 @@ class ProjectsController < ApplicationController
     begin
       @project = Project.new(params[:project])
       @project.save!
+      flash[:notice] = "Project created!"
       redirect_to project_path(@project)
     rescue ActiveRecord::RecordInvalid
       render :action => "new"

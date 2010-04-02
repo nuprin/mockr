@@ -6,6 +6,7 @@ class SettingsController < ApplicationController
   def update
     setting = Setting.find_by_key(params[:setting][:key])
     setting.update_attributes(params[:setting])
+    flash[:notice] = "Settings saved!"
     redirect_to :back
   end
 end

@@ -30,7 +30,10 @@
         </div>
       </div>
     </div>
-    <div id="content">
+    <% if !flash[:notice].blank? %>
+      <div id="notice"><%= flash[:notice] %></div>
+    <% end %>
+    <div class="clearfix" id="content">
       <%= yield %>
     </div>
   </body>

@@ -16,6 +16,9 @@
     <%= yield :head %>
   </head>
   <body<%= ' class="fullscreen"' unless @sidebar %>>
+    <% if !flash[:notice].blank? %>
+      <div id="notice"><%= flash[:notice] %></div>
+    <% end %>
     <%= yield %>
   </body>
 </html>
