@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       user_id = params[:session][:user_id].to_i
     end
     session[:user_id] = user_id
-    url = params[:session][:redirect_url] || home_url
+    url = params[:session][:redirect_url] || home_path
     redirect_to url
   end
 end
