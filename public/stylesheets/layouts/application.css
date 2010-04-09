@@ -10,7 +10,7 @@ body, textarea {
 }
 #content {
   margin: 0 auto;
-  padding: 40px;
+  padding: 40px 0;
 }
 #header_container {
   background-image: url(../../images/home_background.png);  
