@@ -13,7 +13,7 @@ var mockr = function() {
         var x ;    // vertical mouse data
         var y;     // horizontal mouse data
 
-        function initialize(){
+        function initialize() {
           x = {};
           y = {};
           mockView.mousedown(function(event){
@@ -143,14 +143,6 @@ var mockr = function() {
         mockView.animate({left: '-400px'}, 'fast');
         $(document.body).toggleClass('fullscreen');
       }
-    }
-
-    function initializeFeatureList(){
-      $("#feature_list").change(function(event) {
-        if (event.target.value != "") {
-          location.href = "/" + event.target.value;
-        }
-      });     
     }
 
     function initializeFeedbackFilter() {
@@ -286,7 +278,7 @@ var mockr = function() {
         $("#sidebar").height(height);
         $("#mock").height(height);
         $("#mock").width(width);
-      }, 10);
+      }, 100);
     }
     
     function expandAll() {
@@ -325,7 +317,6 @@ var mockr = function() {
         
         highlight.initialize();
         adjustDimensions();
-        initializeFeatureList();
         initializeFeedbackFilter();
         initializeTextareas();
         initializeComments();
@@ -391,7 +382,6 @@ var Flash = {
 $(function() {
   mockr.initialize();
   KeyboardShortcuts.setup();
-  mockr.adjustDimensions();
   Flash.setup();
 });
 
