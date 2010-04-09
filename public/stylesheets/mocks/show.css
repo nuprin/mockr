@@ -275,9 +275,10 @@ p.unread_notice a:hover {
 }
 #sidebar {
   color: white;
+  left: 0;
   position: absolute;
   top: 50px;
-  left: 0;
+  overflow: auto;
   width: 400px;
 }
 #click_tooltip {
